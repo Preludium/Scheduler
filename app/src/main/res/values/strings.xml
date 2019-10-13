@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Scheduler</string>
+
+    <!-- Activity names -->
+    <string name="title_activity_add_arrangement">Add Arrangement</string>
+
+    <!-- Main Activity -->
+    <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button, to add one.</string>
+
+    <!-- Bottom menu bar options -->
+    <string name="title_meals">Meals</string>
+    <string name="title_training">Training</string>
+    <string name="title_tasks">Tasks</string>
+
+    <!-- Main menu options -->
+    <string name="action_meals">Meals</string>
+    <string name="action_users">Change user</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_select_meal">SelectMealActivity</string>
+    <string name="title_activity_new_training">NewTrainingActivity</string>
+    <string name="title_activity_new_task">NewTaskActivity</string>
+</resources>
