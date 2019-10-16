@@ -2,9 +2,20 @@ package pl.jansmi.scheduler.dbstructure.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Practices")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "Practices",
+        foreignKeys = {@ForeignKey(entity = Arrangement.class,
+                                   parentColumns = "id",
+                                   childColumns = "arrangementId",
+                                   onDelete = CASCADE),
+                       @ForeignKey(entity = Discipline.class,
+                                   parentColumns = "id",
+                                   childColumns = "disciplineId",
+                                   onDelete = CASCADE)})
 public class Practice {
 
     @PrimaryKey
@@ -18,11 +29,20 @@ public class Practice {
 
     private float favour;
 
-    public Practice(@NonNull String id, @NonNull String name, int duration, float favour) {
+    @NonNull
+    private String arrangementId;
+
+    @NonNull
+    private String disciplineId;
+
+    public Practice(@NonNull String id, @NonNull String name, int duration, float favour,
+                    @NonNull String arrangementId, @NonNull String disciplineId) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.favour = favour;
+        this.arrangementId = arrangementId;
+        this.disciplineId = disciplineId;
     }
 
     @NonNull
@@ -41,5 +61,15 @@ public class Practice {
 
     public float getFavour() {
         return favour;
+    }
+
+    @NonNull
+    public String getArrangementId() {
+        return arrangementId;
+    }
+
+    @NonNull
+    public String getDisciplineId() {
+        return disciplineId;
     }
 }

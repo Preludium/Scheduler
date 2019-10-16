@@ -2,13 +2,20 @@ package pl.jansmi.scheduler.dbstructure.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-@Entity(tableName = "Arrangements")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "Arrangements",
+        foreignKeys = @ForeignKey(entity = User.class,
+                                  parentColumns = "id",
+                                  childColumns = "userId",
+                                  onDelete = CASCADE))
 public class Arrangement {
 
     @PrimaryKey
@@ -21,10 +28,14 @@ public class Arrangement {
     @NonNull
     private Date date;
 
-    public Arrangement(@NotNull String id, @NotNull String name, @NotNull Date date) {
+    @NonNull
+    private String userId;
+
+    public Arrangement(@NotNull String id, @NotNull String name, @NotNull Date date, @NonNull String userId) {
         this.id = id;
         this.name = name;
         this.date = date;
+        this.userId = userId;
     }
 
     @NonNull
@@ -40,5 +51,10 @@ public class Arrangement {
     @NonNull
     public Date getDate() {
         return date;
+    }
+
+    @NonNull
+    public String getUserId() {
+        return userId;
     }
 }
