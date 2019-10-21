@@ -5,8 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import org.jetbrains.annotations.NotNull;
-
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "Meals",
@@ -19,12 +17,9 @@ public class Meal {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private float favour;
-
     @NonNull
     private String categoryId;
 
@@ -49,7 +44,7 @@ public class Meal {
         return favour;
     }
 
-    @NotNull
+    @NonNull
     public String getCategoryId() {
         return categoryId;
     }
