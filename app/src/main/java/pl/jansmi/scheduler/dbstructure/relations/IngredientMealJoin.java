@@ -18,7 +18,6 @@ public class IngredientMealJoin {
 
     @NonNull
     private String ingredientId;
-
     @NonNull
     private String mealId;
 

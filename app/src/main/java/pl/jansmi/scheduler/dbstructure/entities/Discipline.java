@@ -10,12 +10,9 @@ public class Discipline {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private int kcalPerMinute;
-
     private float favour;
 
     public Discipline(@NonNull String id, @NonNull String name, int kcalPerMinute, float favour) {

@@ -4,27 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
-import pl.jansmi.scheduler.dbstructure.entities.Discipline;
+import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Tag;
 
-@Entity(tableName = "Tag_discipline_join",
+@Entity(tableName = "Tag_arrangement_join",
         foreignKeys = {@ForeignKey(entity = Tag.class,
                                    parentColumns = "id",
                                    childColumns = "tagId"),
-                       @ForeignKey(entity = Discipline.class,
+                       @ForeignKey(entity = Arrangement.class,
                                    parentColumns = "id",
-                                   childColumns = "disciplineId")})
-public class TagDisciplineJoin {
+                                   childColumns = "arrangementId")})
+public class TagArrangementJoin {
 
     @NonNull
     private String tagId;
-
     @NonNull
-    private String disciplineId;
+    private String arrangementId;
 
-    public TagDisciplineJoin(@NonNull String tagId, @NonNull String disciplineId) {
+    public TagArrangementJoin(@NonNull String tagId, @NonNull String arrangementId) {
         this.tagId = tagId;
-        this.disciplineId = disciplineId;
+        this.arrangementId = arrangementId;
     }
 
     @NonNull
@@ -33,7 +32,7 @@ public class TagDisciplineJoin {
     }
 
     @NonNull
-    public String getDisciplineId() {
-        return disciplineId;
+    public String getArrangementId() {
+        return arrangementId;
     }
 }

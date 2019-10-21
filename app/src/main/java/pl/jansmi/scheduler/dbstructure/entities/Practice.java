@@ -21,17 +21,12 @@ public class Practice {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private int duration;
-
     private float favour;
-
     @NonNull
     private String arrangementId;
-
     @NonNull
     private String disciplineId;
 

@@ -5,8 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "Tasks",
@@ -19,26 +17,20 @@ public class Task {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private String description;
-
-    private Date deadline;
-
+    private int weekday;
     private int durationMinutes;
-
     private float favour;
-
     @NonNull
     private String arrangementId;
 
-    public Task(@NonNull String id, @NonNull String name, String description, Date deadline, int durationMinutes, float favour, @NonNull String arrangementId) {
+    public Task(@NonNull String id, @NonNull String name, String description, int weekday, int durationMinutes, float favour, @NonNull String arrangementId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.deadline = deadline;
+        this.weekday = weekday;
         this.durationMinutes = durationMinutes;
         this.favour = favour;
         this.arrangementId = arrangementId;
@@ -58,8 +50,8 @@ public class Task {
         return description;
     }
 
-    public Date getDeadline() {
-        return deadline;
+    public int getWeekday() {
+        return weekday;
     }
 
     public int getDurationMinutes() {

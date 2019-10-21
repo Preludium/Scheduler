@@ -17,9 +17,7 @@ public class DailyMenu {
     @NonNull
     @PrimaryKey
     private String id;
-
     private int dayNumber;
-
     @NonNull
     private String arrangementId;
 
