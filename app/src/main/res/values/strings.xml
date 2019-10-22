@@ -22,4 +22,6 @@
     <string name="title_activity_select_meal">SelectMealActivity</string>
     <string name="title_activity_new_training">NewTrainingActivity</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
 </resources>
