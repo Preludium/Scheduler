@@ -10,10 +10,8 @@ public class Category {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private int order;
 
     public Category(@NonNull String id, @NonNull String name, int order) {

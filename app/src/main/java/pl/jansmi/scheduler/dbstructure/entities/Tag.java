@@ -10,10 +10,8 @@ public class Tag {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private String name;
-
     private float favour;
 
     public Tag(@NonNull String id, @NonNull String name, float favour) {
