@@ -24,4 +24,14 @@
     <string name="title_activity_new_task">NewTaskActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_disciplines">Disciplines</string>
+    <string name="action_invitations">Invitations</string>
+    <string name="action_logout">Logout</string>
+    <string name="title_activity_invitations">InvitationsActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_disciplines">DisciplinesActivity</string>
+    <string name="title_activity_meals">MealsActivity</string>
+    <string name="action_ingredients">Ingredients</string>
+    <string name="action_categories">Categories</string>
 </resources>
