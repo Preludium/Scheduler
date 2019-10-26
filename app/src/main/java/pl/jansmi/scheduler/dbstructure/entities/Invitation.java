@@ -7,6 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -47,6 +48,15 @@ public class Invitation {
         this.state = state;
     }
 
+    @Ignore
+    public Invitation(@NonNull String fromId, @NonNull String toId, @NonNull String taskId) {
+        this.id = UUID.randomUUID().toString();
+        this.fromId = fromId;
+        this.toId = toId;
+        this.taskId = taskId;
+        this.state = STATE_SENT;
+    }
+
     @NonNull
     public String getId() {
         return id;
@@ -71,4 +81,7 @@ public class Invitation {
         return state;
     }
 
+    public void setState(byte state) {
+        this.state = state;
+    }
 }

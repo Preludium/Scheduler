@@ -3,9 +3,11 @@ package pl.jansmi.scheduler.dbstructure.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -33,6 +35,14 @@ public class Arrangement {
         this.userId = userId;
     }
 
+    @Ignore
+    public Arrangement(@NonNull String name, @NonNull Date created, @NonNull String userId) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.created = created;
+        this.userId = userId;
+    }
+
     @NonNull
     public String getId() {
         return id;
@@ -43,13 +53,22 @@ public class Arrangement {
         return name;
     }
 
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
     @NonNull
     public Date getCreated() {
         return created;
+    }
+
+    public void setCreated(@NonNull Date created) {
+        this.created = created;
     }
 
     @NonNull
     public String getUserId() {
         return userId;
     }
+
 }

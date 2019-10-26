@@ -2,7 +2,10 @@ package pl.jansmi.scheduler.dbstructure.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 @Entity(tableName = "Tags")
 public class Tag {
@@ -20,6 +23,13 @@ public class Tag {
         this.favour = favour;
     }
 
+    @Ignore
+    public Tag(@NonNull String name) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.favour = 1.f;
+    }
+
     @NonNull
     public String getId() {
         return id;
@@ -30,8 +40,15 @@ public class Tag {
         return name;
     }
 
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
     public float getFavour() {
         return favour;
     }
 
+    public void setFavour(float favour) {
+        this.favour = favour;
+    }
 }

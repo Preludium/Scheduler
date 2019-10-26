@@ -3,7 +3,10 @@ package pl.jansmi.scheduler.dbstructure.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -19,7 +22,6 @@ public class Study {
     private String id;
     @NonNull
     private String subject;
-    @NonNull
     private String desc;
     private int dayNumber; // 0-6
     private int duration; // minutes
@@ -36,6 +38,15 @@ public class Study {
         this.arrangementId = arrangementId;
     }
 
+    @Ignore
+    public Study(@NonNull String subject, int dayNumber, @NonNull String arrangementId) {
+        this.id = UUID.randomUUID().toString();
+        this.subject = subject;
+        this.dayNumber = dayNumber;
+        this.duration = 0;
+        this.arrangementId = arrangementId;
+    }
+
     @NonNull
     public String getId() {
         return id;
@@ -46,17 +57,32 @@ public class Study {
         return subject;
     }
 
-    @NonNull
+    public void setSubject(@NonNull String subject) {
+        this.subject = subject;
+    }
+
     public String getDesc() {
         return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public int getDayNumber() {
         return dayNumber;
     }
 
+    public void setDayNumber(int dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+
     public int getDuration() {
         return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @NonNull

@@ -3,7 +3,10 @@ package pl.jansmi.scheduler.dbstructure.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -23,19 +26,30 @@ public class Practice {
     private String id;
     @NonNull
     private String name;
+    private int dayNumber;
     private int duration;
-    private float favour;
     @NonNull
     private String arrangementId;
     @NonNull
     private String disciplineId;
 
-    public Practice(@NonNull String id, @NonNull String name, int duration, float favour,
+    public Practice(@NonNull String id, @NonNull String name, int dayNumber, int duration,
                     @NonNull String arrangementId, @NonNull String disciplineId) {
         this.id = id;
         this.name = name;
+        this.dayNumber = dayNumber;
         this.duration = duration;
-        this.favour = favour;
+        this.arrangementId = arrangementId;
+        this.disciplineId = disciplineId;
+    }
+
+    @Ignore
+    public Practice(@NonNull String name, int dayNumber,
+                    @NonNull String arrangementId, @NonNull String disciplineId) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.dayNumber = dayNumber;
+        this.duration = 0;
         this.arrangementId = arrangementId;
         this.disciplineId = disciplineId;
     }
@@ -50,12 +64,24 @@ public class Practice {
         return name;
     }
 
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
+    public int getDayNumber() {
+        return dayNumber;
+    }
+
+    public void setDayNumber(int dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+
     public int getDuration() {
         return duration;
     }
 
-    public float getFavour() {
-        return favour;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @NonNull
@@ -67,4 +93,9 @@ public class Practice {
     public String getDisciplineId() {
         return disciplineId;
     }
+
+    public void setDisciplineId(@NonNull String disciplineId) {
+        this.disciplineId = disciplineId;
+    }
+
 }

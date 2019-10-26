@@ -3,9 +3,11 @@ package pl.jansmi.scheduler.dbstructure.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -22,7 +24,7 @@ public class Measure {
     @NonNull
     private Date date;
     private float weight;
-    private float water;
+    private float water; // number of glasses
     @NonNull
     private String userId;
 
@@ -31,6 +33,15 @@ public class Measure {
         this.date = date;
         this.weight = weight;
         this.water = water;
+        this.userId = userId;
+    }
+
+    @Ignore
+    public Measure(@NonNull Date date, @NonNull String userId) {
+        this.id = UUID.randomUUID().toString();
+        this.date = date;
+        this.weight = 0;
+        this.water = 0;
         this.userId = userId;
     }
 
@@ -44,16 +55,29 @@ public class Measure {
         return date;
     }
 
+    public void setDate(@NonNull Date date) {
+        this.date = date;
+    }
+
     public float getWeight() {
         return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 
     public float getWater() {
         return water;
     }
 
+    public void setWater(float water) {
+        this.water = water;
+    }
+
     @NonNull
     public String getUserId() {
         return userId;
     }
+
 }

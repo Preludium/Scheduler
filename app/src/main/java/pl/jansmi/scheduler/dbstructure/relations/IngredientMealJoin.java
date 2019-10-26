@@ -8,6 +8,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 
 @Entity(tableName = "Ingredient_meal_join",
+        primaryKeys = {"ingredientId", "mealId"},
         foreignKeys = {@ForeignKey(entity = Ingredient.class,
                                    parentColumns = "id",
                                    childColumns = "ingredientId"),
@@ -20,10 +21,12 @@ public class IngredientMealJoin {
     private String ingredientId;
     @NonNull
     private String mealId;
+    private float amount;
 
-    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId) {
+    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId, float amount) {
         this.ingredientId = ingredientId;
         this.mealId = mealId;
+        this.amount = amount;
     }
 
     @NonNull
@@ -34,5 +37,13 @@ public class IngredientMealJoin {
     @NonNull
     public String getMealId() {
         return mealId;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 }

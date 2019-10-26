@@ -5,35 +5,42 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
-import pl.jansmi.scheduler.dbstructure.entities.Tag;
+import pl.jansmi.scheduler.dbstructure.entities.Meal;
 
-@Entity(tableName = "Tag_arrangement_join",
-        primaryKeys = {"tagId", "arrangementId"},
-        foreignKeys = {@ForeignKey(entity = Tag.class,
+@Entity(tableName = "Meal_arrangement_join",
+        primaryKeys = {"mealId", "arrangementId"},
+        foreignKeys = {@ForeignKey(entity = Meal.class,
                                    parentColumns = "id",
-                                   childColumns = "tagId"),
+                                   childColumns = "mealId"),
                        @ForeignKey(entity = Arrangement.class,
                                    parentColumns = "id",
                                    childColumns = "arrangementId")})
-public class TagArrangementJoin {
+public class MealArrangementJoin {
 
     @NonNull
-    private String tagId;
+    private String mealId;
     @NonNull
     private String arrangementId;
+    private int dayNumber;
 
-    public TagArrangementJoin(@NonNull String tagId, @NonNull String arrangementId) {
-        this.tagId = tagId;
+    public MealArrangementJoin(@NonNull String mealId, @NonNull String arrangementId, int dayNumber) {
+        this.mealId = mealId;
         this.arrangementId = arrangementId;
+        this.dayNumber = dayNumber;
     }
 
     @NonNull
-    public String getTagId() {
-        return tagId;
+    public String getMealId() {
+        return mealId;
     }
 
     @NonNull
     public String getArrangementId() {
         return arrangementId;
     }
+
+    public int getDayNumber() {
+        return dayNumber;
+    }
+
 }

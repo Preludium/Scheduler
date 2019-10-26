@@ -13,8 +13,8 @@ import pl.jansmi.scheduler.dbstructure.entities.Tag;
 @Dao
 public interface TagDao {
 
-    @Query("SELECT * FROM Tags JOIN Tag_arrangement_join " +
-            "USING(arrangementId) WHERE arrangementId = :arrangementId")
+    @Query("SELECT * FROM Tags t JOIN Tag_arrangement_join j " +
+            "ON t.id = j.tagId WHERE j.arrangementId = :arrangementId")
     List<Tag> getByArrangementId(String arrangementId);
 
     @Insert
