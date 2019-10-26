@@ -1,10 +1,7 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,11 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import pl.jansmi.scheduler.App;
+import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.Session;
+import pl.jansmi.scheduler.dbstructure.Database;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.db = Database.build(getApplicationContext());
+
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                // TODO: check if exists user of a given name and password AND open new Session
+                startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
             }
         });
 
@@ -44,8 +50,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-        finish();
+    public void onDestroy(){
+        super.onDestroy();
+        App.db.close();
+        // App.session.terminate();
     }
 
 }

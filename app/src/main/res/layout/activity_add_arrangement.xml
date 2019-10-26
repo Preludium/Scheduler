@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddArrangementActivity">
+    tools:context=".activities.AddArrangementActivity">
 
     <FrameLayout
         android:id="@+id/add_arrangement_activity_fragment_container"

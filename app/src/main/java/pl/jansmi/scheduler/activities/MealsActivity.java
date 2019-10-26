@@ -1,17 +1,15 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import pl.jansmi.scheduler.R;
 
 public class MealsActivity extends AppCompatActivity {
 

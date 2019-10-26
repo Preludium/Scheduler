@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+
+import pl.jansmi.scheduler.fragments.MealsFragment;
+import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.fragments.TasksFragment;
+import pl.jansmi.scheduler.fragments.TrainingFragment;
 
 public class AddArrangementActivity extends AppCompatActivity {
 

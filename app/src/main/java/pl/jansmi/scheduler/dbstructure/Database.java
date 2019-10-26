@@ -48,8 +48,6 @@ import pl.jansmi.scheduler.dbstructure.relations.TagArrangementJoin;
                                     TagArrangementJoin.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class Database extends RoomDatabase {
-    public static Database conn; // main db connection of app
-
     public abstract ArrangementDao arrangements();
     public abstract CategoryDao categories();
     public abstract DisciplineDao disciplines();
@@ -68,12 +66,8 @@ public abstract class Database extends RoomDatabase {
     public abstract MealArrangementJoinDao mealArrangementJoin();
     public abstract TagArrangementJoinDao tagArrangementJoin();
 
-    public void build(Context context) {
-        conn = Room.databaseBuilder(context, Database.class, "main_db").build();
-    }
-
-    public void close() {
-        conn.close();
+    public static Database build(Context context) {
+        return Room.databaseBuilder(context, Database.class, "db").build();
     }
 
 }

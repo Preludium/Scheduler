@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.os.Bundle;
 
@@ -10,12 +10,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class SettingsActivity extends AppCompatActivity {
+import pl.jansmi.scheduler.R;
+
+public class NewTrainingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_new_training);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

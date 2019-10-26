@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+
+import pl.jansmi.scheduler.R;
 
 public class IngredientsActivity extends AppCompatActivity {
 

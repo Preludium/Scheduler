@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import pl.jansmi.scheduler.R;
 
 public class SignupActivity extends AppCompatActivity {
 

@@ -1,11 +1,9 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +13,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import pl.jansmi.scheduler.R;
+
+public class ArrangementsActivity extends AppCompatActivity {
 
     private static final int ADD_ARRANGEMENT_RC = 1;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectMealActivity">
+    tools:context=".activities.SelectMealActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
