@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button login_btn = findViewById(R.id.login_btn);
+        Button login_btn = findViewById(R.id.signin_btn);
         TextView signup_text = findViewById(R.id.signup_text);
         EditText login_box = findViewById(R.id.login_box);
         EditText password_box = findViewById(R.id.password_box);
@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                finish();
             }
         });
 
@@ -42,23 +41,11 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
     public void onBackPressed(){
-//        super.onBackPressed();
-//        startActivity(new Intent(ThisActivity.this, NextActivity.class));
         finish();
-//        System.exit(0);
     }
 
 }
