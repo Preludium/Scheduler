@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toTopOf="@id/login_btn"
+        app:layout_constraintBottom_toTopOf="@id/signin_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
@@ -38,7 +38,7 @@
             android:id="@+id/login_box"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Login"
+            android:hint="@string/login"
             android:layout_marginBottom="10dp"
             android:singleLine="true"
             />
@@ -47,7 +47,7 @@
             android:id="@+id/password_box"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:singleLine="true"
@@ -55,6 +55,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/remember_me_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -74,17 +75,17 @@
             android:id="@+id/remember_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remember me"
+            android:text="@string/remember_me"
             android:gravity="center"
             />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/signin_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LogIn"
+        android:text="Sign In"
         style="@style/Widget.AppCompat.Button.Colored"
         app:layout_constraintTop_toBottomOf="@id/login_layout"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,7 +100,8 @@
         android:text="No account yet? Sign Up"
         android:textSize="16dip"
         android:clickable="true"
-        app:layout_constraintTop_toBottomOf="@id/login_btn"
+
+        app:layout_constraintTop_toBottomOf="@id/signin_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 

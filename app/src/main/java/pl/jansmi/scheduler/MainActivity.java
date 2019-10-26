@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-//        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
     }
 

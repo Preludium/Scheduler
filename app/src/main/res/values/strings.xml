@@ -27,11 +27,18 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_disciplines">Disciplines</string>
     <string name="action_invitations">Invitations</string>
-    <string name="action_logout">Logout</string>
+    <string name="action_logout">Log Out</string>
     <string name="title_activity_invitations">InvitationsActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_disciplines">DisciplinesActivity</string>
     <string name="title_activity_meals">MealsActivity</string>
     <string name="action_ingredients">Ingredients</string>
     <string name="action_categories">Categories</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="title_activity_ingredients">IngredientsActivity</string>
+    <string name="title_activity_categories">CategoriesActivity</string>
 </resources>
