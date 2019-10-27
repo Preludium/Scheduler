@@ -12,12 +12,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.CategoriesActivity"
-            android:label="@string/title_activity_categories"
+            android:name=".AddTagActivity"
+            android:label="@string/title_activity_add_tag"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".activities.IngredientsActivity"
-            android:label="@string/title_activity_ingredients"
+            android:name=".activities.SelectIngredientActivity"
+            android:label="@string/title_activity_select_ingredient"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SelectTagsActivity"
+            android:label="@string/title_activity_select_tags"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AddMealActivity"
+            android:label="@string/title_activity_add_meal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CategoriesActivity"
+            android:label="@string/title_activity_categories"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MealsActivity"

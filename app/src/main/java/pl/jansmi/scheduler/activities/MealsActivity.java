@@ -8,6 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import pl.jansmi.scheduler.R;
 
@@ -20,14 +23,15 @@ public class MealsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), AddMealActivity.class));
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-//            }
-//        });
+            }
+        });
     }
 
     @Override
@@ -57,7 +61,7 @@ public class MealsActivity extends AppCompatActivity {
     }
 
     private void ingredients() {
-        startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
+        startActivity(new Intent(getApplicationContext(), SelectIngredientActivity.class));
     }
 
 }
