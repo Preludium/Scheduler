@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TasksFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Control tasks"
-        />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/tasks_fragment_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tasks_fragment_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.viewpager.widget.ViewPager>
 
 </FrameLayout>

@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: check if exists user of a given name and password AND open new Session
+                // TODO: check if user exists of a given name and password AND open new Session
                 startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
             }
         });

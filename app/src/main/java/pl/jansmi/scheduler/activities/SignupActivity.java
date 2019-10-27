@@ -30,6 +30,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                // TODO: check if passwords are equal and add new user to database
                 finish();
             }
         });
