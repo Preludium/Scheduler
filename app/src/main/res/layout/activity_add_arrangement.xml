@@ -25,6 +25,8 @@
             android:src="@android:drawable/ic_input_add"
             android:tint="@android:color/white" />
 
+        <!-- TODO: add second fab, to save arrangement -->
+
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

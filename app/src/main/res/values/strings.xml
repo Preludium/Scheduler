@@ -47,4 +47,6 @@
     <string name="title_activity_select_tags">SelectTagsActivity</string>
     <string name="title_activity_select_ingredient">SelectIngredientActivity</string>
     <string name="title_activity_add_tag">AddTagActivity</string>
+    <string name="studying">Studying</string>
+    <string name="title_activity_new_studying">NewStudyingActivity</string>
 </resources>

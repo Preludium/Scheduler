@@ -48,6 +48,8 @@ import pl.jansmi.scheduler.dbstructure.relations.TagArrangementJoin;
                                     TagArrangementJoin.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class Database extends RoomDatabase {
+
+    // TODO: think about changing Localization to Subject (of Study) - then declare localization as Task field
     public abstract ArrangementDao arrangements();
     public abstract CategoryDao categories();
     public abstract DisciplineDao disciplines();
@@ -67,7 +69,7 @@ public abstract class Database extends RoomDatabase {
     public abstract TagArrangementJoinDao tagArrangementJoin();
 
     public static Database build(Context context) {
-        return Room.databaseBuilder(context, Database.class, "db").build();
+        return Room.databaseBuilder(context, Database.class, "db").allowMainThreadQueries().build();
     }
 
 }

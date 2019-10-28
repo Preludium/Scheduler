@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.AddTagActivity"
-    tools:showIn="@layout/activity_add_tag">
+    tools:context=".activities.NewStudyingActivity"
+    tools:showIn="@layout/activity_new_studying">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

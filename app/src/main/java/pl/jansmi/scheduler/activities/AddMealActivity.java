@@ -11,8 +11,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.Database;
 
 public class AddMealActivity extends AppCompatActivity {
+
+    private String mealId; // to (potentially) update
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +24,27 @@ public class AddMealActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mealId = getIntent().getExtras().getString("mealId");
+        if (mealId != null) { // update
+            // TODO: set activity title to 'update' and fill activity with initial data
+        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (mealId == null) { // insert
+                    // TODO: insert data to db
+                    finish();
+                }
+
+               else { // update
+                    // TODO: update data to db
+                    finish();
+                }
             }
         });
+
     }
 
 }
