@@ -14,6 +14,10 @@ import static androidx.room.ForeignKey.CASCADE;
         foreignKeys = {@ForeignKey(entity = Arrangement.class,
                                    parentColumns = "id",
                                    childColumns = "arrangementId",
+                                   onDelete = CASCADE),
+                       @ForeignKey(entity = Subject.class,
+                                   parentColumns = "id",
+                                   childColumns = "subjectId",
                                    onDelete = CASCADE)})
 public class Study {
 
@@ -21,30 +25,34 @@ public class Study {
     @NonNull
     private String id;
     @NonNull
-    private String subject;
+    private String title;
     private String desc;
     private int dayNumber; // 0-6
     private int duration; // minutes
     @NonNull
     private String arrangementId;
+    @NonNull
+    private String subjectId;
 
-    public Study(@NonNull String id, @NonNull String subject, @NonNull String desc,
-                 int dayNumber, int duration, @NonNull String arrangementId) {
+    public Study(@NonNull String id, @NonNull String title, @NonNull String desc,
+                 int dayNumber, int duration, @NonNull String arrangementId, @NonNull String subjectId) {
         this.id = id;
-        this.subject = subject;
+        this.title = title;
         this.desc = desc;
         this.dayNumber = dayNumber;
         this.duration = duration;
         this.arrangementId = arrangementId;
+        this.subjectId = subjectId;
     }
 
     @Ignore
-    public Study(@NonNull String subject, int dayNumber, @NonNull String arrangementId) {
+    public Study(@NonNull String title, int dayNumber, @NonNull String arrangementId, @NonNull String subjectId) {
         this.id = UUID.randomUUID().toString();
-        this.subject = subject;
+        this.title = title;
         this.dayNumber = dayNumber;
         this.duration = 0;
         this.arrangementId = arrangementId;
+        this.subjectId = subjectId;
     }
 
     @NonNull
@@ -53,12 +61,12 @@ public class Study {
     }
 
     @NonNull
-    public String getSubject() {
-        return subject;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSubject(@NonNull String subject) {
-        this.subject = subject;
+    public void setTitle(@NonNull String subject) {
+        this.title = title;
     }
 
     public String getDesc() {
@@ -90,4 +98,8 @@ public class Study {
         return arrangementId;
     }
 
+    @NonNull
+    public String getSubjectId() {
+        return subjectId;
+    }
 }

@@ -28,16 +28,14 @@ public class Task {
     private int durationMinutes;
     @NonNull
     private String arrangementId;
-    private String localizationId;
 
-    public Task(@NonNull String id, @NonNull String name, String description, int weekday, int durationMinutes, @NonNull String arrangementId, String localizationId) {
+    public Task(@NonNull String id, @NonNull String name, String description, int weekday, int durationMinutes, @NonNull String arrangementId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.weekday = weekday;
         this.durationMinutes = durationMinutes;
         this.arrangementId = arrangementId;
-        this.localizationId = localizationId;
     }
 
     @Ignore
@@ -47,7 +45,6 @@ public class Task {
         this.weekday = weekday;
         this.durationMinutes = 0;
         this.arrangementId = arrangementId;
-        this.localizationId = null;
     }
 
     @NonNull
@@ -93,11 +90,4 @@ public class Task {
         return arrangementId;
     }
 
-    public String getLocalizationId() {
-        return localizationId;
-    }
-
-    public void setLocalizationId(String localizationId) {
-        this.localizationId = localizationId;
-    }
 }

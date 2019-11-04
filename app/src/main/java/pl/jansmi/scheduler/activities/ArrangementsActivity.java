@@ -123,8 +123,16 @@ public class ArrangementsActivity extends AppCompatActivity {
                 disciplines();
                 return true;
 
-            case R.id.action_invitations:
-                invitations();
+            case R.id.action_subjects:
+                subjects();
+                return true;
+
+            case R.id.action_profile:
+                profile();
+                return true;
+
+            case R.id.action_tags:
+                tags();
                 return true;
 
             case R.id.action_settings:
@@ -144,16 +152,24 @@ public class ArrangementsActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MealsActivity.class));
     }
 
-    private void settings() {
-        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-    }
-
     private void disciplines() {
         startActivity(new Intent(getApplicationContext(), DisciplinesActivity.class));
     }
 
-    private void invitations() {
-        startActivity(new Intent(getApplicationContext(), InvitationsActivity.class));
+    private void subjects() {
+        //startActivity(new Intent(getApplicationContext(), SubjectsActivity.class));
+    }
+
+    private void profile() {
+        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+    }
+
+    private void tags() {
+        //startActivity(new Intent(getApplicationContext(), TagsActivity.class));
+    }
+
+    private void settings() {
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
     }
 
     private void logout() {

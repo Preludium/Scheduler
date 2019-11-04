@@ -27,9 +27,9 @@ public class MealsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), AddMealActivity.class));
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), AddMealActivity.class);
+                intent.putExtra("mealId", (String) null); // no update
+                startActivity(intent);
             }
         });
     }
@@ -61,7 +61,7 @@ public class MealsActivity extends AppCompatActivity {
     }
 
     private void ingredients() {
-        startActivity(new Intent(getApplicationContext(), SelectIngredientActivity.class));
+        //startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
     }
 
 }
