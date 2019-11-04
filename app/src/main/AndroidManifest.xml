@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pl.jansmi.scheduler">
 
     <application
@@ -8,24 +9,54 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".NewTaskActivity"
-            android:label="@string/title_activity_new_task"
+            android:name=".activities.NewStudyingActivity"
+            android:label="@string/title_activity_new_studying"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".NewTrainingActivity"
-            android:label="@string/title_activity_new_training"
+            android:name=".activities.AddTagActivity"
+            android:label="@string/title_activity_add_tag"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SelectMealActivity"
-            android:label="@string/title_activity_select_meal"
+            android:name=".activities.SelectIngredientActivity"
+            android:label="@string/title_activity_select_ingredient"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddArrangementActivity"
-            android:label="@string/title_activity_add_arrangement" />
+            android:name=".activities.SelectTagsActivity"
+            android:label="@string/title_activity_select_tags"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.AddMealActivity"
+            android:label="@string/title_activity_add_meal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CategoriesActivity"
+            android:label="@string/title_activity_categories"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.MealsActivity"
+            android:label="@string/title_activity_meals"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.DisciplinesActivity"
+            android:label="@string/title_activity_disciplines"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.InvitationsActivity"
+            android:label="@string/title_activity_invitations"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SignupActivity"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,6 +65,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.NewTaskActivity"
+            android:label="@string/title_activity_new_task"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.NewTrainingActivity"
+            android:label="@string/title_activity_new_training"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SelectMealActivity"
+            android:label="@string/title_activity_select_meal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AddArrangementActivity"
+            android:label="@string/title_activity_add_arrangement" />
+        <activity
+            android:name=".activities.ArrangementsActivity"
+            android:label="@string/title_activity_arrangements_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

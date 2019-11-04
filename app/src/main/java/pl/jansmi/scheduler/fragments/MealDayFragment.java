@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
+
+import pl.jansmi.scheduler.R;
 
 public class MealDayFragment extends Fragment {
 

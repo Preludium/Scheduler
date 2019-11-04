@@ -1,5 +1,6 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,12 +11,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class NewTaskActivity extends AppCompatActivity {
+import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.Database;
+
+public class SelectMealActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_task);
+        setContentView(R.layout.activity_select_meal);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -23,8 +27,9 @@ public class NewTaskActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), AddMealActivity.class);
+                intent.putExtra("mealId", (String) null); // no update
+                startActivity(intent);
             }
         });
     }

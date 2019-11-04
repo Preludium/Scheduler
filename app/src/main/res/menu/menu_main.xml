@@ -1,23 +1,49 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pl.jansmi.scheduler.MainActivity">
+    tools:context="pl.jansmi.scheduler.activities.ArrangementsActivity">
 
     <item
         android:id="@+id/action_meals"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="@string/action_meals"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_users"
-        android:orderInCategory="130"
-        android:title="@string/action_users"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/action_disciplines"
+        android:orderInCategory="2"
+        android:title="@string/action_disciplines"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_subjects"
+        android:orderInCategory="3"
+        android:title="@string/action_subjects"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="4"
+        android:title="@string/action_profile"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_tags"
+        android:orderInCategory="5"
+        android:title="@string/action_tags"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="140"
+        android:orderInCategory="6"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="7"
+        android:title="@string/action_logout"
+        app:showAsAction="ifRoom" />
+
 </menu>

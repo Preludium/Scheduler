@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_assignment_black_24dp"
         android:title="@string/title_tasks" />
 
+    <item
+        android:id="@+id/navigation_studying"
+        android:icon="@drawable/ic_school_black_24dp"
+        android:title="@string/studying" />
+
 </menu>
