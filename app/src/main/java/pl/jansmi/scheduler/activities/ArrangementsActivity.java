@@ -41,7 +41,7 @@ public class ArrangementsActivity extends AppCompatActivity {
             ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 titleTextView = findViewById(R.id.main_listitem_title);
-                dateTextView = findViewById(R.id.main_listitem_date);
+                dateTextView = findViewById(R.id.main_listitem_desc);
             }
         }
 
