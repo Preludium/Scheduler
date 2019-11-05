@@ -27,41 +27,4 @@ public class MealDayFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_meal_day, container, false);
     }
 
-    public class MealDayRecyclerViewAdapter extends RecyclerView.Adapter<MealDayRecyclerViewAdapter.ViewHolder> {
-
-        public MealDayRecyclerViewAdapter() {
-
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 0;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView mealTitle;
-            TextView mealCategory;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                mealTitle = itemView.findViewById(R.id.meal_listitem_title);
-                mealCategory = itemView.findViewById(R.id.meal_listitem_category);
-            }
-        }
-
-
-    }
-
 }

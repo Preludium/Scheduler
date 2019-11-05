@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp">
+    android:padding="15dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/main_listitem_image"
@@ -21,11 +21,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/main_listitem_date"
+        android:id="@+id/main_listitem_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Created: 01/01/2000"
+        android:text="Description"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:layout_toEndOf="@id/main_listitem_image"
         android:layout_alignBottom="@id/main_listitem_image" />
@@ -34,7 +34,6 @@
         android:id="@+id/main_listitem_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onMenuClick"
         android:src="@drawable/ic_more_vert_black_24dp"
         android:background="@android:color/transparent"
         android:layout_alignParentEnd="true"
