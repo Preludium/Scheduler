@@ -27,7 +27,7 @@ public class Category {
     public Category(@NonNull String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.order = 100;
+        this.order = 0;
     }
 
     @NonNull
