@@ -22,6 +22,7 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
     public CategoriesRecyclerViewAdapter(Context context) {
         this.context = context;
         this.categories = App.db.categories().getAll();
+        // TODO: sort by category order
     }
 
     @NonNull
@@ -40,7 +41,7 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: inflate menu
+                App.db.categories().delete(category);
             }
         });
     }
