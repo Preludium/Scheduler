@@ -13,7 +13,7 @@
         android:id="@+id/meals_content_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/listitem_meal" />
+        tools:listitem="@layout/listitem_main" />
 
     <TextView
         android:id="@+id/meals_content_info_text"

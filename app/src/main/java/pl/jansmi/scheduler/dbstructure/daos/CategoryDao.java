@@ -6,10 +6,15 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 
 @Dao
 public interface CategoryDao {
+
+    @Query("SELECT * FROM Categories")
+    List<Category> getAll();
 
     @Query("SELECT * FROM Categories WHERE id = :id")
     Category getById(String id);

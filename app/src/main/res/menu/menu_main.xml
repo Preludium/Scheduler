@@ -17,21 +17,33 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/action_invitations"
+        android:id="@+id/action_subjects"
         android:orderInCategory="3"
-        android:title="@string/action_invitations"
-        app:showAsAction="never"/>
+        android:title="@string/action_subjects"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="4"
+        android:title="@string/action_profile"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_tags"
+        android:orderInCategory="5"
+        android:title="@string/action_tags"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="4"
+        android:orderInCategory="6"
         android:title="@string/action_settings"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_logout"
-        android:orderInCategory="5"
+        android:orderInCategory="7"
         android:title="@string/action_logout"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -7,27 +7,27 @@ import androidx.room.PrimaryKey;
 
 import java.util.UUID;
 
-@Entity(tableName = "Categories")
-public class Category {
+@Entity(tableName = "Subjects")
+public class Subject {
 
     @PrimaryKey
     @NonNull
     private String id;
     @NonNull
     private String name;
-    private int order;
+    private float favour;
 
-    public Category(@NonNull String id, @NonNull String name, int order) {
+    public Subject(@NonNull String id, @NonNull String name, float favour) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.favour = favour;
     }
 
     @Ignore
-    public Category(@NonNull String name) {
+    public Subject(@NonNull String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.order = 0;
+        this.favour = 1.f;
     }
 
     @NonNull
@@ -44,11 +44,12 @@ public class Category {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public float getFavour() {
+        return favour;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setFavour(float favour) {
+        this.favour = favour;
     }
+
 }

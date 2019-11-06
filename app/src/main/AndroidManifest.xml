@@ -12,9 +12,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.AddCategoryActivity"
+            android:label="@string/title_activity_add_category"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.NewStudyingActivity"
             android:label="@string/title_activity_new_studying"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddTagActivity"
             android:label="@string/title_activity_add_tag"
