@@ -1,9 +1,12 @@
 package pl.jansmi.scheduler.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +44,20 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                App.db.categories().delete(category);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Confirm delete");
+                builder.setMessage("Are you sure you want to delete this record?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteItem(position);
+                        // TODO: show infoBox, if 'categories' is empty
+                        App.db.categories().delete(category);
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.create().show();
+
             }
         });
     }
@@ -50,4 +66,11 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
     public int getItemCount() {
         return categories.size();
     }
+
+    private void deleteItem(int position) {
+        categories.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, categories.size());
+    }
+
 }
