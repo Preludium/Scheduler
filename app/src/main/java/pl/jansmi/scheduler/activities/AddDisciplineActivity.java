@@ -51,7 +51,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
                 if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Name is missing!", Toast.LENGTH_LONG).show();
 
-                // OK when kcalPerMinute is missing (then simply kcalPerMinute = 0)
+                    // OK when kcalPerMinute is missing (then simply kcalPerMinute = 0)
 
                 else {
                     if (disciplineId == null) {

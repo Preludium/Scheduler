@@ -1,6 +1,5 @@
 package pl.jansmi.scheduler.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +15,6 @@ import java.util.List;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.activities.AddDisciplineActivity;
-import pl.jansmi.scheduler.activities.AddIngredientActivity;
-import pl.jansmi.scheduler.activities.DisciplinesActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Discipline;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
