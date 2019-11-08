@@ -12,16 +12,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.AddDisciplineActivity"
+            android:label="@string/title_activity_add_discipline"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".activities.AddDisciplineActivity"
-            android:label="@string/title_activity_add_discipline"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddIngredientActivity"
             android:label="@string/title_activity_add_ingredient"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.IngredientsActivity"
             android:label="@string/title_activity_ingredients"

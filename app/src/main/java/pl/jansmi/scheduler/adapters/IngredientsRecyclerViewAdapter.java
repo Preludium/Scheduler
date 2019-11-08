@@ -78,5 +78,6 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
         ingredients.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, ingredients.size());
+        notifyDataSetChanged();
     }
 }
