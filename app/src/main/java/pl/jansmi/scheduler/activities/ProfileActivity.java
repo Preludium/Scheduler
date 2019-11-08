@@ -14,15 +14,22 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import pl.jansmi.scheduler.App;
@@ -31,15 +38,18 @@ import pl.jansmi.scheduler.dbstructure.entities.User;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private User user;
     private EditText name;
     private EditText birthday;
-    private Spinner sex;
     private EditText weight;
     private EditText height;
     private EditText kcalPerDayTarget;
     private Date date;
+
+    private User user;
+    private final String[] sexList = {"male", "female"};
+    private boolean gender;
     private DatePickerDialog.OnDateSetListener birthdayDateSetListener;
+    private String userNameInitial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,58 +59,69 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         date = new Date();
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
 
         user = App.db.users().getById(App.session.getUserId());
         name = findViewById(R.id.login_content);
         birthday = findViewById(R.id.birthday_content);
-        sex = findViewById(R.id.sex_content);
+        birthday.setClickable(true);
+        birthday.setFocusableInTouchMode(false);
+        Spinner sex = findViewById(R.id.sex_content);
         weight = findViewById(R.id.weight_content);
         height = findViewById(R.id.height_content);
         kcalPerDayTarget = findViewById(R.id.kcalPerDayTarget_content);
 
         name.setText(user.getName());
+        userNameInitial = user.getName();
 
         if(user.getBirthday() != null) {
             date = user.getBirthday();
-            birthday.setText(dateFormat.format(date));
+            @SuppressLint("DefaultLocale")
+            String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth(), date.getYear());
+            birthday.setText(dateHandler);
         }
+        weight.setText(String.valueOf(user.getWeight()));
+        height.setText(String.valueOf(user.getHeight()));
+        kcalPerDayTarget.setText(String.valueOf(user.getKcalPerDayTarget()));
 
-//        if(user.getWeight() != null)
-//            weight.setText(String.valueOf(user.getWeight()));
-//
-//        if(user.getHeight() != null)
-//            height.setText(String.valueOf(user.getHeight()));
+        gender = user.isSex();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sexList);
+        sex.setAdapter(adapter);
 
-//        if(user.getKcalPerDayTarget() != null)
-//            kcalPerDayTarget.setText(String.valueOf(user.getKcalPerDayTarget()));
+        if(gender)
+            sex.setSelection(1);
+        else
+            sex.setSelection(0);
 
-        birthday.setOnClickListener(new View.OnClickListener(){
+        sex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
             @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-//                if(date != null) {
-//                    cal.set(Calendar.DAY_OF_MONTH, date.getDay());
-//                    cal.set(Calendar.MONTH, date.getMonth());
-//                    cal.set(Calendar.YEAR, date.getYear());
-//                }
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                DatePickerDialog dialog = new DatePickerDialog(ProfileActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        birthdayDateSetListener, year, month, day);
-                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                switch(position) {
+                    case 0:
+                        gender = false;
+                        break;
+
+                    case 1:
+                        gender = true;
+
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
         birthdayDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
                 date = new Date(year, month, day);
-                birthday.setText(dateFormat.format(date));
+                birthday.setText(String.format("%s/%s/%s", day, month, year));
             }
         };
 
@@ -108,10 +129,54 @@ public class ProfileActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                if(!name.getText().toString().equals(userNameInitial) && name.getText() != null) {
+                    List<User> users;
+                    users = App.db.users().getAll();
+                    for(User userTemp : users) {
+                        if (name.getText().toString().equals(userTemp.getName())) {
+                            Toast.makeText(getApplicationContext(), "That user name is occupied", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+                    user.setName(name.getText().toString());
+                }
+
+
+                if(birthday.getText() != null)
+                    user.setBirthday(date);
+
+                user.setSex(gender);
+
+                if(weight.getText() != null)
+                    user.setWeight(Float.valueOf(weight.getText().toString()));
+
+                if(height.getText() != null)
+                    user.setHeight(Integer.valueOf(height.getText().toString()));
+
+                if(kcalPerDayTarget.getText() != null)
+                    user.setKcalPerDayTarget(Integer.valueOf(kcalPerDayTarget.getText().toString()));
+
+                App.db.users().update(user);
+                finish();
             }
         });
+    }
+
+    public void onBirthdayClick(View view) {
+        Calendar cal = Calendar.getInstance();
+        int year, month, day;
+
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(ProfileActivity.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                birthdayDateSetListener, year, month, day);
+
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
 }

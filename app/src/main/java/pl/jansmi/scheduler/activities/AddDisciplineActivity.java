@@ -30,7 +30,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_discipline);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         kcalPerMinute = findViewById(R.id.add_discipline_content_KcalPerMinute);
         disciplineId = Objects.requireNonNull(getIntent().getExtras()).getString("disciplineId");
