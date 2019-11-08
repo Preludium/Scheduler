@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Objects;
+
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
@@ -46,7 +48,7 @@ public class AddIngredientActivity extends AppCompatActivity {
 
         kcal = findViewById(R.id.add_ingredient_kcal);
 
-        ingredientId = getIntent().getExtras().getString("ingredientId");
+        ingredientId = Objects.requireNonNull(getIntent().getExtras()).getString("ingredientId");
 
         if (ingredientId != null) { // update
             this.ingredient = App.db.ingredients().getById(ingredientId);

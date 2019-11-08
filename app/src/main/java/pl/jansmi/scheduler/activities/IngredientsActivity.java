@@ -61,4 +61,11 @@ public class IngredientsActivity extends AppCompatActivity {
             infoBox.setVisibility(View.INVISIBLE);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
 }

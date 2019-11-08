@@ -3,6 +3,7 @@ package pl.jansmi.scheduler.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.activities.AddDisciplineActivity;
+import pl.jansmi.scheduler.activities.AddIngredientActivity;
 import pl.jansmi.scheduler.activities.DisciplinesActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Discipline;
+import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
 
@@ -25,7 +29,7 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
     public DisciplinesRecyclerViewAdapter(Context context) {
         this.context = context;
         this.disciplines = App.db.disciplines().getAll();
-        // TODO: sort by discipline order
+        // TODO: sort by discipline favour
     }
 
     @NonNull
@@ -39,24 +43,30 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
         Discipline discipline = disciplines.get(position);
+
         holder.title.setText(discipline.getName());
         holder.desc.setText(String.valueOf(discipline.getKcalPerMinute()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AddDisciplineActivity.class);
+                intent.putExtra("ingredientId", discipline.getId());
+                context.startActivity(intent);
+            }
+        });
+
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Confirm delete");
-                builder.setMessage("Are you sure you want to delete this record?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteItem(position);
                         // TODO: show infoBox, if 'disciplines' is empty
                         App.db.disciplines().delete(discipline);
                     }
                 });
-                builder.setNegativeButton("No", null);
-                builder.create().show();
 
             }
         });

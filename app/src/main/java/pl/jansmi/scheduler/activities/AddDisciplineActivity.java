@@ -22,6 +22,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Discipline;
 public class AddDisciplineActivity extends AppCompatActivity {
 
     private String disciplineId;
+    private Discipline discipline;
     private EditText name;
     private EditText kcalPerMinute;
 
@@ -37,7 +38,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
         name = findViewById(R.id.add_discipline_content_name);
 
         if (disciplineId != null) { // update
-            Discipline discipline = App.db.disciplines().getById(disciplineId);
+            this.discipline = App.db.disciplines().getById(disciplineId);
             name.setText(discipline.getName());
             kcalPerMinute.setText(discipline.getKcalPerMinute());
         }
@@ -47,21 +48,29 @@ public class AddDisciplineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (name.getText().toString().equals("")  || kcalPerMinute.getText().toString().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Name or Kcal is missing!", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Discipline discipline = new Discipline(name.getText().toString());
-                    discipline.setFavour(1.f);
-                    discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+                if (name.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(), "Name is missing!", Toast.LENGTH_LONG).show();
 
+                // OK when kcalPerMinute is missing (then simply kcalPerMinute = 0)
+
+                else {
                     if (disciplineId == null) {
+                        discipline = new Discipline(name.getText().toString());
+                        discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+                        discipline.setFavour(1.f);
                         App.db.disciplines().insert(discipline);
                         finish();
-                    } else {
+                    }
+
+                    else {
+                        discipline.setName(name.getText().toString());
+                        discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+                        // TODO: think of favour changing, while refreshing data
+                        // discipline.setFavour(1.f);
                         App.db.disciplines().update(discipline);
                         finish();
                     }
+
                 }
             }
 
