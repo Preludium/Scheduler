@@ -54,4 +54,13 @@
     <string name="action_subjects">Subjects</string>
     <string name="title_activity_add_category">AddCategoryActivity</string>
     <string name="categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
+    <string name="title_activity_add_ingredient">AddIngredientActivity</string>
+    <string name="ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
+
+    <string name="ingredient_units_prompt">Unit</string>
+    <string-array name="ingredient_units_array">
+        <item>pcs.</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
 </resources>
