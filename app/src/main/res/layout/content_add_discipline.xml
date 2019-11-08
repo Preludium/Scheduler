@@ -5,7 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".AddDisciplineActivity"
+    tools:context=".activities.AddDisciplineActivity"
     tools:showIn="@layout/activity_add_discipline">
+
+
+    <TextView
+        android:id="@+id/add_discipline_content_name_title"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_discipline_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/add_discipline_content_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/add_discipline_content_name"
+        android:layout_width="@dimen/min_text_box_width"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textAlignment="center"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/add_discipline_content_name_title"
+        app:layout_constraintBottom_toTopOf="@id/add_discipline_content_KcalPerMinute_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/add_discipline_content_KcalPerMinute_title"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_discipline_kcal_per_minute"
+        app:layout_constraintTop_toBottomOf="@id/add_discipline_content_name"
+        app:layout_constraintBottom_toTopOf="@+id/add_discipline_content_KcalPerMinute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/add_discipline_content_KcalPerMinute"
+        android:layout_width="@dimen/min_text_box_width"
+        android:layout_height="wrap_content"
+        android:hint="@string/kcal_per_minute"
+        android:textAlignment="center"
+        android:singleLine="true"
+        android:phoneNumber="true"
+        app:layout_constraintTop_toBottomOf="@id/add_discipline_content_KcalPerMinute_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

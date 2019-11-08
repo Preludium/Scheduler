@@ -71,6 +71,7 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
         categories.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, categories.size());
+        notifyDataSetChanged();
     }
 
 }

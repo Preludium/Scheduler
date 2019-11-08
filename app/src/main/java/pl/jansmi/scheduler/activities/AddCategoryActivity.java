@@ -1,16 +1,16 @@
 package pl.jansmi.scheduler.activities;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.widget.EditText;
-import android.widget.NumberPicker;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Objects;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
@@ -21,6 +21,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     private String categoryId;
     private EditText name;
     private NumberPicker picker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         picker.setMinValue(0);
         picker.setMaxValue(23);
 
-        categoryId = getIntent().getExtras().getString("categoryId");
+        categoryId = Objects.requireNonNull(getIntent().getExtras()).getString("categoryId");
 
         if (categoryId != null) { // update
             Category category = App.db.categories().getById(categoryId);

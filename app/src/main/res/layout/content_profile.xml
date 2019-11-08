@@ -8,4 +8,147 @@
     tools:context=".activities.ProfileActivity"
     tools:showIn="@layout/activity_profile">
 
+    <!--  LOGIN  -->
+
+    <TextView
+        android:id="@+id/login_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/birthday_content_title"
+        app:layout_constraintEnd_toStartOf="@id/login_content"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/login_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        app:layout_constraintBottom_toTopOf="@id/birthday_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/login_content_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--  BIRTHDAY  -->
+
+    <TextView
+        android:id="@+id/birthday_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birthday"
+        app:layout_constraintTop_toBottomOf="@id/login_content_title"
+        app:layout_constraintBottom_toTopOf="@id/sex_content_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/birthday_content"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/birthday_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:editable="false"
+        android:inputType="none"
+        app:layout_constraintBottom_toTopOf="@id/sex_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/birthday_content_title"
+        app:layout_constraintTop_toBottomOf="@id/login_content"
+        tools:ignore="MissingConstraints" />
+
+    <!--  SEX  -->
+
+    <TextView
+        android:id="@+id/sex_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sex"
+        app:layout_constraintBottom_toTopOf="@id/weight_content_title"
+        app:layout_constraintEnd_toStartOf="@id/birthday_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/birthday_content_title"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/sex_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        app:layout_constraintBottom_toTopOf="@id/weight_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sex_content_title"
+        app:layout_constraintTop_toBottomOf="@id/birthday_content" />
+
+    <!--  WEIGHT  -->
+
+    <TextView
+        android:id="@+id/weight_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight"
+        app:layout_constraintBottom_toTopOf="@id/height_content_title"
+        app:layout_constraintEnd_toStartOf="@id/weight_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sex_content_title"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/weight_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        app:layout_constraintBottom_toTopOf="@id/height_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/weight_content_title"
+        app:layout_constraintTop_toBottomOf="@id/sex_content"
+        tools:ignore="MissingConstraints" />
+
+    <!--  HEIGHT  -->
+
+    <TextView
+        android:id="@+id/height_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        app:layout_constraintBottom_toTopOf="@id/kcalPerDayTarget_content_title"
+        app:layout_constraintEnd_toStartOf="@id/height_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weight_content_title"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/height_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        app:layout_constraintBottom_toTopOf="@id/kcalPerDayTarget_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/height_content_title"
+        app:layout_constraintTop_toBottomOf="@id/weight_content"
+        tools:ignore="MissingConstraints" />
+
+    <!--  KCAL  -->
+
+    <TextView
+        android:id="@+id/kcalPerDayTarget_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kcal Per Day Target"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/kcalPerDayTarget_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/height_content_title"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/kcalPerDayTarget_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/kcalPerDayTarget_content_title"
+        app:layout_constraintTop_toBottomOf="@id/height_content" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

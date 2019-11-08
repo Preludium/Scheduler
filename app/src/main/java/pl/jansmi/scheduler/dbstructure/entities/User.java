@@ -43,7 +43,8 @@ public class User {
     public User(@NonNull String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.weight = 0;
+        this.sex = SEX_MALE;
+        this.weight = 0.f;
         this.height = 0;
         this.kcalPerDayTarget = 0;
     }
