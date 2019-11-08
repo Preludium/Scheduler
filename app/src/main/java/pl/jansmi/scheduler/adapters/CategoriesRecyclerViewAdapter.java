@@ -3,6 +3,7 @@ package pl.jansmi.scheduler.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.activities.AddCategoryActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
+import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
 
@@ -39,24 +42,30 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
         Category category = categories.get(position);
+
         holder.title.setText(category.getName());
         holder.desc.setText(String.valueOf(category.getOrder()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AddCategoryActivity.class);
+                intent.putExtra("categoryId", category.getId());
+                context.startActivity(intent);
+            }
+        });
+        
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Confirm delete");
-                builder.setMessage("Are you sure you want to delete this record?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
                         // TODO: show infoBox, if 'categories' is empty
                         App.db.categories().delete(category);
                     }
                 });
-                builder.setNegativeButton("No", null);
-                builder.create().show();
 
             }
         });

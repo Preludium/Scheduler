@@ -91,4 +91,8 @@ public class Ingredient {
     public void setFavour(float favour) {
         this.favour = favour;
     }
+
+    public String getDesc() {
+        return quantity + unit + ", " + kcal + "kcal";
+    }
 }

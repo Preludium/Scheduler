@@ -16,6 +16,9 @@ public interface IngredientDao {
     @Query("SELECT * FROM Ingredients")
     List<Ingredient> getAll();
 
+    @Query("SELECT * FROM Ingredients WHERE id = :ingredientId")
+    Ingredient getById(String ingredientId);
+
     @Query("SELECT * FROM Ingredients i JOIN Ingredient_meal_join j " +
             "ON i.id = j.ingredientId WHERE j.mealId = :mealId")
     List<Ingredient> getByMealId(String mealId);
