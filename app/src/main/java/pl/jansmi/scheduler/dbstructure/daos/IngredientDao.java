@@ -13,6 +13,9 @@ import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 @Dao
 public interface IngredientDao {
 
+    @Query("SELECT * FROM Ingredients")
+    List<Ingredient> getAll();
+
     @Query("SELECT * FROM Ingredients i JOIN Ingredient_meal_join j " +
             "ON i.id = j.ingredientId WHERE j.mealId = :mealId")
     List<Ingredient> getByMealId(String mealId);
@@ -25,4 +28,5 @@ public interface IngredientDao {
 
     @Delete
     void delete(Ingredient ingredient);
+
 }
