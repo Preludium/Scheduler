@@ -54,6 +54,7 @@
     <string name="action_subjects">Subjects</string>
     <string name="title_activity_add_category">AddCategoryActivity</string>
     <string name="categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
+<<<<<<< HEAD
     <string name="disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
     <string name="title_activity_add_discipline">AddDisciplineActivity</string>
     <string name="enter_discipline_name">Enter discipline name</string>
@@ -61,4 +62,15 @@
     <string name="enter_discipline_kcal_per_minute">Enter discipline Kcal per minute</string>
     <string name="kcal_per_minute">Kcal per Minute</string>
     <string name="title_activity_profile">ProfileActivity</string>
+=======
+    <string name="title_activity_add_ingredient">AddIngredientActivity</string>
+    <string name="ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
+
+    <string name="ingredient_units_prompt">Unit</string>
+    <string-array name="ingredient_units_array">
+        <item>pcs.</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
+>>>>>>> 3895cf8db9ab184821afa6b3b26cf6893420035a
 </resources>

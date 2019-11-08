@@ -19,6 +19,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Category;
 public class AddCategoryActivity extends AppCompatActivity {
 
     private String categoryId;
+    private Category category;
     private EditText name;
     private NumberPicker picker;
 
@@ -39,7 +40,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         categoryId = Objects.requireNonNull(getIntent().getExtras()).getString("categoryId");
 
         if (categoryId != null) { // update
-            Category category = App.db.categories().getById(categoryId);
+            this.category = App.db.categories().getById(categoryId);
             name.setText(category.getName());
             picker.setValue(category.getOrder());
         }
@@ -49,15 +50,16 @@ public class AddCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Category category = new Category(name.getText().toString());
-                category.setOrder(picker.getValue());
-
-                if (categoryId == null) {
+                if (categoryId == null) { // insert
+                    category = new Category(name.getText().toString());
+                    category.setOrder(picker.getValue());
                     App.db.categories().insert(category);
                     finish();
                 }
 
-                else {
+                else { // update
+                    category.setName(name.getText().toString());
+                    category.setOrder(picker.getValue());
                     App.db.categories().update(category);
                     finish();
                 }

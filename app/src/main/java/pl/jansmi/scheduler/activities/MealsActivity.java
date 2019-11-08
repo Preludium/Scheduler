@@ -61,7 +61,7 @@ public class MealsActivity extends AppCompatActivity {
     }
 
     private void ingredients() {
-        //startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
+        startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
     }
 
 }
