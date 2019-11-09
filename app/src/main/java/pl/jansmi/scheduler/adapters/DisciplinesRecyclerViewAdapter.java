@@ -42,13 +42,13 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
         Discipline discipline = disciplines.get(position);
 
         holder.title.setText(discipline.getName());
-        holder.desc.setText(String.valueOf(discipline.getKcalPerMinute()));
+        holder.desc.setText("Kcal: " + String.valueOf(discipline.getKcalPerMinute()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AddDisciplineActivity.class);
-                intent.putExtra("ingredientId", discipline.getId());
+                intent.putExtra("disciplineId", discipline.getId());
                 context.startActivity(intent);
             }
         });

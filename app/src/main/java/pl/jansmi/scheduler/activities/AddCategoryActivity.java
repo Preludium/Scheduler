@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -49,14 +50,15 @@ public class AddCategoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (categoryId == null) { // insert
+                if(name.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Enter category name", Toast.LENGTH_LONG).show();
+                }
+                else if (categoryId == null) { // insert
                     category = new Category(name.getText().toString());
                     category.setOrder(picker.getValue());
                     App.db.categories().insert(category);
                     finish();
                 }
-
                 else { // update
                     category.setName(name.getText().toString());
                     category.setOrder(picker.getValue());

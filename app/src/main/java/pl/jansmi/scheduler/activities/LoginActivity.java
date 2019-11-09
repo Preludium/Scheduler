@@ -21,6 +21,8 @@ import pl.jansmi.scheduler.dbstructure.Database;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 
 public class LoginActivity extends AppCompatActivity {
+    private EditText login_box;
+    private EditText password_box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +34,28 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        login_box = findViewById(R.id.login_box);
+        password_box = findViewById(R.id.password_box);
         Button login_btn = findViewById(R.id.signin_btn);
         TextView signup_text = findViewById(R.id.signup_text);
         final EditText login_box = findViewById(R.id.login_box);
         // EditText password_box = findViewById(R.id.password_box);
 
+
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // check if user exists of a given name and password AND open new Session
-//                String name = login_box.getText().toString();
-                User fetched = App.db.users().getByName("jansmi");
+                String name = login_box.getText().toString();
+                User fetched = App.db.users().getByName(name);
 
                 if (fetched != null) {
                     App.session = new Session(fetched.getId());
                     startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
                 }
-
                 else {
-                    Toast.makeText(getApplicationContext(), "No user of a given name found!",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No user of a given name found!", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -63,6 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        login_box.setText("");
+        password_box.setText("");
     }
 
     @Override

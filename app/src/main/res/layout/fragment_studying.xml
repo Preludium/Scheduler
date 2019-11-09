@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.StudyingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/studying_fragment_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+        android:id="@+id/studying_fragment_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </androidx.viewpager.widget.ViewPager>
 
 </FrameLayout>

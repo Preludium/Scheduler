@@ -157,7 +157,7 @@ public class ArrangementsActivity extends AppCompatActivity {
     }
 
     private void subjects() {
-        //startActivity(new Intent(getApplicationContext(), SubjectsActivity.class));
+        startActivity(new Intent(getApplicationContext(), SubjectsActivity.class));
     }
 
     private void profile() {

@@ -5,29 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.SettingsActivity"
-    tools:showIn="@layout/activity_settings">
+    tools:context=".activities.SubjectsActivity"
+    tools:showIn="@layout/activity_subjects">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjects_content_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/listitem_main" />
 
     <TextView
-        android:id="@+id/settings_content_delete_account_title"
+        android:id="@+id/subjects_content_infobox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete account"
-        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_margin="100dp"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:text="@string/no_subjects_found_click_to_add_one"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/settings_content_delete_account"/>
-
-    <Button
-        android:id="@+id/settings_content_delete_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:onClick="onDeleteClick"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/settings_content_delete_account_title"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

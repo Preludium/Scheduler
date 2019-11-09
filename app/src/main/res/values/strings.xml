@@ -70,4 +70,7 @@
         <item>g</item>
         <item>ml</item>
     </string-array>
+    <string name="title_activity_subjects">SubjectsActivity</string>
+    <string name="title_activity_add_subject">AddSubjectActivity</string>
+    <string name="no_subjects_found_click_to_add_one">No subjects found. Click to add one</string>
 </resources>
