@@ -49,9 +49,9 @@ public class MealsFragment extends Fragment {
         return view;
     }
 
-    public class MealDayFragmentPagerAdapter extends FragmentPagerAdapter {
+    private class MealDayFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        public MealDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
+        MealDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
 
