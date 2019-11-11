@@ -16,6 +16,9 @@ public interface CategoryDao {
     @Query("SELECT * FROM Categories")
     List<Category> getAll();
 
+    @Query("SELECT name FROM Categories")
+    List<String> getAllNames();
+
     @Query("SELECT * FROM Categories WHERE id = :id")
     Category getById(String id);
 
