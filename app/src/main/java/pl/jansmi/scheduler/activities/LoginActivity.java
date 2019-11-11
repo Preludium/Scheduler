@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // check if user exists of a given name and password AND open new Session
 //                String name = login_box.getText().toString();
-                User fetched = App.db.users().getByName("jansmi");
+                User fetched = App.db.users().getByName("mik");
 
                 if (fetched != null) {
                     App.session = new Session(fetched.getId());
