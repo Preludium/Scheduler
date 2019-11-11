@@ -1,13 +1,11 @@
 package pl.jansmi.scheduler.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,18 +15,18 @@ import java.util.List;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.activities.AddCategoryActivity;
-import pl.jansmi.scheduler.dbstructure.entities.Category;
+import pl.jansmi.scheduler.activities.AddSubjectActivity;
+import pl.jansmi.scheduler.dbstructure.entities.Subject;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
+public class SubjectsRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
 
     private Context context;
-    private List<Category> categories;
+    private List<Subject> subjects;
 
-    public CategoriesRecyclerViewAdapter(Context context) {
+    public SubjectsRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.categories = App.db.categories().getAll();
-        // TODO: sort by category order
+        this.subjects = App.db.subjects().getAll();
     }
 
     @NonNull
@@ -41,20 +39,20 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
 
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
-        Category category = categories.get(position);
+        Subject subject = subjects.get(position);
 
-        holder.title.setText(category.getName());
-        holder.desc.setText("Order: " + String.valueOf(category.getOrder()));
+        holder.title.setText(subject.getName());
+        holder.desc.setText("");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AddCategoryActivity.class);
-                intent.putExtra("categoryId", category.getId());
+                Intent intent = new Intent(context, AddSubjectActivity.class);
+                intent.putExtra("subjectId", subject.getId());
                 context.startActivity(intent);
             }
         });
-        
+
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,8 +60,8 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'categories' is empty
-                        App.db.categories().delete(category);
+                        // TODO: show infoBox, if 'subject' is empty
+                        App.db.subjects().delete(subject);
                     }
                 });
 
@@ -73,14 +71,13 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return subjects.size();
     }
 
     private void deleteItem(int position) {
-        categories.remove(position);
+        subjects.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, categories.size());
+        notifyItemRangeChanged(position, subjects.size());
         notifyDataSetChanged();
     }
-
 }

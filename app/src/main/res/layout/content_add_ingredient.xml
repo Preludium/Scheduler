@@ -24,6 +24,7 @@
         android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
         android:hint="Name"
+        android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/add_ingredient_name_title"
         app:layout_constraintBottom_toTopOf="@id/add_ingredient_quantity_title"
@@ -55,6 +56,7 @@
             android:layout_width="@dimen/sml_text_box_width"
             android:layout_height="wrap_content"
             android:hint="Quantity"
+            android:singleLine="true"
             android:textAlignment="center" />
 
         <Spinner
@@ -83,6 +85,7 @@
         android:layout_height="wrap_content"
         android:hint="Kcal"
         android:textAlignment="center"
+        android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@id/add_ingredient_kcal_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

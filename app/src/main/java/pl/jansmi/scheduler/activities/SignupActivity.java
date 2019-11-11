@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
@@ -31,18 +32,19 @@ public class SignupActivity extends AppCompatActivity {
 
 
         signup_btn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // check if passwords are equal and add new user to database
-                String name = signup_login_box.getText().toString();
-                User usr = new User(name);
+                if(signup_login_box.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Enter user name", Toast.LENGTH_LONG).show();
+                else {
+                    String name = signup_login_box.getText().toString();
+                    User usr = new User(name);
 
-                App.db.users().insert(usr);
-                App.session = new Session(usr.getId());
+                    App.db.users().insert(usr);
 
-                startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
-                finish();
+                    finish();
+                }
             }
         });
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -70,25 +71,28 @@ public class AddIngredientActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (ingredientId == null) { // insert
-                    ingredient = new Ingredient(name.getText().toString());
-                    ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
-                    ingredient.setUnit(unit.getSelectedItem().toString());
-                    ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
-                    App.db.ingredients().insert(ingredient);
+                if (name.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Enter ingredient name", Toast.LENGTH_LONG).show();
+                else if (quantity.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Enter ingredient quantity", Toast.LENGTH_LONG).show();
+                else if (kcal.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(), "Enter ingredient Kcal", Toast.LENGTH_LONG).show();
+                else {
+                    if (ingredientId == null) { // insert
+                        ingredient = new Ingredient(name.getText().toString());
+                        ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
+                        ingredient.setUnit(unit.getSelectedItem().toString());
+                        ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+                        App.db.ingredients().insert(ingredient);
+                    } else { // update
+                        ingredient.setName(name.getText().toString());
+                        ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
+                        ingredient.setUnit(unit.getSelectedItem().toString());
+                        ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+                        App.db.ingredients().update(ingredient);
+                    }
                     finish();
                 }
-
-                else { // update
-                    ingredient.setName(name.getText().toString());
-                    ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
-                    ingredient.setUnit(unit.getSelectedItem().toString());
-                    ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
-                    App.db.ingredients().update(ingredient);
-                    finish();
-                }
-
             }
         });
     }
