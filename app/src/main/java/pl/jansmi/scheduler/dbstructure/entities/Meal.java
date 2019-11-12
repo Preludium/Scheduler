@@ -71,4 +71,5 @@ public class Meal {
     public void setCategoryId(@NonNull String categoryId) {
         this.categoryId = categoryId;
     }
+
 }

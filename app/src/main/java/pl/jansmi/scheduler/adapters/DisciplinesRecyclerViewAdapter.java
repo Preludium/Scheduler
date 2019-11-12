@@ -18,7 +18,7 @@ import pl.jansmi.scheduler.activities.AddDisciplineActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Discipline;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
+public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
 
     private Context context;
     private List<Discipline> disciplines;
@@ -31,14 +31,14 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
 
     @NonNull
     @Override
-    public ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.listitem_main, null);
-        return new ListItemViewHolder(view);
+        return new MainListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
         Discipline discipline = disciplines.get(position);
 
         holder.title.setText(discipline.getName());

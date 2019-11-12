@@ -68,7 +68,7 @@ public class MealsActivity extends AppCompatActivity {
 
         this.mealCategoryFragmentList = new ArrayList<>();
         for (Category cat : categories)
-            mealCategoryFragmentList.add(new MealCategoryFragment(getApplicationContext(), cat));
+            mealCategoryFragmentList.add(new MealCategoryFragment(cat));
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);

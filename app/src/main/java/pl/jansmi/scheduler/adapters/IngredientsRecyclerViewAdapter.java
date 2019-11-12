@@ -1,6 +1,5 @@
 package pl.jansmi.scheduler.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,7 @@ import pl.jansmi.scheduler.activities.AddIngredientActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
+public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
 
     private Context context;
     private List<Ingredient> ingredients;
@@ -32,14 +31,14 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<ListIte
 
     @NonNull
     @Override
-    public ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.listitem_main, null);
-        return new ListItemViewHolder(view);
+        return new MainListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
         Ingredient ingredient = ingredients.get(position);
 
         holder.title.setText(ingredient.getName());
