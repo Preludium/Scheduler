@@ -1,13 +1,11 @@
 package pl.jansmi.scheduler.adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +18,7 @@ import pl.jansmi.scheduler.activities.AddCategoryActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
+public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
 
     private Context context;
     private List<Category> categories;
@@ -33,14 +31,14 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<ListItem
 
     @NonNull
     @Override
-    public ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.listitem_main, null);
-        return new ListItemViewHolder(view);
+        return new MainListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
         Category category = categories.get(position);
 
         holder.title.setText(category.getName());

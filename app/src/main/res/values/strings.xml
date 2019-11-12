@@ -4,9 +4,6 @@
     <!-- Activity names -->
     <string name="title_activity_add_arrangement">Add Arrangement</string>
 
-    <!-- Main Activity -->
-    <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button to add one.</string>
-
     <!-- Bottom menu bar options -->
     <string name="title_meals">Meals</string>
     <string name="title_training">Training</string>
@@ -53,16 +50,19 @@
     <string name="action_tags">Tags</string>
     <string name="action_subjects">Subjects</string>
     <string name="title_activity_add_category">AddCategoryActivity</string>
-    <string name="categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
-    <string name="disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
     <string name="title_activity_add_discipline">AddDisciplineActivity</string>
-    <string name="enter_discipline_name">Enter discipline name</string>
-    <string name="choose_discipline_favour">Choose discipline favour</string>
-    <string name="enter_discipline_kcal_per_minute">Enter discipline Kcal per minute</string>
+    <string name="enter_discipline_name">Discipline name</string>
+    <string name="enter_discipline_kcal_per_minute">Kcal per minute</string>
     <string name="kcal_per_minute">Kcal per Minute</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_add_ingredient">AddIngredientActivity</string>
-    <string name="ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
+
+    <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button to add one.</string>
+    <string name="no_categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
+    <string name="no_disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
+    <string name="no_ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
+    <string name="no_subjects_found_click_to_add_one">No subjects found. Click the button to add one.</string>
+    <string name="no_meals_found_click_the_button_to_add_one">No meals found. Click the button to add one.</string>
 
     <string name="ingredient_units_prompt">Unit</string>
     <string-array name="ingredient_units_array">
@@ -70,9 +70,10 @@
         <item>g</item>
         <item>ml</item>
     </string-array>
+
     <string name="title_activity_subjects">SubjectsActivity</string>
     <string name="title_activity_add_subject">AddSubjectActivity</string>
-    <string name="no_subjects_found_click_to_add_one">No subjects found. Click to add one</string>
     <string name="title_activity_tag">TagActivity</string>
     <string name="no_tags_found_click_to_add_one">No tags found, click to add one</string>
+    <string name="title_activity_select_meal_ingredients">SelectMealIngredientsActivity</string>
 </resources>

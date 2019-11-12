@@ -14,19 +14,22 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.activities.AddDisciplineActivity;
-import pl.jansmi.scheduler.dbstructure.entities.Discipline;
+import pl.jansmi.scheduler.activities.AddMealActivity;
+import pl.jansmi.scheduler.dbstructure.entities.Category;
+import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
+import pl.jansmi.scheduler.dbstructure.entities.Meal;
+import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
+public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
 
     private Context context;
-    private List<Discipline> disciplines;
+    private List<Meal> meals;
 
-    public DisciplinesRecyclerViewAdapter(Context context) {
+    public MealsRecyclerViewAdapter(Context context, Category category) {
         this.context = context;
-        this.disciplines = App.db.disciplines().getAll();
-        // TODO: sort by discipline favour
+        this.meals = App.db.meals().getByCategoryId(category.getId());
+        // TODO: sort
     }
 
     @NonNull
@@ -39,16 +42,25 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
 
     @Override
     public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
-        Discipline discipline = disciplines.get(position);
+        Meal meal = meals.get(position);
 
-        holder.title.setText(discipline.getName());
-        holder.desc.setText("Kcal: " + String.valueOf(discipline.getKcalPerMinute()));
+        // counting sum of calories by ingredients
+        int kcalSum = 0;
+        List<IngredientMealJoin> joins = App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
+
+        for (IngredientMealJoin join : joins) {
+            Ingredient ing = App.db.ingredients().getById(join.getIngredientId());
+            kcalSum += ing.getKcal() * ing.getQuantity() * join.getAmount();
+        }
+
+        holder.title.setText(meal.getName());
+        holder.desc.setText("Kcal: " + kcalSum);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AddDisciplineActivity.class);
-                intent.putExtra("disciplineId", discipline.getId());
+                Intent intent = new Intent(context, AddMealActivity.class);
+                intent.putExtra("mealId", meal.getId());
                 context.startActivity(intent);
             }
         });
@@ -56,28 +68,29 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'disciplines' is empty
-                        App.db.disciplines().delete(discipline);
+                        // TODO: show infoBox, if 'meals' is empty
+                        App.db.meals().delete(meal);
                     }
                 });
-
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return disciplines.size();
+        return meals.size();
     }
 
     private void deleteItem(int position) {
-        disciplines.remove(position);
+        meals.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, disciplines.size());
+        notifyItemRangeChanged(position, meals.size());
         notifyDataSetChanged();
     }
+
 }

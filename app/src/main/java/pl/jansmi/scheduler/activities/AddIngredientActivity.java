@@ -71,12 +71,11 @@ public class AddIngredientActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.getText().toString().equals(""))
+                if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter ingredient name", Toast.LENGTH_LONG).show();
-                else if (quantity.getText().toString().equals(""))
+                else if (quantity.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter ingredient quantity", Toast.LENGTH_LONG).show();
-                else if (kcal.getText().toString().equals(""))
-                    Toast.makeText(getApplicationContext(), "Enter ingredient Kcal", Toast.LENGTH_LONG).show();
+                // kcalBox can be empty
                 else {
                     if (ingredientId == null) { // insert
                         ingredient = new Ingredient(name.getText().toString());

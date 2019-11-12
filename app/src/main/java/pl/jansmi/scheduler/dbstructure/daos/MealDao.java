@@ -20,6 +20,9 @@ public interface MealDao {
     @Query("SELECT * FROM Meals WHERE categoryId = :categoryId")
     List<Meal> getByCategoryId(String categoryId);
 
+    @Query("SELECT * FROM Meals WHERE id = :mealId")
+    Meal getById(String mealId);
+
     @Insert
     void insert(Meal meal);
 
@@ -28,4 +31,5 @@ public interface MealDao {
 
     @Delete
     void delete(Meal meal);
+
 }
