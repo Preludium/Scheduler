@@ -21,12 +21,12 @@ public class IngredientMealJoin {
     private String ingredientId;
     @NonNull
     private String mealId;
-    private float amount;
+    private int quantity;
 
-    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId, float amount) {
+    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId, int quantity) {
         this.ingredientId = ingredientId;
         this.mealId = mealId;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
     @NonNull
@@ -39,11 +39,11 @@ public class IngredientMealJoin {
         return mealId;
     }
 
-    public float getAmount() {
-        return amount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

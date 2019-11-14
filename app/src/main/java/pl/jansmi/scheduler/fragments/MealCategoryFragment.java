@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class MealCategoryFragment extends Fragment {
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
+    private TextView infoBox;
 
     public MealCategoryFragment(Category category) {
         this.category = category;
@@ -36,14 +38,24 @@ public class MealCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_meal_category, container, false);
 
+        this.infoBox = root.findViewById(R.id.meal_category_fragment_info_text);
         this.recycler = root.findViewById(R.id.meal_category_fragment_recycler);
+
         this.manager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(manager);
-
         this.adapter = new MealsRecyclerViewAdapter(getContext(), category);
         recycler.setAdapter(adapter);
 
+        if (App.db.meals().getByCategoryId(category.getId()).size() == 0)
+            infoBox.setVisibility(View.VISIBLE);
+        else
+            infoBox.setVisibility(View.INVISIBLE);
+
         return root;
+    }
+
+    public int getItemCount() {
+        return adapter.getItemCount();
     }
 
 }

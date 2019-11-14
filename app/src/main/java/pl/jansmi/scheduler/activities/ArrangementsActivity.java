@@ -30,6 +30,7 @@ public class ArrangementsActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
     private RecyclerViewAdapter adapter;
+    private TextView infoBox;
 
     private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -89,6 +90,8 @@ public class ArrangementsActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
+        this.infoBox = findViewById(R.id.main_content_info_text);
+
         FloatingActionButton fab = findViewById(R.id.main_activity_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +101,16 @@ public class ArrangementsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (adapter.getItemCount() == 0)
+            infoBox.setVisibility(View.VISIBLE);
+        else
+            infoBox.setVisibility(View.INVISIBLE);
     }
 
     @Override

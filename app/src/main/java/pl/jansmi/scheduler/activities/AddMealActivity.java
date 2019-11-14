@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +31,7 @@ import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
+import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
 
 public class AddMealActivity extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class AddMealActivity extends AppCompatActivity {
     private String mealId;
     private Meal meal;
     private List<Category> categories;
-    private List<Integer> counts;
+    private HashMap<String, Integer> selectedIngredients;
 
     private EditText name;
     private Spinner categorySpinner;
@@ -70,7 +73,13 @@ public class AddMealActivity extends AppCompatActivity {
             this.meal = App.db.meals().getById(mealId);
             name.setText(meal.getName());
             categorySpinner.setSelection(getCategoryPosition());
-            // TODO: ingredientsTxt
+
+            this.selectedIngredients = new HashMap<>();
+            List<IngredientMealJoin> joins = App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
+            for (IngredientMealJoin join : joins)
+                selectedIngredients.put(join.getIngredientId(), join.getQuantity());
+
+            updateIngredientsTxt();
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -79,19 +88,35 @@ public class AddMealActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter meal name", Toast.LENGTH_LONG).show();
-                String categoryId = categories.get(categorySpinner.getSelectedItemPosition()).getId();
 
-                if (mealId == null) { // insert
-                    meal = new Meal(name.getText().toString(), categoryId);
-                    App.db.meals().insert(meal);
-                    finish();
-                }
+                else {
+                    String categoryId = categories.get(categorySpinner.getSelectedItemPosition()).getId();
 
-               else { // update
-                    meal.setName(name.getText().toString());
-                    meal.setCategoryId(categoryId);
-                    App.db.meals().update(meal);
-                    finish();
+                    if (mealId == null) { // insert
+                        meal = new Meal(name.getText().toString(), categoryId);
+                        App.db.meals().insert(meal);
+
+                        if (selectedIngredients != null)
+                            for (String key : selectedIngredients.keySet())
+                                App.db.ingredientMealJoin().insert(
+                                        new IngredientMealJoin(key, meal.getId(), selectedIngredients.get(key)));
+
+                        finish();
+                    } else { // update
+                        meal.setName(name.getText().toString());
+                        meal.setCategoryId(categoryId);
+                        App.db.meals().update(meal);
+
+                        List<IngredientMealJoin> joins = App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
+                        for (IngredientMealJoin join : joins)
+                            App.db.ingredientMealJoin().delete(join);
+
+                        for (String key : selectedIngredients.keySet())
+                            App.db.ingredientMealJoin().insert(
+                                    new IngredientMealJoin(key, meal.getId(), selectedIngredients.get(key)));
+
+                        finish();
+                    }
                 }
             }
         });
@@ -123,8 +148,14 @@ public class AddMealActivity extends AppCompatActivity {
     }
 
     public void onSelectClick(View view) {
-        // TODO: pass initial data if update
-        startActivityForResult(new Intent(this, SelectMealIngredientsActivity.class), INGREDIENTS_RC);
+        if (App.db.ingredients().getAll().size() == 0)
+            Snackbar.make(view, "No meal ingredients found! Please first add one.",
+                    Snackbar.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(this, SelectMealIngredientsActivity.class);
+            intent.putExtra("ingredients", selectedIngredients);
+            startActivityForResult(intent, INGREDIENTS_RC);
+        }
     }
 
     @Override
@@ -132,11 +163,18 @@ public class AddMealActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == INGREDIENTS_RC && resultCode == RESULT_OK) {
-            // List<Integer> counts = (List<Integer>) data.getSerializableExtra("counts");
-            // List<Ingredient> ingredients = (List<Ingredient>) data.getSerializableExtra("ingredients");
-            // Log.i("CustomLog", counts.get(0).toString()); DATA OK!
-            // TODO: remember counts and ingredients for further insert/update
+            this.selectedIngredients = (HashMap<String, Integer>) data.getSerializableExtra("ingredients");
+            updateIngredientsTxt();
         }
 
     }
+
+    private void updateIngredientsTxt() {
+        int count = 0;
+        for (String key : selectedIngredients.keySet()) {
+            count += selectedIngredients.get(key);
+        }
+        this.ingredientsTxt.setText("Ingredients: " + count);
+    }
+
 }

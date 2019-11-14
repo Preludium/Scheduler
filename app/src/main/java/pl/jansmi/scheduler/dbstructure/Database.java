@@ -69,7 +69,7 @@ public abstract class Database extends RoomDatabase {
     public abstract TagArrangementJoinDao tagArrangementJoin();
 
     public static Database build(Context context) {
-        return Room.databaseBuilder(context, Database.class, "db").allowMainThreadQueries().build();
+        return Room.databaseBuilder(context, Database.class, "db.db").allowMainThreadQueries().build();
     }
 
 }

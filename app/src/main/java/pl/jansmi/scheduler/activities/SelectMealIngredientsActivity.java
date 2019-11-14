@@ -15,15 +15,17 @@ import android.util.Log;
 import android.view.View;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.MealIngredientsRecyclerViewAdapter;
+import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 
 public class SelectMealIngredientsActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
-    private MealIngredientsRecyclerViewAdapter adapter;
+    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
     @Override
@@ -39,10 +41,13 @@ public class SelectMealIngredientsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Integer> counts = ((MealIngredientsRecyclerViewAdapter) recycler.getAdapter()).getCounts();
+                HashMap<String, Integer> selectedIngredients = ((MealIngredientsRecyclerViewAdapter)
+                        recycler.getAdapter()).getSelectedIngredients();
+
                 Intent intent = new Intent();
-                intent.putExtra("counts", (Serializable) counts);
+                intent.putExtra("ingredients", selectedIngredients);
                 setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
@@ -55,7 +60,8 @@ public class SelectMealIngredientsActivity extends AppCompatActivity {
         manager = new LinearLayoutManager(this);
         recycler.setLayoutManager(manager);
 
-        adapter = new MealIngredientsRecyclerViewAdapter(this);
+        adapter = new MealIngredientsRecyclerViewAdapter(this,
+                (HashMap<String, Integer>) getIntent().getExtras().getSerializable("ingredients"));
         recycler.setAdapter(adapter);
 
     }

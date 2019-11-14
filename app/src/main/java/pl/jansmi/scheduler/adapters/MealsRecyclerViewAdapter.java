@@ -50,7 +50,7 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
 
         for (IngredientMealJoin join : joins) {
             Ingredient ing = App.db.ingredients().getById(join.getIngredientId());
-            kcalSum += ing.getKcal() * ing.getQuantity() * join.getAmount();
+            kcalSum += ing.getKcal() * join.getQuantity();
         }
 
         holder.title.setText(meal.getName());
@@ -73,6 +73,12 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
                         // TODO: show infoBox, if 'meals' is empty
+
+                        List<IngredientMealJoin> joins =
+                                App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
+                        for (IngredientMealJoin join : joins)
+                            App.db.ingredientMealJoin().delete(join);
+
                         App.db.meals().delete(meal);
                     }
                 });

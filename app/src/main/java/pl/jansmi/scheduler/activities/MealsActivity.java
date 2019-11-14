@@ -15,8 +15,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class MealsActivity extends AppCompatActivity {
 
     private List<Category> categories;
     private List<MealCategoryFragment> mealCategoryFragmentList;
+    private TextView infoBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +50,20 @@ public class MealsActivity extends AppCompatActivity {
         this.tabs = findViewById(R.id.meals_content_tabs);
         this.tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
         this.tabs.setupWithViewPager(pager);
+        this.infoBox = findViewById(R.id.meals_content_info_text);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddMealActivity.class);
-                intent.putExtra("mealId", (String) null); // no update
-                startActivity(intent);
+                if (categories.size() == 0)
+                    Snackbar.make(view, "No meal categories found! Please first add some.",
+                            Snackbar.LENGTH_LONG).show();
+                else {
+                    Intent intent = new Intent(getApplicationContext(), AddMealActivity.class);
+                    intent.putExtra("mealId", (String) null); // no update
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -72,6 +81,11 @@ public class MealsActivity extends AppCompatActivity {
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);
+
+        if (adapter.getCount() == 0)
+            infoBox.setVisibility(View.VISIBLE);
+        else
+            infoBox.setVisibility(View.INVISIBLE);
 
     }
 
@@ -127,6 +141,7 @@ public class MealsActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return categories.get(position).getName();
         }
+
     }
 
 }

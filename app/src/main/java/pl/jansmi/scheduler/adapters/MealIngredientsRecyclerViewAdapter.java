@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
@@ -22,11 +26,15 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
     private List<Ingredient> ingredients;
     private List<Integer> counts;
 
-    public MealIngredientsRecyclerViewAdapter(Context context) {
+    public MealIngredientsRecyclerViewAdapter(Context context, HashMap<String, Integer> selectedIngredients) {
         this.context = context;
         this.ingredients = App.db.ingredients().getAll();
-        // TODO: sort by favour
+        // TODO: sort
         this.counts = new ArrayList<>(Collections.nCopies(ingredients.size(), 0));
+
+        if (selectedIngredients != null)
+            for (int i = 0; i < ingredients.size(); ++i)
+                counts.set(i, selectedIngredients.getOrDefault(ingredients.get(i).getId(), 0));
     }
 
     @NonNull
@@ -70,7 +78,14 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
         return n >= 0 ? n : 0;
     }
 
-    public List<Integer> getCounts() {
-        return counts;
+    public HashMap<String, Integer> getSelectedIngredients() {
+        HashMap<String, Integer> resultMap = new HashMap<>();
+
+        for (int i = 0; i < ingredients.size(); ++i) {
+            if (counts.get(i) > 0)
+                resultMap.put(ingredients.get(i).getId(), counts.get(i));
+        }
+
+        return resultMap;
     }
 }
