@@ -7,14 +7,18 @@ import androidx.room.ForeignKey;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(tableName = "Meal_arrangement_join",
         primaryKeys = {"mealId", "arrangementId"},
         foreignKeys = {@ForeignKey(entity = Meal.class,
                                    parentColumns = "id",
-                                   childColumns = "mealId"),
+                                   childColumns = "mealId",
+                                   onDelete = CASCADE),
                        @ForeignKey(entity = Arrangement.class,
                                    parentColumns = "id",
-                                   childColumns = "arrangementId")})
+                                   childColumns = "arrangementId",
+                                   onDelete = CASCADE)})
 public class MealArrangementJoin {
 
     @NonNull
