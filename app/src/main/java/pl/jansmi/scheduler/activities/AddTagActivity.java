@@ -36,7 +36,7 @@ public class AddTagActivity extends AppCompatActivity {
         tagId = Objects.requireNonNull(getIntent().getExtras()).getString("tagId");
         if (tagId != null) { // update
             tag = App.db.tags().getById(tagId);
-            tagName.setText(tag.getName().toString());
+            tagName.setText(tag.getName());
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);

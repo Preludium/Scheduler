@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.TagActivity"
-    tools:showIn="@layout/activity_tag">
+    tools:context=".activities.TagsActivity"
+    tools:showIn="@layout/activity_tags">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tag_content_recycler"
+        android:id="@+id/tags_content_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/listitem_main" />
 
     <TextView
-        android:id="@+id/tag_content_info_text"
+        android:id="@+id/tags_content_info_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="100dp"

@@ -14,6 +14,11 @@ import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.fragments.StudyingFragment;
@@ -28,6 +33,7 @@ public class AddArrangementActivity extends AppCompatActivity {
     private static final int SELECT_STUDYING_RC = 4;
 
     private String arrangementId; // to (potentially) update
+    private HashMap<String, Integer> selectedMeals;
 
     private BottomNavigationView navView;
 
@@ -36,10 +42,19 @@ public class AddArrangementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_arrangement);
 
+        selectedMeals = new HashMap<>();
+
         arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
             // TODO: set activity title to 'update' and fill activity with initial data
         }
+
+        // init fragments
+        MealsFragment mealsFragment = new MealsFragment(selectedMeals);
+        // TODO: pass data to the rest
+        TrainingFragment trainingFragment = new TrainingFragment();
+        TasksFragment tasksFragment = new TasksFragment();
+        StudyingFragment studyingFragment = new StudyingFragment();
 
         // init navView
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
@@ -48,13 +63,13 @@ public class AddArrangementActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_meals:
-                        return loadFragment(new MealsFragment());
+                        return loadFragment(mealsFragment);
                     case R.id.navigation_training:
-                        return loadFragment(new TrainingFragment());
+                        return loadFragment(trainingFragment);
                     case R.id.navigation_tasks:
-                        return loadFragment(new TasksFragment());
+                        return loadFragment(tasksFragment);
                     case R.id.navigation_studying:
-                        return loadFragment(new StudyingFragment());
+                        return loadFragment(studyingFragment);
                 }
                 return false;
             }
@@ -62,7 +77,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         // set starting fragment
         navView.setSelectedItemId(R.id.action_meals);
-        loadFragment(new MealsFragment());
+        loadFragment(mealsFragment);
 
         // init fab
         FloatingActionButton addFab = findViewById(R.id.add_arrangement_activity_fab);
@@ -71,7 +86,17 @@ public class AddArrangementActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch (navView.getSelectedItemId()) {
                     case R.id.navigation_meals:
-                        startActivityForResult(new Intent(view.getContext(), SelectMealActivity.class), SELECT_MEAL_RC);
+                        List<String> selectedMealsId = new ArrayList<>();
+                        int dayNumber = mealsFragment.getCurrentDay();
+
+                        for (String key : selectedMeals.keySet()) {
+                            if (selectedMeals.get(key) == dayNumber)
+                                selectedMealsId.add(key);
+                        }
+
+                        Intent intent = new Intent(getApplicationContext(), SelectMealsActivity.class);
+                        intent.putExtra("meals", (Serializable) selectedMealsId);
+                        startActivityForResult(intent, SELECT_MEAL_RC);
                         break;
                     case R.id.navigation_training:
                         startActivityForResult(new Intent(view.getContext(), NewTrainingActivity.class), SELECT_TRAINING_RC);

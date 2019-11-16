@@ -20,6 +20,9 @@ public interface TagDao {
     @Query("SELECT * FROM Tags WHERE id = :tagId")
     Tag getById(String tagId);
 
+    @Query("SELECT * FROM Tags")
+    List<Tag> getAll();
+
     @Insert
     void insert(Tag tag);
 

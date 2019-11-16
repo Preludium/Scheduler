@@ -178,7 +178,7 @@ public class ArrangementsActivity extends AppCompatActivity {
     }
 
     private void tags() {
-        //startActivity(new Intent(getApplicationContext(), TagsActivity.class));
+        startActivity(new Intent(getApplicationContext(), TagsActivity.class));
     }
 
     private void settings() {

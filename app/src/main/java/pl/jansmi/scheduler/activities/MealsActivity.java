@@ -36,7 +36,6 @@ public class MealsActivity extends AppCompatActivity {
     private ViewPager pager;
 
     private List<Category> categories;
-    private List<MealCategoryFragment> mealCategoryFragmentList;
     private TextView infoBox;
 
     @Override
@@ -74,10 +73,6 @@ public class MealsActivity extends AppCompatActivity {
 
         this.categories = App.db.categories().getAll();
         // TODO: sort categories by order
-
-        this.mealCategoryFragmentList = new ArrayList<>();
-        for (Category cat : categories)
-            mealCategoryFragmentList.add(new MealCategoryFragment(cat));
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);
@@ -121,15 +116,19 @@ public class MealsActivity extends AppCompatActivity {
 
     private class MealCategoryFragmentPagerAdapter extends FragmentPagerAdapter {
 
+        private List<MealCategoryFragment> mealCategoryFragmentList;
+
         MealCategoryFragmentPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
+
+            this.mealCategoryFragmentList = new ArrayList<>();
+            for (Category cat : categories)
+                mealCategoryFragmentList.add(new MealCategoryFragment(cat));
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
-            return mealCategoryFragmentList.get(position);
-        }
+        public Fragment getItem(int position) { return mealCategoryFragmentList.get(position); }
 
         @Override
         public int getCount() {
