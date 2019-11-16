@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/subjects_content_infobox"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
         android:layout_margin="100dp"
         style="@style/TextAppearance.AppCompat.Medium"

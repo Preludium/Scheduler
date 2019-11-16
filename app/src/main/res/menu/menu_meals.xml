@@ -6,15 +6,15 @@
     tools:context="pl.jansmi.scheduler.activities.MealsActivity">
 
     <item
-        android:id="@+id/action_ingredients"
+        android:id="@+id/action_categories"
         android:orderInCategory="1"
-        android:title="@string/action_ingredients"
-        app:showAsAction="never"/>
+        android:title="@string/action_categories"
+        app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_categories"
+        android:id="@+id/action_ingredients"
         android:orderInCategory="2"
-        android:title="@string/action_categories"
-        app:showAsAction="never"/>
+        android:title="@string/action_ingredients"
+        app:showAsAction="ifRoom"/>
 
 </menu>
