@@ -47,21 +47,23 @@ public class AddDisciplineActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (kcalPerMinute.getText().toString().equals(""))
-                    discipline.setFavour(0.f);
-
                 if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Name is missing!", Toast.LENGTH_LONG).show();
                 else {
                     if (disciplineId == null) {
                         discipline = new Discipline(name.getText().toString());
-                        discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
-                        discipline.setFavour(1.f);
+
+                        if (!kcalPerMinute.getText().toString().isEmpty())
+                            discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+
                         App.db.disciplines().insert(discipline);
                     }
                     else {
                         discipline.setName(name.getText().toString());
-                        discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+
+                        if (!kcalPerMinute.getText().toString().isEmpty())
+                            discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
+
                         // TODO: think of favour changing, while refreshing data
                         // discipline.setFavour(1.f);
                         App.db.disciplines().update(discipline);

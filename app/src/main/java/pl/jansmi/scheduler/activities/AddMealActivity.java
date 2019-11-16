@@ -39,6 +39,7 @@ public class AddMealActivity extends AppCompatActivity {
 
     private String mealId;
     private Meal meal;
+
     private List<Category> categories;
     private HashMap<String, Integer> selectedIngredients;
 
@@ -105,6 +106,7 @@ public class AddMealActivity extends AppCompatActivity {
                     } else { // update
                         meal.setName(name.getText().toString());
                         meal.setCategoryId(categoryId);
+                        //meal.setFavour(1.f);
                         App.db.meals().update(meal);
 
                         List<IngredientMealJoin> joins = App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());

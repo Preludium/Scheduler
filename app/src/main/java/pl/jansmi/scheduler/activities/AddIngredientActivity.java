@@ -81,13 +81,20 @@ public class AddIngredientActivity extends AppCompatActivity {
                         ingredient = new Ingredient(name.getText().toString());
                         ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
                         ingredient.setUnit(unit.getSelectedItem().toString());
-                        ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+
+                        if (!kcal.getText().toString().isEmpty())
+                            ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+
                         App.db.ingredients().insert(ingredient);
                     } else { // update
                         ingredient.setName(name.getText().toString());
                         ingredient.setQuantity(Integer.parseInt(quantity.getText().toString()));
                         ingredient.setUnit(unit.getSelectedItem().toString());
-                        ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+
+                        if (!kcal.getText().toString().isEmpty())
+                            ingredient.setKcal(Integer.parseInt(kcal.getText().toString()));
+
+                        //ingredient.setFavour(1.f);
                         App.db.ingredients().update(ingredient);
                     }
                     finish();
