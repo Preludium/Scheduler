@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
@@ -29,14 +30,30 @@ public class MealsFragment extends Fragment {
     private TabLayout tabs;
 
     private List<MealDayFragment> mealDayFragmentList;
+    private HashMap<String, Integer> selectedMeals;
+
+    public MealsFragment(HashMap<String, Integer> selectedMeals) {
+        this.selectedMeals = selectedMeals;
+    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meals, container, false);
 
+        // to each mealDayFragment pass only these meals, that need to be in this day
         mealDayFragmentList = new ArrayList<>();
-        for (int i=0; i<7; ++i)
-            mealDayFragmentList.add(new MealDayFragment());
+        List<String> tempMealList;
+
+        for (int i=0; i<7; ++i) {
+            tempMealList = new ArrayList<>();
+
+            for (String key : selectedMeals.keySet()) {
+                if (selectedMeals.get(key) == i)
+                    tempMealList.add(key);
+            }
+
+            mealDayFragmentList.add(new MealDayFragment(tempMealList));
+        }
 
         adapter = new MealDayFragmentPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.meals_fragment_pager);
@@ -88,6 +105,10 @@ public class MealsFragment extends Fragment {
 
             return null;
         }
+    }
+
+    public int getCurrentDay() {
+        return viewPager.getCurrentItem();
     }
 
 }

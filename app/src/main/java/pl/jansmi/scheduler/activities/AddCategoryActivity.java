@@ -50,20 +50,20 @@ public class AddCategoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(name.getText().toString().equals("")) {
+                if(name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter category name", Toast.LENGTH_LONG).show();
-                }
-                else if (categoryId == null) { // insert
-                    category = new Category(name.getText().toString());
-                    category.setOrder(picker.getValue());
-                    App.db.categories().insert(category);
-                    finish();
-                }
-                else { // update
-                    category.setName(name.getText().toString());
-                    category.setOrder(picker.getValue());
-                    App.db.categories().update(category);
-                    finish();
+                else {
+                    if (categoryId == null) { // insert
+                        category = new Category(name.getText().toString());
+                        category.setOrder(picker.getValue());
+                        App.db.categories().insert(category);
+                        finish();
+                    } else { // update
+                        category.setName(name.getText().toString());
+                        category.setOrder(picker.getValue());
+                        App.db.categories().update(category);
+                        finish();
+                    }
                 }
             }
 

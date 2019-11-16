@@ -14,22 +14,18 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.activities.AddMealActivity;
-import pl.jansmi.scheduler.dbstructure.entities.Category;
-import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
-import pl.jansmi.scheduler.dbstructure.entities.Meal;
-import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
+import pl.jansmi.scheduler.activities.AddTagActivity;
+import pl.jansmi.scheduler.dbstructure.entities.Tag;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
+public class TagsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
 
     private Context context;
-    private List<Meal> meals;
+    private List<Tag> tags;
 
-    public MealsRecyclerViewAdapter(Context context, Category category) {
+    public TagsRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.meals = App.db.meals().getByCategoryId(category.getId());
-        // TODO: sort
+        this.tags = App.db.tags().getAll();
     }
 
     @NonNull
@@ -42,25 +38,16 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
 
     @Override
     public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
-        Meal meal = meals.get(position);
+        Tag tag = tags.get(position);
 
-        // counting sum of calories by ingredients
-        int kcalSum = 0;
-        List<IngredientMealJoin> joins = App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
-
-        for (IngredientMealJoin join : joins) {
-            Ingredient ing = App.db.ingredients().getById(join.getIngredientId());
-            kcalSum += ing.getKcal() * join.getQuantity();
-        }
-
-        holder.title.setText(meal.getName());
-        holder.desc.setText("Kcal: " + kcalSum);
+        holder.title.setText(tag.getName());
+        holder.desc.setText("");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AddMealActivity.class);
-                intent.putExtra("mealId", meal.getId());
+                Intent intent = new Intent(context, AddTagActivity.class);
+                intent.putExtra("tadId", tag.getId());
                 context.startActivity(intent);
             }
         });
@@ -72,31 +59,23 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'meals' is empty
-
-                        List<IngredientMealJoin> joins =
-                                App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());
-                        for (IngredientMealJoin join : joins)
-                            App.db.ingredientMealJoin().delete(join);
-
-                        App.db.meals().delete(meal);
+                        // TODO: show infoBox, if 'tags' is empty
+                        App.db.tags().delete(tag);
                     }
                 });
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return meals.size();
+        return tags.size();
     }
 
     private void deleteItem(int position) {
-        meals.remove(position);
+        tags.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, meals.size());
+        notifyItemRangeChanged(position, tags.size());
         notifyDataSetChanged();
     }
-
 }

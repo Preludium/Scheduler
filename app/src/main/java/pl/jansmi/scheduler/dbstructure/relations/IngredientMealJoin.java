@@ -7,26 +7,30 @@ import androidx.room.ForeignKey;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(tableName = "Ingredient_meal_join",
         primaryKeys = {"ingredientId", "mealId"},
         foreignKeys = {@ForeignKey(entity = Ingredient.class,
                                    parentColumns = "id",
-                                   childColumns = "ingredientId"),
+                                   childColumns = "ingredientId",
+                                   onDelete = CASCADE),
                        @ForeignKey(entity = Meal.class,
                                    parentColumns = "id",
-                                   childColumns = "mealId")})
+                                   childColumns = "mealId",
+                                   onDelete = CASCADE)})
 public class IngredientMealJoin {
 
     @NonNull
     private String ingredientId;
     @NonNull
     private String mealId;
-    private float amount;
+    private int quantity;
 
-    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId, float amount) {
+    public IngredientMealJoin(@NonNull String ingredientId, @NonNull String mealId, int quantity) {
         this.ingredientId = ingredientId;
         this.mealId = mealId;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
     @NonNull
@@ -39,11 +43,11 @@ public class IngredientMealJoin {
         return mealId;
     }
 
-    public float getAmount() {
-        return amount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

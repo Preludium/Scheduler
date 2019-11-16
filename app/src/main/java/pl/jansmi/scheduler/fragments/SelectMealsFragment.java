@@ -11,51 +11,40 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import java.util.List;
+import java.util.HashMap;
 
-import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.adapters.MealsRecyclerViewAdapter;
+import pl.jansmi.scheduler.adapters.SelectMealsRecyclerViewAdapter;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
-import pl.jansmi.scheduler.dbstructure.entities.Meal;
+import pl.jansmi.scheduler.fragments.MealCategoryFragment;
 
-public class MealCategoryFragment extends Fragment {
+public class SelectMealsFragment extends Fragment {
 
     private Category category;
+    private HashMap<String, Boolean> selectedMeals;
 
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
-    private TextView infoBox;
 
-    public MealCategoryFragment(Category category) {
+    public SelectMealsFragment(Category category, HashMap<String, Boolean> selectedMeals) {
         this.category = category;
+        this.selectedMeals = selectedMeals;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_meal_category, container, false);
+        View root = inflater.inflate(R.layout.fragment_select_meals, container, false);
 
-        this.infoBox = root.findViewById(R.id.meal_category_fragment_info_text);
-        this.recycler = root.findViewById(R.id.meal_category_fragment_recycler);
+        this.recycler = root.findViewById(R.id.select_meals_fragment_recycler);
 
         this.manager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(manager);
-        this.adapter = new MealsRecyclerViewAdapter(getContext(), category);
+        this.adapter = new SelectMealsRecyclerViewAdapter(getContext(), category, selectedMeals);
         recycler.setAdapter(adapter);
 
-        if (App.db.meals().getByCategoryId(category.getId()).size() == 0)
-            infoBox.setVisibility(View.VISIBLE);
-        else
-            infoBox.setVisibility(View.INVISIBLE);
-
         return root;
-    }
-
-    public int getItemCount() {
-        return adapter.getItemCount();
     }
 
 }

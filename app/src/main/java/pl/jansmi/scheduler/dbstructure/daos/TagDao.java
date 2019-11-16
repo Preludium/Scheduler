@@ -17,6 +17,12 @@ public interface TagDao {
             "ON t.id = j.tagId WHERE j.arrangementId = :arrangementId")
     List<Tag> getByArrangementId(String arrangementId);
 
+    @Query("SELECT * FROM Tags WHERE id = :tagId")
+    Tag getById(String tagId);
+
+    @Query("SELECT * FROM Tags")
+    List<Tag> getAll();
+
     @Insert
     void insert(Tag tag);
 

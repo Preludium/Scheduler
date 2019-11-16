@@ -7,14 +7,18 @@ import androidx.room.ForeignKey;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Tag;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(tableName = "Tag_arrangement_join",
         primaryKeys = {"tagId", "arrangementId"},
         foreignKeys = {@ForeignKey(entity = Tag.class,
                                    parentColumns = "id",
-                                   childColumns = "tagId"),
+                                   childColumns = "tagId",
+                                   onDelete = CASCADE),
                        @ForeignKey(entity = Arrangement.class,
                                    parentColumns = "id",
-                                   childColumns = "arrangementId")})
+                                   childColumns = "arrangementId",
+                                   onDelete = CASCADE)})
 public class TagArrangementJoin {
 
     @NonNull

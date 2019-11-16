@@ -24,18 +24,18 @@ import pl.jansmi.scheduler.R;
 
 public class StudyingFragment extends Fragment {
 
-    private ViewPager viewPager;
+    /*private ViewPager viewPager;
     private TabLayout tabs;
 
     private MealDayFragmentPagerAdapter adapter;
-    private List<MealDayFragment> mealDayFragmentList;
+    private List<MealDayFragment> mealDayFragmentList;*/
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_studying, container, false);
 
-        mealDayFragmentList = new ArrayList<>();
+        /*mealDayFragmentList = new ArrayList<>();
         for (int i=0; i<7; ++i)
             mealDayFragmentList.add(new MealDayFragment());
 
@@ -46,7 +46,7 @@ public class StudyingFragment extends Fragment {
 
         tabs = view.findViewById(R.id.studying_fragment_tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.setupWithViewPager(viewPager);
+        tabs.setupWithViewPager(viewPager);*/
 
         return view;
     }
@@ -60,7 +60,7 @@ public class StudyingFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return mealDayFragmentList.get(position);
+            return null; //mealDayFragmentList.get(position);
         }
 
         @Override

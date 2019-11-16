@@ -44,9 +44,8 @@ public class AddSubjectActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.getText().toString().equals("")) {
+                if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter subject name", Toast.LENGTH_LONG).show();
-                }
                 else
                 {
                     if (subjectId == null) { //insert
@@ -54,6 +53,7 @@ public class AddSubjectActivity extends AppCompatActivity {
                         App.db.subjects().insert(subject);
                     } else { //update
                         subject.setName(name.getText().toString());
+                        //subject.setFavour(1.f);
                         App.db.subjects().update(subject);
                     }
                     finish();

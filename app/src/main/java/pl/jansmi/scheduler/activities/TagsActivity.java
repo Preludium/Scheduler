@@ -4,51 +4,44 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.adapters.MealIngredientsRecyclerViewAdapter;
-import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
+import pl.jansmi.scheduler.adapters.TagsRecyclerViewAdapter;
 
-public class SelectMealIngredientsActivity extends AppCompatActivity {
+public class TagsActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
+    private TextView infoBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_meal_ingredients);
+        setContentView(R.layout.activity_tags);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.recycler = findViewById(R.id.select_meal_ingredients_content_recycler);
+        recycler = findViewById(R.id.tags_content_recycler);
+        infoBox = findViewById(R.id.tags_content_info_text);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HashMap<String, Integer> selectedIngredients = ((MealIngredientsRecyclerViewAdapter)
-                        recycler.getAdapter()).getSelectedIngredients();
-
-                Intent intent = new Intent();
-                intent.putExtra("ingredients", selectedIngredients);
-                setResult(RESULT_OK, intent);
-
-                finish();
+                Intent intent = new Intent(getApplicationContext(), AddTagActivity.class);
+                intent.putExtra("tagId", (String) null);
+                startActivity(intent);
             }
         });
     }
@@ -57,12 +50,22 @@ public class SelectMealIngredientsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        adapter = new TagsRecyclerViewAdapter(this);
+        recycler.setAdapter(adapter);
+
         manager = new LinearLayoutManager(this);
         recycler.setLayoutManager(manager);
 
-        adapter = new MealIngredientsRecyclerViewAdapter(this,
-                (HashMap<String, Integer>) getIntent().getExtras().getSerializable("ingredients"));
-        recycler.setAdapter(adapter);
+        if (adapter.getItemCount() == 0)
+            infoBox.setVisibility(View.VISIBLE);
+        else
+            infoBox.setVisibility(View.INVISIBLE);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }

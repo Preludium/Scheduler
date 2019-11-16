@@ -12,7 +12,7 @@
         tools:listitem="@layout/listitem_main" />
 
     <TextView
-        android:id="@+id/ingredients_content_info_text"
+        android:id="@+id/meal_category_fragment_info_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="100dp"
