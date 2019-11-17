@@ -30,9 +30,9 @@ public class MealsFragment extends Fragment {
     private TabLayout tabs;
 
     private List<MealDayFragment> mealDayFragmentList;
-    private HashMap<String, Integer> selectedMeals;
+    private List<List<String>> selectedMeals;
 
-    public MealsFragment(HashMap<String, Integer> selectedMeals) {
+    public MealsFragment(List<List<String>> selectedMeals) {
         this.selectedMeals = selectedMeals;
     }
 
@@ -41,19 +41,9 @@ public class MealsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_meals, container, false);
 
         // to each mealDayFragment pass only these meals, that need to be in this day
-        mealDayFragmentList = new ArrayList<>();
-        List<String> tempMealList;
-
-        for (int i=0; i<7; ++i) {
-            tempMealList = new ArrayList<>();
-
-            for (String key : selectedMeals.keySet()) {
-                if (selectedMeals.get(key) == i)
-                    tempMealList.add(key);
-            }
-
-            mealDayFragmentList.add(new MealDayFragment(tempMealList));
-        }
+        this.mealDayFragmentList = new ArrayList<>();
+        for (int i=0; i<7; ++i)
+            mealDayFragmentList.add(new MealDayFragment(selectedMeals.get(i)));
 
         adapter = new MealDayFragmentPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.meals_fragment_pager);

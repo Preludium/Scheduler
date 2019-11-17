@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.jansmi.scheduler.R;
 
-public class SelectListItemViewHolder extends RecyclerView.ViewHolder {
+class SelectListItemViewHolder extends RecyclerView.ViewHolder {
 
     RadioButton checkBox;
     TextView title;
     TextView desc;
 
-    public SelectListItemViewHolder(@NonNull View itemView) {
+    SelectListItemViewHolder(@NonNull View itemView) {
         super(itemView);
         checkBox = itemView.findViewById(R.id.select_listitem_radio);
         title = itemView.findViewById(R.id.select_listitem_title);
