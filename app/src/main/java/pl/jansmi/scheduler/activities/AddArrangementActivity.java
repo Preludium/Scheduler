@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.fragments.StudyFragment;
@@ -34,7 +35,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
     private String arrangementId; // to (potentially) update
     private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
-    private List<List<String>> selectedSubjects;
+    private List<List<Study>> selectedStudies;
 
     MealsFragment mealsFragment;
     TrainingFragment trainingFragment;
@@ -49,7 +50,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_arrangement);
 
         this.selectedMeals = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
-        this.selectedSubjects = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
+        this.selectedStudies = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
@@ -61,7 +62,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         // TODO: pass data to the rest
         this.trainingFragment = new TrainingFragment();
         this.tasksFragment = new TasksFragment();
-        this.studyFragment = new StudyFragment(selectedSubjects);
+        this.studyFragment = new StudyFragment(selectedStudies);
 
         // init navView
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
@@ -114,7 +115,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                     case R.id.navigation_studying:
                         dayNumber = studyFragment.getCurrentDay();
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
-                        intent.putExtra("subjects", (Serializable) selectedSubjects.get(dayNumber));
+                        intent.putExtra("studies", (Serializable) selectedStudies.get(dayNumber));
                         startActivityForResult(intent, SELECT_STUDYING_RC);
                         break;
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Study;
 
 
 public class StudyFragment extends Fragment {
@@ -29,10 +30,10 @@ public class StudyFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabs;
     private List<StudyDayFragment> studyDayFragmentList;
-    private List<List<String>> selectedSubjects;
+    private List<List<Study>> selectedStudies;
 
-    public StudyFragment(List<List<String>> selectedSubjects) {
-        this.selectedSubjects = selectedSubjects;
+    public StudyFragment(List<List<Study>> selectedStudies) {
+        this.selectedStudies = selectedStudies;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class StudyFragment extends Fragment {
 
         this.studyDayFragmentList = new ArrayList<>();
         for (int i=0; i<7; ++i)
-            studyDayFragmentList.add(new StudyDayFragment(selectedSubjects.get(i)));
+            studyDayFragmentList.add(new StudyDayFragment(selectedStudies.get(i)));
 
         adapter = new StudyDayFragmentPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.study_fragment_pager);

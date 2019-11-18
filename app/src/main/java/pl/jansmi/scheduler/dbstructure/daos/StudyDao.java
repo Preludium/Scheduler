@@ -16,6 +16,9 @@ public interface StudyDao {
     @Query("SELECT * FROM Studies WHERE arrangementId = :arrangementId")
     List<Study> getByArrangementId(String arrangementId);
 
+    @Query("SELECT * FROM Studies WHERE id = :studyId")
+    Study getById(String studyId);
+
     @Insert
     void insert(Study study);
 

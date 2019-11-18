@@ -13,17 +13,16 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.dbstructure.entities.Subject;
 
-public class SubjectsDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
+public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
     private Context context;
-    List<Subject> subjects;
+    List<Study> selectedStudies;
 
-        public SubjectsDayRecyclerViewAdapter(Context context, List<String> selectedSubjects) {
+        public StudyDayRecyclerViewAdapter(Context context, List<Study> selectedStudies) {
         this.context = context;
-        this.subjects = new ArrayList<>();
-        for (String id : selectedSubjects)
-            subjects.add(App.db.subjects().getById(id));
+        this.selectedStudies = selectedStudies;
     }
 
     @NonNull
@@ -36,9 +35,11 @@ public class SubjectsDayRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
 
     @Override
     public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
-        Subject subject = subjects.get(position);
+        Study study = selectedStudies.get(position);
+        Subject subject = App.db.subjects().getById(study.getSubjectId());
 
-        holder.title.setText(subject.getName());
+        holder.title.setText(study.getTitle());
+        holder.desc.setText(subject.getName());
 
         holder.menuBtn.setVisibility(View.INVISIBLE);
         holder.menuBtn.setEnabled(false);
@@ -47,6 +48,6 @@ public class SubjectsDayRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
 
     @Override
     public int getItemCount() {
-        return subjects.size();
+        return selectedStudies.size();
     }
 }
