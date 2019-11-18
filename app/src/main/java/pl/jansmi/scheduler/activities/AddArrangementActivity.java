@@ -13,19 +13,15 @@ import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-import pl.jansmi.scheduler.App;
-import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.fragments.StudyingFragment;
+import pl.jansmi.scheduler.fragments.StudyFragment;
 import pl.jansmi.scheduler.fragments.TasksFragment;
 import pl.jansmi.scheduler.fragments.TrainingFragment;
 
@@ -38,11 +34,12 @@ public class AddArrangementActivity extends AppCompatActivity {
 
     private String arrangementId; // to (potentially) update
     private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
+    private List<List<String>> selectedSubjects;
 
     MealsFragment mealsFragment;
     TrainingFragment trainingFragment;
     TasksFragment tasksFragment;
-    StudyingFragment studyingFragment;
+    StudyFragment studyFragment;
 
     private BottomNavigationView navView;
 
@@ -52,6 +49,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_arrangement);
 
         this.selectedMeals = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
+        this.selectedSubjects = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
@@ -63,7 +61,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         // TODO: pass data to the rest
         this.trainingFragment = new TrainingFragment();
         this.tasksFragment = new TasksFragment();
-        this.studyingFragment = new StudyingFragment();
+        this.studyFragment = new StudyFragment(selectedSubjects);
 
         // init navView
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
@@ -78,7 +76,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                     case R.id.navigation_tasks:
                         return loadFragment(tasksFragment);
                     case R.id.navigation_studying:
-                        return loadFragment(studyingFragment);
+                        return loadFragment(studyFragment);
                 }
                 return false;
             }
@@ -93,11 +91,13 @@ public class AddArrangementActivity extends AppCompatActivity {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int dayNumber;
+                Intent intent;
                 switch (navView.getSelectedItemId()) {
                     case R.id.navigation_meals:
-                        int dayNumber = mealsFragment.getCurrentDay();
+                        dayNumber = mealsFragment.getCurrentDay();
 
-                        Intent intent = new Intent(getApplicationContext(), SelectMealsActivity.class);
+                        intent = new Intent(getApplicationContext(), SelectMealsActivity.class);
                         intent.putExtra("meals", (Serializable) selectedMeals.get(dayNumber));
                         startActivityForResult(intent, SELECT_MEAL_RC);
 
@@ -112,7 +112,10 @@ public class AddArrangementActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_studying:
-                        startActivityForResult(new Intent(view.getContext(), NewStudyingActivity.class), SELECT_STUDYING_RC);
+                        dayNumber = studyFragment.getCurrentDay();
+                        intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
+                        intent.putExtra("subjects", (Serializable) selectedSubjects.get(dayNumber));
+                        startActivityForResult(intent, SELECT_STUDYING_RC);
                         break;
 
                 }

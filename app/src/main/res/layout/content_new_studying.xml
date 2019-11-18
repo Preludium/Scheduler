@@ -8,4 +8,16 @@
     tools:context=".activities.NewStudyingActivity"
     tools:showIn="@layout/activity_new_studying">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/new_studying_content_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/new_studying_content_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.viewpager.widget.ViewPager>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

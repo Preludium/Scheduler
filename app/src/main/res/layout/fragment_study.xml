@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.StudyingFragment">
+    tools:context=".fragments.StudyFragment">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/studying_fragment_pager"
+        android:id="@+id/study_fragment_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-        android:id="@+id/studying_fragment_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            android:id="@+id/study_fragment_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </androidx.viewpager.widget.ViewPager>
 
