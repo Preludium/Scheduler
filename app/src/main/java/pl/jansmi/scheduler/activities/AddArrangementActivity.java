@@ -13,12 +13,16 @@ import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import pl.jansmi.scheduler.App;
+import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.fragments.StudyingFragment;
@@ -33,7 +37,12 @@ public class AddArrangementActivity extends AppCompatActivity {
     private static final int SELECT_STUDYING_RC = 4;
 
     private String arrangementId; // to (potentially) update
-    private HashMap<String, Integer> selectedMeals;
+    private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
+
+    MealsFragment mealsFragment;
+    TrainingFragment trainingFragment;
+    TasksFragment tasksFragment;
+    StudyingFragment studyingFragment;
 
     private BottomNavigationView navView;
 
@@ -42,19 +51,19 @@ public class AddArrangementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_arrangement);
 
-        selectedMeals = new HashMap<>();
+        this.selectedMeals = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
 
-        arrangementId = getIntent().getExtras().getString("arrangementId");
+        this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
             // TODO: set activity title to 'update' and fill activity with initial data
         }
 
         // init fragments
-        MealsFragment mealsFragment = new MealsFragment(selectedMeals);
+        this.mealsFragment = new MealsFragment(selectedMeals);
         // TODO: pass data to the rest
-        TrainingFragment trainingFragment = new TrainingFragment();
-        TasksFragment tasksFragment = new TasksFragment();
-        StudyingFragment studyingFragment = new StudyingFragment();
+        this.trainingFragment = new TrainingFragment();
+        this.tasksFragment = new TasksFragment();
+        this.studyingFragment = new StudyingFragment();
 
         // init navView
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
@@ -86,27 +95,26 @@ public class AddArrangementActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch (navView.getSelectedItemId()) {
                     case R.id.navigation_meals:
-                        List<String> selectedMealsId = new ArrayList<>();
                         int dayNumber = mealsFragment.getCurrentDay();
 
-                        for (String key : selectedMeals.keySet()) {
-                            if (selectedMeals.get(key) == dayNumber)
-                                selectedMealsId.add(key);
-                        }
-
                         Intent intent = new Intent(getApplicationContext(), SelectMealsActivity.class);
-                        intent.putExtra("meals", (Serializable) selectedMealsId);
+                        intent.putExtra("meals", (Serializable) selectedMeals.get(dayNumber));
                         startActivityForResult(intent, SELECT_MEAL_RC);
+
                         break;
+
                     case R.id.navigation_training:
                         startActivityForResult(new Intent(view.getContext(), NewTrainingActivity.class), SELECT_TRAINING_RC);
                         break;
+
                     case R.id.navigation_tasks:
                         startActivityForResult(new Intent(view.getContext(), NewTaskActivity.class), SELECT_TASK_RC);
                         break;
+
                     case R.id.navigation_studying:
                         startActivityForResult(new Intent(view.getContext(), NewStudyingActivity.class), SELECT_STUDYING_RC);
                         break;
+
                 }
             }
         });
@@ -132,19 +140,27 @@ public class AddArrangementActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SELECT_MEAL_RC && resultCode == RESULT_OK) {
-            // TODO: insert selected meal to meals recycler
+            List<String> mealsId = data.getExtras().getStringArrayList("meals");
+            this.selectedMeals.set(mealsFragment.getCurrentDay(), mealsId);
+            this.mealsFragment = new MealsFragment(selectedMeals);
+            navView.setSelectedItemId(R.id.action_meals);
+            loadFragment(mealsFragment);
+
+            // TODO: after selecting some meals, save, then edit, selecting none and save again,
+            //  selected meals stay the same, like at the beginning. Need fix.
+            //  (edit: app seems to remember last choice and doesn't delete the value)
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {
-            // TODO: insert selected training to training recycler
+
         }
 
         else if (requestCode == SELECT_TASK_RC && resultCode == RESULT_OK) {
-            // TODO: insert selected task to task recycler
+
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
-            // TODO: insert selected studying to task recycler
+
         }
 
     }

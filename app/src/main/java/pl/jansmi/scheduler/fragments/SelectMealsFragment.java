@@ -17,20 +17,21 @@ import java.util.HashMap;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.SelectMealsRecyclerViewAdapter;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
+import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.fragments.MealCategoryFragment;
 
 public class SelectMealsFragment extends Fragment {
 
     private Category category;
-    private HashMap<String, Boolean> selectedMeals;
+    private Meal selectedMeal;
 
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
 
-    public SelectMealsFragment(Category category, HashMap<String, Boolean> selectedMeals) {
+    public SelectMealsFragment(Category category, Meal selectedMeal) {
         this.category = category;
-        this.selectedMeals = selectedMeals;
+        this.selectedMeal = selectedMeal;
     }
 
     @Override
@@ -41,10 +42,15 @@ public class SelectMealsFragment extends Fragment {
 
         this.manager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(manager);
-        this.adapter = new SelectMealsRecyclerViewAdapter(getContext(), category, selectedMeals);
+        this.adapter = new SelectMealsRecyclerViewAdapter(getContext(), category, selectedMeal);
         recycler.setAdapter(adapter);
 
         return root;
+    }
+
+    public Meal getSelectedMeal() {
+        selectedMeal = ((SelectMealsRecyclerViewAdapter) adapter).getSelectedMeal();
+        return selectedMeal;
     }
 
 }

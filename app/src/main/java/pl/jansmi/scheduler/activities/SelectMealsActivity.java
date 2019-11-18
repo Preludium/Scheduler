@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +31,11 @@ import pl.jansmi.scheduler.dbstructure.entities.Category;
 public class SelectMealsActivity extends AppCompatActivity {
 
     private List<Category> categories;
-    private List<Meal> selectedMeals;
-    private List<SelectMealsFragment> selectMealsFragmentList;
+    private List<String> selectedMealsId;
 
+    private List<SelectMealsFragment> selectMealsFragmentList;
     private SelectMealsFragmentPagerAdapter adapter;
+
     private ViewPager pager;
     private TabLayout tabs;
 
@@ -53,7 +55,17 @@ public class SelectMealsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: pass selected meals to AddArrangementActivity
+                selectedMealsId = new ArrayList<>();
+                for (SelectMealsFragment fragment : selectMealsFragmentList) {
+                    if (fragment.getSelectedMeal() != null)
+                        selectedMealsId.add(fragment.getSelectedMeal().getId());
+                }
+
+                Intent intent = new Intent();
+                intent.putExtra("meals", (Serializable) selectedMealsId);
+                setResult(RESULT_OK, intent);
+
+                finish();
             }
         });
     }
@@ -65,10 +77,7 @@ public class SelectMealsActivity extends AppCompatActivity {
         this.categories = App.db.categories().getAll();
         // TODO: sort categories by order
 
-        this.selectedMeals = new ArrayList<>();
-        List<String> selectedMealsId = getIntent().getExtras().getStringArrayList("meals");
-        for (String id : selectedMealsId)
-            selectedMeals.add(App.db.meals().getById(id));
+        this.selectedMealsId = getIntent().getExtras().getStringArrayList("meals");
 
         this.adapter = new SelectMealsFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);
@@ -77,13 +86,29 @@ public class SelectMealsActivity extends AppCompatActivity {
 
     private class SelectMealsFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        public SelectMealsFragmentPagerAdapter(@NonNull FragmentManager fm) {
+        SelectMealsFragmentPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
 
-            // TODO: from selectedMeals get only these, that match category
+            List<Meal> selectedMeals = new ArrayList<>();
+            for (String id : selectedMealsId)
+                selectedMeals.add(App.db.meals().getById(id));
+
+            // from selectedMeals get only one, that match category and create fragment
             selectMealsFragmentList = new ArrayList<>();
-            for (Category cat : categories)
-                selectMealsFragmentList.add(new SelectMealsFragment(cat, null));
+
+            Meal selectedMeal;
+            for (Category cat : categories) {
+                selectedMeal = null;
+
+                for (Meal meal : selectedMeals) {
+                    if (meal.getCategoryId().equals(cat.getId())) {
+                        selectedMeal = meal;
+                        break;
+                    }
+                }
+
+                selectMealsFragmentList.add(new SelectMealsFragment(cat, selectedMeal));
+            }
         }
 
         @NonNull

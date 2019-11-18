@@ -26,24 +26,22 @@ public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
 
     private Context context;
     private List<Meal> meals;
-    private List<Boolean> checked;
+    private Meal selectedMeal;
 
-    public SelectMealsRecyclerViewAdapter(Context context, Category category, HashMap<String, Boolean> selectedMeals) {
+    private int lastCheckedPosition = -1;
+
+    public SelectMealsRecyclerViewAdapter(Context context, Category category, Meal selectedMeal) {
         this.context = context;
         this.meals = App.db.meals().getByCategoryId(category.getId());
         // TODO: sort
-
-        this.checked = new ArrayList<>(Collections.nCopies(meals.size(), false));
-        if (selectedMeals != null)
-            for (int i=0; i < meals.size(); ++i)
-                checked.set(i, selectedMeals.getOrDefault(meals.get(i).getId(), false));
+        this.selectedMeal = selectedMeal;
     }
 
     @NonNull
     @Override
     public SelectListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.fragment_select_meals, null);
+        View view = inflater.inflate(R.layout.listitem_select, null);
         return new SelectListItemViewHolder(view);
     }
 
@@ -63,10 +61,24 @@ public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         holder.title.setText(meal.getName());
         holder.desc.setText("Kcal: " + kcalSum);
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if (meal.equals(selectedMeal))
+            lastCheckedPosition = position;
+
+        holder.checkBox.setChecked(position == lastCheckedPosition);
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                checked.set(position, b);
+            public void onClick(View view) {
+                notifyItemChanged(lastCheckedPosition);
+
+                if (position == lastCheckedPosition) {
+                    lastCheckedPosition = -1;
+                    selectedMeal = null;
+
+                } else {
+                    lastCheckedPosition = position;
+                    selectedMeal = meal;
+
+                }
             }
         });
 
@@ -77,14 +89,7 @@ public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         return meals.size();
     }
 
-    public HashMap<String, Boolean> getSelectedMeals() {
-        HashMap<String, Boolean> resultMap = new HashMap<>();
-
-        for (int i=0; i<meals.size(); ++i) {
-            if (checked.get(i))
-                resultMap.put(meals.get(i).getId(), true);
-        }
-
-        return resultMap;
+    public Meal getSelectedMeal() {
+        return selectedMeal;
     }
 }
