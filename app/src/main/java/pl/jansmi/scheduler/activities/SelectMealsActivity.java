@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.View;
 
 import java.io.Serializable;
@@ -93,7 +94,7 @@ public class SelectMealsActivity extends AppCompatActivity {
             for (String id : selectedMealsId)
                 selectedMeals.add(App.db.meals().getById(id));
 
-            // from selectedMeals get only one, that match category and create fragment
+            // from selectedMeals get only one, that matches category and create fragment
             selectMealsFragmentList = new ArrayList<>();
 
             Meal selectedMeal;

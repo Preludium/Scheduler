@@ -13,6 +13,7 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
@@ -50,8 +51,10 @@ public class MealDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIte
             kcalSum += ing.getKcal() * join.getQuantity();
         }
 
+        Category cat = App.db.categories().getById(meal.getCategoryId());
+
         holder.title.setText(meal.getName());
-        holder.desc.setText("Kcal: " + kcalSum);
+        holder.desc.setText(cat.getName() + ", kcal: " + kcalSum);
 
         holder.menuBtn.setVisibility(View.INVISIBLE);
         holder.menuBtn.setEnabled(false);

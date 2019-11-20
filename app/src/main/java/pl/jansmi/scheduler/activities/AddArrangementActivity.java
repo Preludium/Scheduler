@@ -57,13 +57,6 @@ public class AddArrangementActivity extends AppCompatActivity {
             // TODO: set activity title to 'update' and fill activity with initial data
         }
 
-        // init fragments
-        this.mealsFragment = new MealsFragment(selectedMeals);
-        // TODO: pass data to the rest
-        this.trainingFragment = new TrainingFragment();
-        this.tasksFragment = new TasksFragment();
-        this.studyFragment = new StudyFragment(selectedStudies);
-
         // init navView
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -82,10 +75,6 @@ public class AddArrangementActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        // set starting fragment
-        navView.setSelectedItemId(R.id.action_meals);
-        loadFragment(mealsFragment);
 
         // init fab
         FloatingActionButton addFab = findViewById(R.id.add_arrangement_activity_fab);
@@ -114,9 +103,11 @@ public class AddArrangementActivity extends AppCompatActivity {
 
                     case R.id.navigation_studying:
                         dayNumber = studyFragment.getCurrentDay();
+
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
                         intent.putExtra("studies", (Serializable) selectedStudies.get(dayNumber));
                         startActivityForResult(intent, SELECT_STUDYING_RC);
+
                         break;
 
                 }
@@ -126,6 +117,22 @@ public class AddArrangementActivity extends AppCompatActivity {
         // TODO: implement listener (insert or update, depending on arrangementId!)
         FloatingActionButton saveFab;
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // init fragments
+        this.mealsFragment = new MealsFragment(selectedMeals);
+        // TODO: pass data to the rest
+        this.trainingFragment = new TrainingFragment();
+        this.tasksFragment = new TasksFragment();
+        this.studyFragment = new StudyFragment(selectedStudies);
+
+        // set starting fragment
+        navView.setSelectedItemId(R.id.action_meals);
+        loadFragment(mealsFragment);
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -146,13 +153,6 @@ public class AddArrangementActivity extends AppCompatActivity {
         if (requestCode == SELECT_MEAL_RC && resultCode == RESULT_OK) {
             List<String> mealsId = data.getExtras().getStringArrayList("meals");
             this.selectedMeals.set(mealsFragment.getCurrentDay(), mealsId);
-            this.mealsFragment = new MealsFragment(selectedMeals);
-            navView.setSelectedItemId(R.id.action_meals);
-            loadFragment(mealsFragment);
-
-            // TODO: after selecting some meals, save, then edit, selecting none and save again,
-            //  selected meals stay the same, like at the beginning. Need fix.
-            //  (edit: app seems to remember last choice and doesn't delete the value)
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {

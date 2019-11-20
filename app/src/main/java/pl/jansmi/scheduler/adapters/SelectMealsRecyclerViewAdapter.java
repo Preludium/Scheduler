@@ -1,6 +1,7 @@
 package pl.jansmi.scheduler.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         holder.title.setText(meal.getName());
         holder.desc.setText("Kcal: " + kcalSum);
 
-        if (meal.equals(selectedMeal))
+        if (selectedMeal != null && meal.getId().equals(selectedMeal.getId()))
             lastCheckedPosition = position;
 
         holder.checkBox.setChecked(position == lastCheckedPosition);
