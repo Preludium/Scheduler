@@ -41,8 +41,10 @@ public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
         holder.title.setText(study.getTitle());
         holder.desc.setText(subject.getName());
 
-        holder.menuBtn.setVisibility(View.INVISIBLE);
-        holder.menuBtn.setEnabled(false);
+        // TODO: holder.itemView listener implementation (startActivity NewStudyingActivity and pass
+        //  current study for update
+
+        // TODO: holder.menuBtn listener implementation (delete record)
 
     }
 

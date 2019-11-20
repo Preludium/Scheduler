@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.NewStudyingActivity"
-    tools:showIn="@layout/activity_new_studying">
+    tools:context=".activities.NewStudyingSelectSubjectActivity"
+    tools:showIn="@layout/activity_new_studying_select_subject">
 
-    <!-- TODO: Study form -->
+    <!-- TODO: recyclerview with subjects -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
