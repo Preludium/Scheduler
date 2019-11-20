@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -15,7 +16,8 @@ import static androidx.room.ForeignKey.CASCADE;
                                   parentColumns = "id",
                                   childColumns = "categoryId",
                                   onDelete = CASCADE))
-public class Meal {
+public class Meal implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @PrimaryKey
     @NonNull
