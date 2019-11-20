@@ -115,7 +115,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         });
 
         // TODO: implement listener (insert or update, depending on arrangementId!)
-        FloatingActionButton saveFab;
+        FloatingActionButton saveFab = findViewById(R.id.add_arrangement_activity_saveFab);
 
     }
 
