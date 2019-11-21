@@ -1,27 +1,22 @@
 package pl.jansmi.scheduler.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.adapters.holders.SelectListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
-import pl.jansmi.scheduler.fragments.SelectMealsFragment;
 
 public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectListItemViewHolder> {
 

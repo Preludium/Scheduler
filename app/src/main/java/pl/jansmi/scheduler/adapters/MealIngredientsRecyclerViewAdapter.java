@@ -8,16 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.adapters.holders.IngredientListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 
 public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<IngredientListItemViewHolder> {

@@ -48,11 +48,12 @@ public class Study implements Serializable {
     }
 
     @Ignore
-    public Study(@NonNull String title, int dayNumber, @NonNull String arrangementId, @NonNull String subjectId) {
+    public Study(@NonNull String title, String desc, int dayNumber, @NonNull String arrangementId, int duration,@NonNull String subjectId) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
+        this.desc = desc;
         this.dayNumber = dayNumber;
-        this.duration = 0;
+        this.duration = duration;
         this.arrangementId = arrangementId;
         this.subjectId = subjectId;
     }

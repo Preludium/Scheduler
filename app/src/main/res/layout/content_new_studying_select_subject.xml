@@ -8,6 +8,10 @@
     tools:context=".activities.NewStudyingSelectSubjectActivity"
     tools:showIn="@layout/activity_new_studying_select_subject">
 
-    <!-- TODO: recyclerview with subjects -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/new_studying_select_subject_content_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/listitem_select"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,7 +105,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                         dayNumber = studyFragment.getCurrentDay();
 
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
-                        intent.putExtra("study", (Study) null); // no update
+                        intent.putExtra("study", (Serializable) selectedStudies.get(dayNumber)); // no update
                         startActivityForResult(intent, SELECT_STUDYING_RC);
 
                         break;
@@ -166,6 +166,8 @@ public class AddArrangementActivity extends AppCompatActivity {
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
             // TODO: fetch data from NewStudyingActivity AND store it in List
             //  (insert or update)
+            List<Study> studies = (List<Study>) getIntent().getSerializableExtra("study");
+            this.selectedStudies.set(studyFragment.getCurrentDay(), studies);
         }
 
     }

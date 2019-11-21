@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler.adapters;
+package pl.jansmi.scheduler.adapters.holders;
 
 import android.view.View;
 import android.widget.ImageButton;
@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.jansmi.scheduler.R;
 
-class MainListItemViewHolder extends RecyclerView.ViewHolder {
+public class MainListItemViewHolder extends RecyclerView.ViewHolder {
 
-    TextView title;
-    TextView desc;
-    ImageButton menuBtn;
+    public TextView title;
+    public TextView desc;
+    public ImageButton menuBtn;
 
-    MainListItemViewHolder(@NonNull View itemView) {
+    public MainListItemViewHolder(@NonNull View itemView) {
         super(itemView);
         title = itemView.findViewById(R.id.main_listitem_title);
         desc = itemView.findViewById(R.id.main_listitem_desc);

@@ -15,6 +15,7 @@ import java.util.List;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.activities.AddTagActivity;
+import pl.jansmi.scheduler.adapters.holders.MainListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Tag;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 

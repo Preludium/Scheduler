@@ -13,6 +13,7 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.adapters.holders.MainListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;

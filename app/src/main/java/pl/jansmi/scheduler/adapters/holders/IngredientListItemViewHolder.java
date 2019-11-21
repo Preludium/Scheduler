@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler.adapters;
+package pl.jansmi.scheduler.adapters.holders;
 
 import android.view.View;
 import android.widget.Button;
@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.jansmi.scheduler.R;
 
-class IngredientListItemViewHolder extends RecyclerView.ViewHolder {
+public class IngredientListItemViewHolder extends RecyclerView.ViewHolder {
 
-    TextView count, title, desc;
-    Button addBtn, delBtn;
+    public TextView count, title, desc;
+    public Button addBtn, delBtn;
 
-    IngredientListItemViewHolder(@NonNull View itemView) {
+    public IngredientListItemViewHolder(@NonNull View itemView) {
         super(itemView);
         count = itemView.findViewById(R.id.ingredient_listitem_count);
         title = itemView.findViewById(R.id.ingredient_listitem_title);
