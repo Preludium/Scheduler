@@ -54,8 +54,14 @@ public class NewStudyingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: pass data back to AddArrangementActivity
-                study = new Study(title.getText().toString(), desc.getText().toString(), 0,
-                        "0", duration.getValue(), name.getText().toString());
+                if (study == null) { // insert
+                    selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
+                            "0", duration.getValue(), name.getText().toString());
+                } else { // update
+                    // TODO: modify current selectedStudy with data from forms
+                    // selectedStudy.setTitle()
+                    // selectedStudy.setDesc() etc.
+                }
 
                 Intent intent = new Intent();
                 intent.putExtra("study", study);
@@ -71,13 +77,17 @@ public class NewStudyingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         // TODO: IF updating Study, read data passed from AddArrangementActivity
-        if(getIntent().getExtras() != null)
-            this.selectedStudy = (Study) getIntent().getExtras().get("study");
-        title.setText(selectedStudy.getTitle());
-        name.setText(App.db.subjects().getById(selectedStudy.getSubjectId()).getName());
-        desc.setText(String.valueOf(selectedStudy.getDesc()));
-        duration.setValue(selectedStudy.getDuration());
+        this.selectedStudy = (Study) getIntent().getExtras().get("study");
+
+        if(selectedStudy != null) { // update
+            title.setText(selectedStudy.getTitle());
+            name.setText(App.db.subjects().getById(selectedStudy.getSubjectId()).getName());
+            desc.setText(String.valueOf(selectedStudy.getDesc()));
+            duration.setValue(selectedStudy.getDuration());
+        }
+
     }
 
     public void onSubjectSelect(View view) {

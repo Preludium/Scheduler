@@ -105,7 +105,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                         dayNumber = studyFragment.getCurrentDay();
 
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
-                        intent.putExtra("study", (Serializable) selectedStudies.get(dayNumber)); // no update
+                        intent.putExtra("study", (Study) null); // no update
                         startActivityForResult(intent, SELECT_STUDYING_RC);
 
                         break;
