@@ -102,7 +102,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_studying:
-                        dayNumber = studyFragment.getCurrentDay();
+//                        dayNumber = studyFragment.getCurrentDay();
 
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
                         intent.putExtra("study", (Study) null); // no update
@@ -167,7 +167,8 @@ public class AddArrangementActivity extends AppCompatActivity {
             // TODO: fetch data from NewStudyingActivity AND store it in List
             //  (insert or update)
             List<Study> studies = (List<Study>) getIntent().getSerializableExtra("study");
-            this.selectedStudies.set(studyFragment.getCurrentDay(), studies);
+//            this.selectedStudies.set(studyFragment.getCurrentDay(), studies);
+            this.selectedStudies.set(0, studies);
         }
 
     }

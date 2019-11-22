@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -40,36 +41,18 @@ public class SelectSubjectRecyclerViewAdapter extends RecyclerView.Adapter<Selec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectListItemViewHolder holder, int position) { //
+    public void onBindViewHolder(@NonNull SelectListItemViewHolder holder, int position) {
         Subject subject = subjects.get(position);
-
         holder.title.setText(subject.getName());
         holder.desc.setText("");
         holder.checkBox.setChecked(selectedPosition == position);
-
-//        holder.checkBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                selectedPosition = holder.getAdapterPosition();
-//                adapter.notifyDatasetChanged();
-//
-//            }
-//        });
+        holder.checkBox.setClickable(false);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notifyItemChanged(selectedPosition);
-
-                if(selectedPosition == position){
-                    selectedPosition = -1;
-                    selectedSubject = null;
-//                    holder.checkBox.setChecked(true);
-                }
-                else{
-//                    holder.checkBox.setChecked(false);
-                    selectedPosition = position;
-                    selectedSubject = subject;
-                }
+                selectedPosition = position;
+                selectedSubject = subject;
+                notifyDataSetChanged();
             }
         });
     }

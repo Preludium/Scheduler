@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.SelectSubjectRecyclerViewAdapter;
@@ -39,10 +40,10 @@ public class NewStudyingSelectSubjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Subject selectedSubject = ((SelectSubjectRecyclerViewAdapter)
-                        recycler.getAdapter()).getSelectedSubject();
+                        Objects.requireNonNull(recycler.getAdapter())).getSelectedSubject();
 
                 Intent intent = new Intent();
-                intent.putExtra("subject", (Serializable) selectedSubject);
+                intent.putExtra("subject", selectedSubject);
                 setResult(RESULT_OK, intent);
 
                 finish();

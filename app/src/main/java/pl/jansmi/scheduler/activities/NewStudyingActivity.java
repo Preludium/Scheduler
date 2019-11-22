@@ -48,15 +48,22 @@ public class NewStudyingActivity extends AppCompatActivity {
         duration = findViewById(R.id.new_studying_content_duration);
         duration.setMaxValue(999);
         duration.setMinValue(0);
+        selectedSubject = null;
 
+        title.setText("");
+        desc.setText("");
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: pass data back to AddArrangementActivity
                 if (study == null) { // insert
-                    selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
-                            "0", duration.getValue(), name.getText().toString());
+                    if (selectedSubject == null)
+                        selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
+                                "0", duration.getValue(), "");
+                    else
+                        selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
+                                "0", duration.getValue(), selectedSubject.getId());
                 } else { // update
                     // TODO: modify current selectedStudy with data from forms
                     // selectedStudy.setTitle()
@@ -64,14 +71,11 @@ public class NewStudyingActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent();
-                intent.putExtra("study", study);
+                intent.putExtra("study", selectedStudy);
                 setResult(RESULT_OK, intent);
-
                 finish();
             }
         });
-
-
     }
 
     @Override
@@ -83,7 +87,7 @@ public class NewStudyingActivity extends AppCompatActivity {
 
         if(selectedStudy != null) { // update
             title.setText(selectedStudy.getTitle());
-            name.setText(App.db.subjects().getById(selectedStudy.getSubjectId()).getName());
+            name.setText(selectedSubject.getName());
             desc.setText(String.valueOf(selectedStudy.getDesc()));
             duration.setValue(selectedStudy.getDuration());
         }
