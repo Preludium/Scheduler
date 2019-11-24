@@ -33,11 +33,10 @@ public class Study implements Serializable {
     private int duration; // minutes
     @NonNull
     private String arrangementId;
-    @NonNull
     private String subjectId;
 
     public Study(@NonNull String id, @NonNull String title, @NonNull String desc,
-                 int dayNumber, int duration, @NonNull String arrangementId, @NonNull String subjectId) {
+                 int dayNumber, int duration, @NonNull String arrangementId, String subjectId) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -48,7 +47,7 @@ public class Study implements Serializable {
     }
 
     @Ignore
-    public Study(@NonNull String title, String desc, int dayNumber, @NonNull String arrangementId, int duration,@NonNull String subjectId) {
+    public Study(@NonNull String title, String desc, int dayNumber, @NonNull String arrangementId, int duration, String subjectId) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.desc = desc;
@@ -101,7 +100,10 @@ public class Study implements Serializable {
         return arrangementId;
     }
 
-    @NonNull
+    public void setArrangementId(@NonNull String arrangementId) {
+        this.arrangementId = arrangementId;
+    }
+
     public String getSubjectId() {
         return subjectId;
     }

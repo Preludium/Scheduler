@@ -14,7 +14,11 @@
         <activity
             android:name=".activities.NewStudyingSelectSubjectActivity"
             android:label="@string/title_activity_new_studying_select_subject"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.NewStudyingActivity"
+            android:label="@string/title_activity_new_studying"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectMealIngredientsActivity"
             android:label="@string/title_activity_select_meal_ingredients"
@@ -50,10 +54,6 @@
         <activity
             android:name=".activities.AddCategoryActivity"
             android:label="@string/title_activity_add_category"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.NewStudyingActivity"
-            android:label="@string/title_activity_new_studying"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddTagActivity"

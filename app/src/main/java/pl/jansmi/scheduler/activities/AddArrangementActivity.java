@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,7 +19,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
+import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
@@ -55,6 +58,8 @@ public class AddArrangementActivity extends AppCompatActivity {
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
             // TODO: set activity title to 'update' and fill activity with initial data
+        } else {
+            this.arrangementId = UUID.randomUUID().toString(); // generate UUID
         }
 
         // init navView
@@ -164,11 +169,22 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
-            // TODO: fetch data from NewStudyingActivity AND store it in List
-            //  (insert or update)
-            List<Study> studies = (List<Study>) getIntent().getSerializableExtra("study");
-//            this.selectedStudies.set(studyFragment.getCurrentDay(), studies);
-            this.selectedStudies.set(0, studies);
+            Study study = (Study) data.getSerializableExtra("study");
+
+            int day = studyFragment.getCurrentDay();
+            study.setDayNumber(day);
+            study.setArrangementId(arrangementId);
+
+            // if fetched study already exists in selectedStudies then update
+            for (int i=0; i<selectedStudies.get(day).size(); ++i) {
+                if (study.getDayNumber() == selectedStudies.get(day).get(i).getDayNumber()) {
+                    selectedStudies.get(day).set(i, study);
+                    return;
+                }
+            }
+            // else insert new value
+            selectedStudies.get(day).add(study);
+
         }
 
     }

@@ -26,7 +26,6 @@ import pl.jansmi.scheduler.fragments.SelectMealsFragment;
 public class NewStudyingActivity extends AppCompatActivity {
     private static final int SELECTSUBJECT_RC = 1;
 
-    private Study study;
     private EditText title;
     private EditText name;
     private EditText desc;
@@ -52,15 +51,26 @@ public class NewStudyingActivity extends AppCompatActivity {
 
         title.setText("");
         desc.setText("");
+
+        this.selectedStudy = (Study) getIntent().getExtras().getSerializable("study");
+
+        if(selectedStudy != null) { // update
+            title.setText(selectedStudy.getTitle());
+            // TODO: selectedSubject needs to be fetched from selectedStudy
+            name.setText(selectedSubject.getName());
+            desc.setText(String.valueOf(selectedStudy.getDesc()));
+            duration.setValue(selectedStudy.getDuration());
+        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: pass data back to AddArrangementActivity
-                if (study == null) { // insert
+                if (selectedStudy == null) { // insert
                     if (selectedSubject == null)
                         selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
-                                "0", duration.getValue(), "");
+                                "0", duration.getValue(), null);
                     else
                         selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
                                 "0", duration.getValue(), selectedSubject.getId());
@@ -78,25 +88,9 @@ public class NewStudyingActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        // TODO: IF updating Study, read data passed from AddArrangementActivity
-        this.selectedStudy = (Study) getIntent().getExtras().get("study");
-
-        if(selectedStudy != null) { // update
-            title.setText(selectedStudy.getTitle());
-            name.setText(selectedSubject.getName());
-            desc.setText(String.valueOf(selectedStudy.getDesc()));
-            duration.setValue(selectedStudy.getDuration());
-        }
-
-    }
-
     public void onSubjectSelect(View view) {
         // TODO: open NewStudyingSelectSubjectActivity with recycler containing subjects
-         startActivityForResult(new Intent(getApplicationContext(), NewStudyingSelectSubjectActivity.class), SELECTSUBJECT_RC);
+        startActivityForResult(new Intent(getApplicationContext(), NewStudyingSelectSubjectActivity.class), SELECTSUBJECT_RC);
     }
 
     @Override
