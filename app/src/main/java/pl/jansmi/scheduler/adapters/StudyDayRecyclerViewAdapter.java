@@ -22,7 +22,7 @@ import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
     private Context context;
-    List<Study> selectedStudies;
+    private List<Study> selectedStudies;
 
         public StudyDayRecyclerViewAdapter(Context context, List<Study> selectedStudies) {
         this.context = context;
@@ -43,7 +43,8 @@ public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
         Subject subject = App.db.subjects().getById(study.getSubjectId());
 
         holder.title.setText(study.getTitle());
-        holder.desc.setText(subject.getName());
+        if (subject != null)
+            holder.desc.setText(subject.getName());
 
         // TODO: holder.itemView listener implementation (startActivity NewStudyingActivity and pass
         //  current study for update

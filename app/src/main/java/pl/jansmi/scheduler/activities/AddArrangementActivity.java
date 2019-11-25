@@ -45,6 +45,8 @@ public class AddArrangementActivity extends AppCompatActivity {
     TasksFragment tasksFragment;
     StudyFragment studyFragment;
 
+    private int selectedFragment = SELECT_MEAL_RC;
+
     private BottomNavigationView navView;
 
     @Override
@@ -136,8 +138,24 @@ public class AddArrangementActivity extends AppCompatActivity {
         this.studyFragment = new StudyFragment(selectedStudies);
 
         // set starting fragment
-        navView.setSelectedItemId(R.id.action_meals);
-        loadFragment(mealsFragment);
+        switch (selectedFragment) {
+            case SELECT_MEAL_RC:
+                navView.setSelectedItemId(R.id.navigation_meals);
+                loadFragment(mealsFragment);
+                break;
+            case SELECT_TRAINING_RC:
+                navView.setSelectedItemId(R.id.navigation_training);
+                loadFragment(trainingFragment);
+                break;
+            case SELECT_TASK_RC:
+                navView.setSelectedItemId(R.id.navigation_tasks);
+                loadFragment(tasksFragment);
+                break;
+            case SELECT_STUDYING_RC:
+                navView.setSelectedItemId(R.id.navigation_studying);
+                loadFragment(studyFragment);
+                break;
+        }
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -158,6 +176,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         if (requestCode == SELECT_MEAL_RC && resultCode == RESULT_OK) {
             List<String> mealsId = data.getExtras().getStringArrayList("meals");
             this.selectedMeals.set(mealsFragment.getCurrentDay(), mealsId);
+            this.selectedFragment = SELECT_MEAL_RC;
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {
@@ -170,6 +189,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
             Study study = (Study) data.getSerializableExtra("study");
+            Log.i("CustomTag", String.valueOf(study.getDuration()));
 
             int day = studyFragment.getCurrentDay();
             study.setDayNumber(day);
@@ -185,6 +205,7 @@ public class AddArrangementActivity extends AppCompatActivity {
             // else insert new value
             selectedStudies.get(day).add(study);
 
+            this.selectedFragment = SELECT_STUDYING_RC;
         }
 
     }
