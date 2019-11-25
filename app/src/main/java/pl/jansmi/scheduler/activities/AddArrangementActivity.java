@@ -189,6 +189,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
             Study study = (Study) data.getSerializableExtra("study");
+            Log.i("CustomTag", String.valueOf(study.getDuration()));
 
             int day = studyFragment.getCurrentDay();
             study.setDayNumber(day);

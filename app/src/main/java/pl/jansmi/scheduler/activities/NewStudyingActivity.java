@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -69,16 +71,14 @@ public class NewStudyingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: pass data back to AddArrangementActivity
                 if (selectedStudy == null) { // insert
-                    if (selectedSubject == null)
-                        selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
-                                "0", duration.getValue(), null);
-                    else
-                        selectedStudy = new Study(title.getText().toString(), desc.getText().toString(), 0,
-                                "0", duration.getValue(), selectedSubject.getId());
+                    selectedStudy = new Study(title.getText().toString(), desc.getText().toString(),
+                            0, "0", duration.getValue(),
+                            selectedSubject == null ? null : selectedSubject.getId());
                 } else { // update
-                    // TODO: modify current selectedStudy with data from forms
-                    // selectedStudy.setTitle()
-                    // selectedStudy.setDesc() etc.
+                    selectedStudy.setTitle(title.getText().toString());
+                    selectedStudy.setDesc(desc.getText().toString());
+                    selectedStudy.setDuration(duration.getValue());
+                    selectedStudy.setSubjectId(selectedSubject == null ? null : selectedSubject.getId());
                 }
 
                 Intent intent = new Intent();
@@ -90,8 +90,10 @@ public class NewStudyingActivity extends AppCompatActivity {
     }
 
     public void onSubjectSelect(View view) {
-        // TODO: open NewStudyingSelectSubjectActivity with recycler containing subjects
-        startActivityForResult(new Intent(getApplicationContext(), NewStudyingSelectSubjectActivity.class), SELECTSUBJECT_RC);
+        if (App.db.subjects().getAll().isEmpty())
+            Snackbar.make(view, "No subjects found. Please first add one.", Snackbar.LENGTH_LONG).show();
+        else
+            startActivityForResult(new Intent(getApplicationContext(), NewStudyingSelectSubjectActivity.class), SELECTSUBJECT_RC);
     }
 
     @Override
@@ -100,11 +102,8 @@ public class NewStudyingActivity extends AppCompatActivity {
 
         if (requestCode == SELECTSUBJECT_RC && resultCode == RESULT_OK) {
             this.selectedSubject = (Subject) data.getSerializableExtra("subject");
-            updateSubjectName();
+            name.setText(selectedSubject.getName());
         }
     }
 
-    private void updateSubjectName() {
-        name.setText(selectedSubject.getName());
-    }
 }

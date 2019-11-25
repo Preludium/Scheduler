@@ -107,4 +107,8 @@ public class Study implements Serializable {
     public String getSubjectId() {
         return subjectId;
     }
+
+    public void setSubjectId(String subjectId) {
+        this.subjectId = subjectId;
+    }
 }
