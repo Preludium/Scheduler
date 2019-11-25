@@ -56,7 +56,8 @@ public class NewStudyingActivity extends AppCompatActivity {
 
         if(selectedStudy != null) { // update
             title.setText(selectedStudy.getTitle());
-            // TODO: selectedSubject needs to be fetched from selectedStudy
+            if (selectedStudy.getSubjectId() != null)
+                selectedSubject = App.db.subjects().getById(selectedStudy.getSubjectId());
             name.setText(selectedSubject.getName());
             desc.setText(String.valueOf(selectedStudy.getDesc()));
             duration.setValue(selectedStudy.getDuration());
