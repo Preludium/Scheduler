@@ -1,5 +1,6 @@
 package pl.jansmi.scheduler.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,18 +22,18 @@ import pl.jansmi.scheduler.dbstructure.entities.Subject;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
-    private Context context;
-    List<Study> selectedStudies;
+    private Activity activity;
+    private List<Study> selectedStudies;
 
-        public StudyDayRecyclerViewAdapter(Context context, List<Study> selectedStudies) {
-        this.context = context;
+        public StudyDayRecyclerViewAdapter(Activity activity, List<Study> selectedStudies) {
+        this.activity = activity;
         this.selectedStudies = selectedStudies;
     }
 
     @NonNull
     @Override
     public MainListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         View view = inflater.inflate(R.layout.listitem_main, null);
         return new MainListItemViewHolder(view);
     }
@@ -43,16 +44,20 @@ public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
         Subject subject = App.db.subjects().getById(study.getSubjectId());
 
         holder.title.setText(study.getTitle());
-        holder.desc.setText(subject.getName());
+        if (subject != null)
+            holder.desc.setText(subject.getName());
+        else {
+            holder.desc.setText("");
+        }
 
         // TODO: holder.itemView listener implementation (startActivity NewStudyingActivity and pass
         //  current study for update
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, NewStudyingActivity.class);
+                Intent intent = new Intent(activity, NewStudyingActivity.class);
                 intent.putExtra("study", study);
-                context.startActivity(intent);
+                activity.startActivityForResult(intent, 4);
             }
         });
 
@@ -60,7 +65,7 @@ public class StudyDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
+                DeletePromptDialog.show(activity, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);

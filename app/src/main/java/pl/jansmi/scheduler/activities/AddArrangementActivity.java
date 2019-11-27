@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +46,8 @@ public class AddArrangementActivity extends AppCompatActivity {
     TasksFragment tasksFragment;
     StudyFragment studyFragment;
 
+    private int selectedFragment = SELECT_MEAL_RC;
+
     private BottomNavigationView navView;
 
     @Override
@@ -52,8 +55,12 @@ public class AddArrangementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_arrangement);
 
-        this.selectedMeals = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
-        this.selectedStudies = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
+        this.selectedMeals = new ArrayList<>(); // 7 weekdays
+        for (int i=0; i<7; ++i)
+            this.selectedMeals.add(new ArrayList<>());
+        this.selectedStudies = new ArrayList<>();
+        for (int i=0; i<7; ++i)
+            this.selectedStudies.add(new ArrayList<>());
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
@@ -136,8 +143,24 @@ public class AddArrangementActivity extends AppCompatActivity {
         this.studyFragment = new StudyFragment(selectedStudies);
 
         // set starting fragment
-        navView.setSelectedItemId(R.id.action_meals);
-        loadFragment(mealsFragment);
+        switch (selectedFragment) {
+            case SELECT_MEAL_RC:
+                navView.setSelectedItemId(R.id.navigation_meals);
+                loadFragment(mealsFragment);
+                break;
+            case SELECT_TRAINING_RC:
+                navView.setSelectedItemId(R.id.navigation_training);
+                loadFragment(trainingFragment);
+                break;
+            case SELECT_TASK_RC:
+                navView.setSelectedItemId(R.id.navigation_tasks);
+                loadFragment(tasksFragment);
+                break;
+            case SELECT_STUDYING_RC:
+                navView.setSelectedItemId(R.id.navigation_studying);
+                loadFragment(studyFragment);
+                break;
+        }
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -158,6 +181,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         if (requestCode == SELECT_MEAL_RC && resultCode == RESULT_OK) {
             List<String> mealsId = data.getExtras().getStringArrayList("meals");
             this.selectedMeals.set(mealsFragment.getCurrentDay(), mealsId);
+            this.selectedFragment = SELECT_MEAL_RC;
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {
@@ -169,6 +193,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
+            this.selectedFragment = SELECT_STUDYING_RC;
             Study study = (Study) data.getSerializableExtra("study");
 
             int day = studyFragment.getCurrentDay();
@@ -177,11 +202,12 @@ public class AddArrangementActivity extends AppCompatActivity {
 
             // if fetched study already exists in selectedStudies then update
             for (int i=0; i<selectedStudies.get(day).size(); ++i) {
-                if (study.getDayNumber() == selectedStudies.get(day).get(i).getDayNumber()) {
+                if (study.getId().equals(selectedStudies.get(day).get(i).getId())) {
                     selectedStudies.get(day).set(i, study);
                     return;
                 }
             }
+            
             // else insert new value
             selectedStudies.get(day).add(study);
 

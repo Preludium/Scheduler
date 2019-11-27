@@ -37,7 +37,7 @@ public class StudyDayFragment extends Fragment {
 
         recycler = view.findViewById(R.id.study_day_fragment_recycler);
 
-        adapter = new StudyDayRecyclerViewAdapter(getContext(), selectedStudies);
+        adapter = new StudyDayRecyclerViewAdapter(getActivity(), selectedStudies);
         recycler.setAdapter(adapter);
 
         manager = new LinearLayoutManager(getContext());
