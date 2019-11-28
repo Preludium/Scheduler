@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,8 +55,12 @@ public class AddArrangementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_arrangement);
 
-        this.selectedMeals = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
-        this.selectedStudies = new ArrayList<>(Collections.nCopies(7, new ArrayList<>())); // 7 weekdays
+        this.selectedMeals = new ArrayList<>(); // 7 weekdays
+        for (int i=0; i<7; ++i)
+            this.selectedMeals.add(new ArrayList<>());
+        this.selectedStudies = new ArrayList<>();
+        for (int i=0; i<7; ++i)
+            this.selectedStudies.add(new ArrayList<>());
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
@@ -188,8 +193,8 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
+            this.selectedFragment = SELECT_STUDYING_RC;
             Study study = (Study) data.getSerializableExtra("study");
-            Log.i("CustomTag", String.valueOf(study.getDuration()));
 
             int day = studyFragment.getCurrentDay();
             study.setDayNumber(day);
@@ -202,10 +207,10 @@ public class AddArrangementActivity extends AppCompatActivity {
                     return;
                 }
             }
+            
             // else insert new value
             selectedStudies.get(day).add(study);
 
-            this.selectedFragment = SELECT_STUDYING_RC;
         }
 
     }
