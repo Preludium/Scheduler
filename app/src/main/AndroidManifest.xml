@@ -12,6 +12,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.NewTrainingSelectDisciplineActivity"
+            android:label="@string/title_activity_new_training_select_discipline"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.NewStudyingSelectSubjectActivity"
             android:label="@string/title_activity_new_studying_select_subject"
             android:theme="@style/AppTheme.NoActionBar" />

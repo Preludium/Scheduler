@@ -51,10 +51,6 @@ public class NewStudyingActivity extends AppCompatActivity {
         duration.setMinValue(0);
         selectedSubject = null;
 
-        title.setText("");
-        desc.setText("");
-        name.setText("");
-
         this.selectedStudy = (Study) getIntent().getExtras().getSerializable("study");
 
         if(selectedStudy != null) { // update
@@ -73,6 +69,12 @@ public class NewStudyingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: pass data back to AddArrangementActivity
                 if (selectedStudy == null) { // insert
+                    if(title.getText() == null)
+                        title.setText("");
+                    if(desc.getText() == null)
+                        desc.setText("");
+                    if(name.getText() == null)
+                        name.setText("");
                     selectedStudy = new Study(title.getText().toString(), desc.getText().toString(),
                             0, "0", duration.getValue(),
                             selectedSubject == null ? null : selectedSubject.getId());

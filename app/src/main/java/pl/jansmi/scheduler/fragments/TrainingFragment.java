@@ -15,50 +15,53 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Practice;
 
 public class TrainingFragment extends Fragment {
 
-    /*private MealDayFragmentPagerAdapter adapter;
+    private TrainingDayFragmentPagerAdapter adapter;
     private ViewPager viewPager;
     private TabLayout tabs;
+    private List<TrainingDayFragment> trainingDayFragmentList;
+    private List<List<Practice>> selectedPractices;
 
-    private List<MealDayFragment> mealDayFragmentList;*/
+    public TrainingFragment(List<List<Practice>> selectedPractices) {
+        this.selectedPractices = selectedPractices;
+    }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_training, container, false);
 
-        /*mealDayFragmentList = new ArrayList<>();
-        for (int i=0; i<7; ++i)
-            mealDayFragmentList.add(new MealDayFragment());
+        this.trainingDayFragmentList = new ArrayList<>();
+        for (int i = 0; i < 7; ++i)
+            trainingDayFragmentList.add(new TrainingDayFragment(selectedPractices.get(i)));
 
-        adapter = new MealDayFragmentPagerAdapter(getChildFragmentManager());
+        adapter = new TrainingDayFragmentPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.training_fragment_pager);
         viewPager.setAdapter(adapter);
 
         tabs = view.findViewById(R.id.training_fragment_tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.setupWithViewPager(viewPager);*/
+        tabs.setupWithViewPager(viewPager);
 
         return view;
     }
 
-    public class MealDayFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        public MealDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
+    private class TrainingDayFragmentPagerAdapter extends FragmentPagerAdapter {
+        TrainingDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
 
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return null ;//mealDayFragmentList.get(position);
+            return trainingDayFragmentList.get(position);
         }
 
         @Override
@@ -69,7 +72,7 @@ public class TrainingFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            switch(position) {
+            switch (position) {
                 case 0:
                     return "Monday";
                 case 1:
@@ -85,9 +88,12 @@ public class TrainingFragment extends Fragment {
                 case 6:
                     return "Sunday";
             }
-
             return null;
         }
+    }
+
+    public int getCurrentDay() {
+        return viewPager.getCurrentItem();
     }
 
 }

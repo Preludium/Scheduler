@@ -78,4 +78,7 @@
     <string name="title_activity_select_meal_ingredients">SelectMealIngredientsActivity</string>
     <string name="title_activity_new_studying_select_subject">NewStudyingSelectSubjectActivity
     </string>
+    <string name="title_activity_new_training_select_discipline">
+        NewTrainingSelectDisciplineActivity
+    </string>
 </resources>

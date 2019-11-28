@@ -67,7 +67,7 @@ public class Study implements Serializable {
         return title;
     }
 
-    public void setTitle(@NonNull String subject) {
+    public void setTitle(@NonNull String title) {
         this.title = title;
     }
 

@@ -8,4 +8,72 @@
     tools:context=".activities.NewTrainingActivity"
     tools:showIn="@layout/activity_new_training">
 
+    <TextView
+        android:id="@+id/new_training_content_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        style="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/new_training_content_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/new_training_content_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:textAlignment="center"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/new_training_content_name_title"
+        app:layout_constraintBottom_toTopOf="@id/new_training_content_discipline_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/new_training_content_discipline_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discipline"
+        style="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@id/new_training_content_name"
+        app:layout_constraintBottom_toTopOf="@id/new_training_content_discipline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/new_training_content_discipline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:focusable="false"
+        android:editable="false"
+        android:textAlignment="center"
+        android:onClick="onDisciplineSelect"
+        app:layout_constraintTop_toBottomOf="@id/new_training_content_discipline_title"
+        app:layout_constraintBottom_toTopOf="@id/new_training_content_duration_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/new_training_content_duration_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration"
+        style="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@id/new_training_content_discipline"
+        app:layout_constraintBottom_toTopOf="@id/new_training_content_duration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <NumberPicker
+        android:id="@+id/new_training_content_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/new_training_content_duration_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

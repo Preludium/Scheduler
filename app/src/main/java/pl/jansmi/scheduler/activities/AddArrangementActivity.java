@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import pl.jansmi.scheduler.App;
+import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
@@ -40,6 +41,7 @@ public class AddArrangementActivity extends AppCompatActivity {
     private String arrangementId; // to (potentially) update
     private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
     private List<List<Study>> selectedStudies;
+    private List<List<Practice>> selectedPractices;
 
     MealsFragment mealsFragment;
     TrainingFragment trainingFragment;
@@ -56,11 +58,14 @@ public class AddArrangementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_arrangement);
 
         this.selectedMeals = new ArrayList<>(); // 7 weekdays
-        for (int i=0; i<7; ++i)
-            this.selectedMeals.add(new ArrayList<>());
         this.selectedStudies = new ArrayList<>();
-        for (int i=0; i<7; ++i)
+        this.selectedPractices = new ArrayList<>();
+
+        for (int i=0; i<7; ++i) {
+            this.selectedMeals.add(new ArrayList<>());
             this.selectedStudies.add(new ArrayList<>());
+            this.selectedPractices.add(new ArrayList<>());
+        }
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
@@ -106,7 +111,9 @@ public class AddArrangementActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_training:
-                        startActivityForResult(new Intent(view.getContext(), NewTrainingActivity.class), SELECT_TRAINING_RC);
+                        intent = new Intent(getApplicationContext(), NewTrainingActivity.class);
+                        intent.putExtra("practice", (Practice) null); // no update
+                        startActivityForResult(intent, SELECT_TRAINING_RC);
                         break;
 
                     case R.id.navigation_tasks:
@@ -114,12 +121,9 @@ public class AddArrangementActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_studying:
-//                        dayNumber = studyFragment.getCurrentDay();
-
                         intent = new Intent(getApplicationContext(), NewStudyingActivity.class);
                         intent.putExtra("study", (Study) null); // no update
                         startActivityForResult(intent, SELECT_STUDYING_RC);
-
                         break;
 
                 }
@@ -137,8 +141,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         // init fragments
         this.mealsFragment = new MealsFragment(selectedMeals);
-        // TODO: pass data to the rest
-        this.trainingFragment = new TrainingFragment();
+        this.trainingFragment = new TrainingFragment(selectedPractices);
         this.tasksFragment = new TasksFragment();
         this.studyFragment = new StudyFragment(selectedStudies);
 
@@ -185,7 +188,22 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {
+            this.selectedFragment = SELECT_TRAINING_RC;
+            Practice practice = (Practice) data.getSerializableExtra("practice");
 
+            int day = trainingFragment.getCurrentDay();
+            practice.setDayNumber(day);
+            practice.setArrangementId(arrangementId);
+
+            // if fetched study already exists in selectedStudies then update
+            for (int i=0; i<selectedPractices.get(day).size(); ++i) {
+                if (practice.getId().equals(selectedPractices.get(day).get(i).getId())) {
+                    selectedPractices.get(day).set(i, practice);
+                    return;
+                }
+            }
+            // else insert new value
+            selectedPractices.get(day).add(practice);
         }
 
         else if (requestCode == SELECT_TASK_RC && resultCode == RESULT_OK) {
@@ -210,7 +228,6 @@ public class AddArrangementActivity extends AppCompatActivity {
             
             // else insert new value
             selectedStudies.get(day).add(study);
-
         }
 
     }

@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -19,7 +20,7 @@ import static androidx.room.ForeignKey.CASCADE;
                                    parentColumns = "id",
                                    childColumns = "disciplineId",
                                    onDelete = CASCADE)})
-public class Practice {
+public class Practice implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -45,11 +46,11 @@ public class Practice {
 
     @Ignore
     public Practice(@NonNull String name, int dayNumber,
-                    @NonNull String arrangementId, @NonNull String disciplineId) {
+                    @NonNull String arrangementId, int duration,  @NonNull String disciplineId) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.dayNumber = dayNumber;
-        this.duration = 0;
+        this.duration = duration;
         this.arrangementId = arrangementId;
         this.disciplineId = disciplineId;
     }
@@ -87,6 +88,10 @@ public class Practice {
     @NonNull
     public String getArrangementId() {
         return arrangementId;
+    }
+
+    public void setArrangementId(@NonNull String arrangementId) {
+        this.arrangementId = arrangementId;
     }
 
     @NonNull
