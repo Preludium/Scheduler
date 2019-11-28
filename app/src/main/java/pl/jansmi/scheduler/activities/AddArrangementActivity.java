@@ -197,7 +197,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
             // if fetched study already exists in selectedStudies then update
             for (int i=0; i<selectedStudies.get(day).size(); ++i) {
-                if (study.getDayNumber() == selectedStudies.get(day).get(i).getDayNumber()) {
+                if (study.getId().equals(selectedStudies.get(day).get(i).getId())) {
                     selectedStudies.get(day).set(i, study);
                     return;
                 }
