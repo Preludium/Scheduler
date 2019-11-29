@@ -1,6 +1,5 @@
 package pl.jansmi.scheduler.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,12 +12,12 @@ import android.view.View;
 
 import pl.jansmi.scheduler.R;
 
-public class InvitationsActivity extends AppCompatActivity {
+public class NewInvitationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invitations);
+        setContentView(R.layout.activity_new_invitation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -26,9 +25,17 @@ public class InvitationsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), NewInvitationActivity.class));
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }
 
+    public void onSelectTask(View view) {
+//        startActivityForResult();
+    }
+
+    public void onSelectUsers(View view) {
+//        startActivityForResult();
+    }
 }

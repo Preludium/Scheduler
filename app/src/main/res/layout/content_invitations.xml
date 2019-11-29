@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="100dp"
-        android:text="@string/no_schedules_found_click_the_button_to_add_one"
+        android:text="@string/no_invitations_found_click_the_button_to_add_one"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:visibility="invisible"

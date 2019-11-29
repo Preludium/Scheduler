@@ -12,9 +12,21 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.SelectTasksActivity"
+            android:label="@string/title_activity_select_tasks"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.SelectUsersActivity"
+            android:label="@string/title_activity_select_users"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.NewInvitationActivity"
+            android:label="@string/title_activity_new_invitation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.NewTrainingSelectDisciplineActivity"
             android:label="@string/title_activity_new_training_select_discipline"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.NewStudyingSelectSubjectActivity"
             android:label="@string/title_activity_new_studying_select_subject"

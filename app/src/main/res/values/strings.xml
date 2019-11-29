@@ -57,6 +57,7 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_add_ingredient">AddIngredientActivity</string>
 
+    <string name="no_invitations_found_click_the_button_to_add_one">No invitations found. Click the button to add one.</string>
     <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button to add one.</string>
     <string name="no_categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
     <string name="no_disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
@@ -81,4 +82,7 @@
     <string name="title_activity_new_training_select_discipline">
         NewTrainingSelectDisciplineActivity
     </string>
+    <string name="title_activity_new_invitation">NewInvitationActivity</string>
+    <string name="title_activity_select_users">SelectUsersActivity</string>
+    <string name="title_activity_select_tasks">SelectTasksActivity</string>
 </resources>
