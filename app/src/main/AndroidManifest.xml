@@ -12,9 +12,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.MeasureActivity"
+            android:label="@string/title_activity_measure"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.TargetActivity"
+            android:label="@string/title_activity_target"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.SelectTasksActivity"
             android:label="@string/title_activity_select_tasks"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectUsersActivity"
             android:label="@string/title_activity_select_users"

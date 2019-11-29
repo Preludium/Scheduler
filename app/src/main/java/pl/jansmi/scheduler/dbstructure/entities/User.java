@@ -6,11 +6,12 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity(tableName = "Users", indices = {@Index(value = "name", unique = true)})
-public class User {
+public class User implements Serializable {
 
     @Ignore
     public static final boolean SEX_MALE = false;

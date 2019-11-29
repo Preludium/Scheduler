@@ -5,13 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.SelectUsersActivity"
-    tools:showIn="@layout/activity_select_users">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/select_users_content_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/listitem_select"/>
+    tools:context=".activities.MeasureActivity"
+    tools:showIn="@layout/activity_measure">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

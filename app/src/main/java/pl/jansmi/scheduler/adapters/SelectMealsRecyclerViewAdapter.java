@@ -18,7 +18,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Ingredient;
 import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
 
-public class SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectListItemViewHolder> {
+public class  SelectMealsRecyclerViewAdapter extends RecyclerView.Adapter<SelectListItemViewHolder> {
 
     private Context context;
     private List<Meal> meals;

@@ -29,7 +29,7 @@ public class SelectDisciplineRecyclerViewAdapter  extends RecyclerView.Adapter<S
 
     @NonNull
     @Override
-    public SelectListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public SelectListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.listitem_select, null);
         return new SelectListItemViewHolder(view);

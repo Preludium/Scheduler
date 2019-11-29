@@ -85,4 +85,6 @@
     <string name="title_activity_new_invitation">NewInvitationActivity</string>
     <string name="title_activity_select_users">SelectUsersActivity</string>
     <string name="title_activity_select_tasks">SelectTasksActivity</string>
+    <string name="title_activity_target">TargetActivity</string>
+    <string name="title_activity_measure">MeasureActivity</string>
 </resources>
