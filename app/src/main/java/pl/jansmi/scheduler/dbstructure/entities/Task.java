@@ -7,6 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -16,7 +17,7 @@ import static androidx.room.ForeignKey.CASCADE;
                                   parentColumns = "id",
                                   childColumns = "arrangementId",
                                   onDelete = CASCADE))
-public class Task {
+public class Task implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -39,12 +40,13 @@ public class Task {
     }
 
     @Ignore
-    public Task(@NonNull String name, int weekday, @NonNull String arrangementId) {
+    public Task(@NonNull String name, int weekday, @NonNull String arrangementId, String description, int durationMinutes) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.weekday = weekday;
-        this.durationMinutes = 0;
         this.arrangementId = arrangementId;
+        this.description = description;
+        this.durationMinutes = durationMinutes;
     }
 
     @NonNull
@@ -90,4 +92,7 @@ public class Task {
         return arrangementId;
     }
 
+    public void setArrangementId(@NonNull String arrangementId) {
+        this.arrangementId = arrangementId;
+    }
 }

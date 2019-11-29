@@ -25,6 +25,7 @@ import java.util.UUID;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
+import pl.jansmi.scheduler.dbstructure.entities.Task;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.fragments.StudyFragment;
@@ -42,6 +43,7 @@ public class AddArrangementActivity extends AppCompatActivity {
     private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
     private List<List<Study>> selectedStudies;
     private List<List<Practice>> selectedPractices;
+    private List<List<Task>> selectedTasks;
 
     MealsFragment mealsFragment;
     TrainingFragment trainingFragment;
@@ -60,11 +62,13 @@ public class AddArrangementActivity extends AppCompatActivity {
         this.selectedMeals = new ArrayList<>(); // 7 weekdays
         this.selectedStudies = new ArrayList<>();
         this.selectedPractices = new ArrayList<>();
+        this.selectedTasks = new ArrayList<>();
 
         for (int i=0; i<7; ++i) {
             this.selectedMeals.add(new ArrayList<>());
             this.selectedStudies.add(new ArrayList<>());
             this.selectedPractices.add(new ArrayList<>());
+            this.selectedTasks.add(new ArrayList<>());
         }
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
@@ -117,7 +121,9 @@ public class AddArrangementActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_tasks:
-                        startActivityForResult(new Intent(view.getContext(), NewTaskActivity.class), SELECT_TASK_RC);
+                        intent = new Intent(getApplicationContext(), NewTaskActivity.class);
+                        intent.putExtra("task", (Task) null); // no update
+                        startActivityForResult(intent, SELECT_TASK_RC);
                         break;
 
                     case R.id.navigation_studying:
@@ -142,7 +148,7 @@ public class AddArrangementActivity extends AppCompatActivity {
         // init fragments
         this.mealsFragment = new MealsFragment(selectedMeals);
         this.trainingFragment = new TrainingFragment(selectedPractices);
-        this.tasksFragment = new TasksFragment();
+        this.tasksFragment = new TasksFragment(selectedTasks);
         this.studyFragment = new StudyFragment(selectedStudies);
 
         // set starting fragment
@@ -207,7 +213,22 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_TASK_RC && resultCode == RESULT_OK) {
+            this.selectedFragment = SELECT_TASK_RC;
+            Task task = (Task) data.getSerializableExtra("task");
 
+            int day = tasksFragment.getCurrentDay();
+            task.setWeekday(day);
+            task.setArrangementId(arrangementId);
+
+            // if fetched study already exists in selectedStudies then update
+            for (int i=0; i<selectedTasks.get(day).size(); ++i) {
+                if (task.getId().equals(selectedTasks.get(day).get(i).getId())) {
+                    selectedTasks.get(day).set(i, task);
+                    return;
+                }
+            }
+            // else insert new value
+            selectedTasks.get(day).add(task);
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {

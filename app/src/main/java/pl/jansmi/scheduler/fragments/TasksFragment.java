@@ -21,44 +21,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Task;
 
 public class TasksFragment extends Fragment {
-
-    /*private MealDayFragmentPagerAdapter adapter;
+    private TaskDayFragmentPagerAdapter adapter;
     private ViewPager viewPager;
     private TabLayout tabs;
+    private List<TasksDayFragment> tasksDayFragmentList;
+    private List<List<Task>> selectedTasks;
 
-    private List<MealDayFragment> mealDayFragmentList;*/
+    public TasksFragment(List<List<Task>> selectedTasks) {
+        this.selectedTasks = selectedTasks;
+    }
 
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
 
-        /*mealDayFragmentList = new ArrayList<>();
-        for (int i=0; i<7; ++i)
-            mealDayFragmentList.add(new MealDayFragment());
+        this.tasksDayFragmentList = new ArrayList<>();
+        for (int i = 0; i < 7; ++i)
+            tasksDayFragmentList.add(new TasksDayFragment(selectedTasks.get(i)));
 
-        adapter = new MealDayFragmentPagerAdapter(getChildFragmentManager());
+        adapter = new TaskDayFragmentPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.tasks_fragment_pager);
         viewPager.setAdapter(adapter);
 
         tabs = view.findViewById(R.id.tasks_fragment_tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.setupWithViewPager(viewPager);*/
+        tabs.setupWithViewPager(viewPager);
 
         return view;
     }
 
-    public class MealDayFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        public MealDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
+    private class TaskDayFragmentPagerAdapter extends FragmentPagerAdapter {
+        TaskDayFragmentPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
 
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return null; // mealDayFragmentList.get(position);
+            return tasksDayFragmentList.get(position);
         }
 
         @Override
@@ -69,7 +73,7 @@ public class TasksFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            switch(position) {
+            switch (position) {
                 case 0:
                     return "Monday";
                 case 1:
@@ -85,11 +89,12 @@ public class TasksFragment extends Fragment {
                 case 6:
                     return "Sunday";
             }
-
             return null;
         }
     }
 
+    public int getCurrentDay() {
+        return viewPager.getCurrentItem();
+    }
+
 }
-
-
