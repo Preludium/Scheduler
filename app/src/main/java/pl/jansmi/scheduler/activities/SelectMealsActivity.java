@@ -107,7 +107,6 @@ public class SelectMealsActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
                 selectMealsFragmentList.add(new SelectMealsFragment(cat, selectedMeal));
             }
         }

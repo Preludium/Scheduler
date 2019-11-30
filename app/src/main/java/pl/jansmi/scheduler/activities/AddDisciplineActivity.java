@@ -40,7 +40,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
         if (disciplineId != null) { // update
             this.discipline = App.db.disciplines().getById(disciplineId);
             name.setText(discipline.getName());
-            kcalPerMinute.setText(discipline.getKcalPerMinute());
+            kcalPerMinute.setText(String.valueOf(discipline.getKcalPerMinute()));
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);

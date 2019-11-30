@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
@@ -20,7 +21,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Discipline;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 
 public class NewTrainingActivity extends AppCompatActivity {
-    private static final int SELECTDISCIPLINE_RC = 1;
+    private static final int SELECT_DISCIPLINE_RC = 1;
 
     private EditText title;
     private EditText name;
@@ -57,18 +58,26 @@ public class NewTrainingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: pass data back to AddArrangementActivity
                 if (selectedPractice == null) { // insert
-                    if(title.getText() == null)
-                        title.setText("");
-                    if(name.getText() == null)
-                        name.setText("");
-                    selectedPractice = new Practice(title.getText().toString(), 0, "0",
-                            duration.getValue(), selectedDiscipline == null ? null : selectedDiscipline.getId());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter training title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedPractice = new Practice(title.getText().toString(), 0, "0",
+                                duration.getValue(), selectedDiscipline == null ? null : selectedDiscipline.getId());
+                    }
+
                 } else { // update
-                    selectedPractice.setName(title.getText().toString());
-                    selectedPractice.setDuration(duration.getValue());
-                    selectedPractice.setDisciplineId(selectedDiscipline == null ? null : selectedDiscipline.getId());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter training title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedPractice.setName(title.getText().toString());
+                        selectedPractice.setDuration(duration.getValue());
+                        selectedPractice.setDisciplineId(selectedDiscipline == null ? null : selectedDiscipline.getId());
+                    }
                 }
 
                 Intent intent = new Intent();
@@ -83,14 +92,15 @@ public class NewTrainingActivity extends AppCompatActivity {
         if (App.db.disciplines().getAll().isEmpty())
             Snackbar.make(view, "No disciplines found. Please first add one.", Snackbar.LENGTH_LONG).show();
         else
-            startActivityForResult(new Intent(getApplicationContext(), NewTrainingSelectDisciplineActivity.class), SELECTDISCIPLINE_RC);
+            startActivityForResult(new Intent(getApplicationContext(), NewTrainingSelectDisciplineActivity.class),
+                    SELECT_DISCIPLINE_RC);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SELECTDISCIPLINE_RC && resultCode == RESULT_OK) {
+        if (requestCode == SELECT_DISCIPLINE_RC && resultCode == RESULT_OK) {
             this.selectedDiscipline = (Discipline) data.getSerializableExtra("discipline");
             name.setText(selectedDiscipline.getName());
         }

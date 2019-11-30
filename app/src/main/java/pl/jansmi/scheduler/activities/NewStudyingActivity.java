@@ -67,22 +67,28 @@ public class NewStudyingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: pass data back to AddArrangementActivity
                 if (selectedStudy == null) { // insert
-                    if(title.getText() == null)
-                        title.setText("");
-                    if(desc.getText() == null)
-                        desc.setText("");
-                    if(name.getText() == null)
-                        name.setText("");
-                    selectedStudy = new Study(title.getText().toString(), desc.getText().toString(),
-                            0, "0", duration.getValue(),
-                            selectedSubject == null ? null : selectedSubject.getId());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter studying title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedStudy = new Study(title.getText().toString(), desc.getText().toString(),
+                                0, "0", duration.getValue(),
+                                selectedSubject == null ? null : selectedSubject.getId());
+                    }
+
                 } else { // update
-                    selectedStudy.setTitle(title.getText().toString());
-                    selectedStudy.setDesc(desc.getText().toString());
-                    selectedStudy.setDuration(duration.getValue());
-                    selectedStudy.setSubjectId(selectedSubject == null ? null : selectedSubject.getId());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter training title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedStudy.setTitle(title.getText().toString());
+                        selectedStudy.setDesc(desc.getText().toString());
+                        selectedStudy.setDuration(duration.getValue());
+                        selectedStudy.setSubjectId(selectedSubject == null ? null : selectedSubject.getId());
+                    }
                 }
 
                 Intent intent = new Intent();

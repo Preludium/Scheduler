@@ -87,4 +87,5 @@
     <string name="title_activity_select_tasks">SelectTasksActivity</string>
     <string name="title_activity_target">TargetActivity</string>
     <string name="title_activity_measure">MeasureActivity</string>
+    <string name="title_activity_submit_arrangement">SubmitArrangementActivity</string>
 </resources>

@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.UUID;
 
 import pl.jansmi.scheduler.App;
+import pl.jansmi.scheduler.SubmitArrangementActivity;
+import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.dbstructure.entities.Task;
@@ -50,7 +52,7 @@ public class AddArrangementActivity extends AppCompatActivity {
     TasksFragment tasksFragment;
     StudyFragment studyFragment;
 
-    private int selectedFragment = SELECT_MEAL_RC;
+    private int selectedFragment;
 
     private BottomNavigationView navView;
 
@@ -78,19 +80,26 @@ public class AddArrangementActivity extends AppCompatActivity {
             this.arrangementId = UUID.randomUUID().toString(); // generate UUID
         }
 
-        // init navView
+        // init starting fragment and navView
+        selectedFragment = SELECT_MEAL_RC;
         navView = findViewById(R.id.add_arrangement_activity_nav_view);
+        navView.setSelectedItemId(R.id.navigation_meals);
+
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.navigation_meals:
+                        selectedFragment = SELECT_MEAL_RC;
                         return loadFragment(mealsFragment);
                     case R.id.navigation_training:
+                        selectedFragment = SELECT_TRAINING_RC;
                         return loadFragment(trainingFragment);
                     case R.id.navigation_tasks:
+                        selectedFragment = SELECT_TASK_RC;
                         return loadFragment(tasksFragment);
                     case R.id.navigation_studying:
+                        selectedFragment = SELECT_STUDYING_RC;
                         return loadFragment(studyFragment);
                 }
                 return false;
@@ -107,11 +116,9 @@ public class AddArrangementActivity extends AppCompatActivity {
                 switch (navView.getSelectedItemId()) {
                     case R.id.navigation_meals:
                         dayNumber = mealsFragment.getCurrentDay();
-
                         intent = new Intent(getApplicationContext(), SelectMealsActivity.class);
                         intent.putExtra("meals", (Serializable) selectedMeals.get(dayNumber));
                         startActivityForResult(intent, SELECT_MEAL_RC);
-
                         break;
 
                     case R.id.navigation_training:
@@ -138,6 +145,18 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         // TODO: implement listener (insert or update, depending on arrangementId!)
         FloatingActionButton saveFab = findViewById(R.id.add_arrangement_activity_saveFab);
+        saveFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SubmitArrangementActivity.class);
+                intent.putExtra("arrangementId", arrangementId);
+                intent.putExtra("meals", (Serializable) selectedMeals);
+                intent.putExtra("practices", (Serializable) selectedPractices);
+                intent.putExtra("tasks", (Serializable) selectedTasks);
+                intent.putExtra("studies", (Serializable) selectedStudies);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -170,6 +189,8 @@ public class AddArrangementActivity extends AppCompatActivity {
                 loadFragment(studyFragment);
                 break;
         }
+
+
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -190,11 +211,9 @@ public class AddArrangementActivity extends AppCompatActivity {
         if (requestCode == SELECT_MEAL_RC && resultCode == RESULT_OK) {
             List<String> mealsId = data.getExtras().getStringArrayList("meals");
             this.selectedMeals.set(mealsFragment.getCurrentDay(), mealsId);
-            this.selectedFragment = SELECT_MEAL_RC;
         }
 
         else if (requestCode == SELECT_TRAINING_RC && resultCode == RESULT_OK) {
-            this.selectedFragment = SELECT_TRAINING_RC;
             Practice practice = (Practice) data.getSerializableExtra("practice");
 
             int day = trainingFragment.getCurrentDay();
@@ -213,7 +232,6 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_TASK_RC && resultCode == RESULT_OK) {
-            this.selectedFragment = SELECT_TASK_RC;
             Task task = (Task) data.getSerializableExtra("task");
 
             int day = tasksFragment.getCurrentDay();
@@ -232,7 +250,6 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SELECT_STUDYING_RC && resultCode == RESULT_OK) {
-            this.selectedFragment = SELECT_STUDYING_RC;
             Study study = (Study) data.getSerializableExtra("study");
 
             int day = studyFragment.getCurrentDay();

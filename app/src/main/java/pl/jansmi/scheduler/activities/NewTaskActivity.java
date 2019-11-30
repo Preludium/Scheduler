@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
@@ -51,15 +52,25 @@ public class NewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (selectedTask == null) { // insert
-                    if(title.getText() == null)
-                        title.setText("");
-                    if(description.getText() == null)
-                        description.setText("");
-                    selectedTask = new Task(title.getText().toString(), 0, "0",description.getText().toString(), duration.getValue());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter task title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedTask = new Task(title.getText().toString(), 0, "0",
+                                description.getText().toString(), duration.getValue());
+                    }
+
                 } else { // update
-                    selectedTask.setName(title.getText().toString());
-                    selectedTask.setDurationMinutes(duration.getValue());
-                    selectedTask.setDescription(description.getText().toString());
+                    if (title.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Enter training title", Toast.LENGTH_LONG).show();
+                        return;
+
+                    } else {
+                        selectedTask.setName(title.getText().toString());
+                        selectedTask.setDescription(description.getText().toString());
+                        selectedTask.setDurationMinutes(duration.getValue());
+                    }
                 }
 
                 Intent intent = new Intent();
