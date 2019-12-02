@@ -16,6 +16,9 @@ public interface ArrangementDao {
     @Query("SELECT * FROM Arrangements WHERE userId = :userId")
     List<Arrangement> getByUserId(String userId);
 
+    @Query("SELECT * FROM Arrangements WHERE id = :arrangementId")
+    Arrangement getById(String arrangementId);
+
     @Insert
     void insert(Arrangement arrangement);
 

@@ -5,10 +5,12 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(tableName = "Tags")
-public class Tag {
+public class Tag implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     @PrimaryKey
     @NonNull

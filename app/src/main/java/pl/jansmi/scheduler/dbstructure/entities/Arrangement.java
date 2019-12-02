@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +17,8 @@ import static androidx.room.ForeignKey.CASCADE;
                                   parentColumns = "id",
                                   childColumns = "userId",
                                   onDelete = CASCADE))
-public class Arrangement {
+public class Arrangement implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     @PrimaryKey
     @NonNull
@@ -36,10 +38,10 @@ public class Arrangement {
     }
 
     @Ignore
-    public Arrangement(@NonNull String name, @NonNull Date created, @NonNull String userId) {
+    public Arrangement(@NonNull String userId) {
         this.id = UUID.randomUUID().toString();
-        this.name = name;
-        this.created = created;
+        this.name = null;
+        this.created = null;
         this.userId = userId;
     }
 
