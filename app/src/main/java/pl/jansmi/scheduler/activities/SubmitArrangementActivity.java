@@ -1,4 +1,4 @@
-package pl.jansmi.scheduler;
+package pl.jansmi.scheduler.activities;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
+import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.SubmitArrangementRecyclerViewAdapter;
 
 public class SubmitArrangementActivity extends AppCompatActivity {

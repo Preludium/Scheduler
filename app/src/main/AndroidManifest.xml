@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SubmitArrangementActivity"
+            android:name=".activities.SubmitArrangementActivity"
             android:label="@string/title_activity_submit_arrangement"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

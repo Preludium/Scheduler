@@ -11,20 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import pl.jansmi.scheduler.App;
-import pl.jansmi.scheduler.SubmitArrangementActivity;
-import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
 import pl.jansmi.scheduler.dbstructure.entities.Task;
