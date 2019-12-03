@@ -14,8 +14,8 @@ import pl.jansmi.scheduler.dbstructure.entities.Meal;
 public interface MealDao {
 
     @Query("SELECT * FROM Meals m JOIN Meal_arrangement_join j " +
-            "ON m.id = j.mealId WHERE j.arrangementId = :arrangementId")
-    List<Meal> getByArrangementId(String arrangementId);
+            "ON m.id = j.mealId WHERE j.arrangementId = :arrangementId AND dayNumber = :day")
+    List<Meal> getByArrangementId(String arrangementId, int day);
 
     @Query("SELECT * FROM Meals WHERE categoryId = :categoryId")
     List<Meal> getByCategoryId(String categoryId);

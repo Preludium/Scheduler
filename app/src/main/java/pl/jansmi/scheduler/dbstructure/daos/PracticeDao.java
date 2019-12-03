@@ -13,8 +13,8 @@ import pl.jansmi.scheduler.dbstructure.entities.Practice;
 @Dao
 public interface PracticeDao {
 
-    @Query("SELECT * FROM Practices WHERE arrangementId = :arrangementId")
-    List<Practice> getByArrangementId(String arrangementId);
+    @Query("SELECT * FROM Practices WHERE arrangementId = :arrangementId AND dayNumber = :day")
+    List<Practice> getByArrangementId(String arrangementId, int day);
 
     @Insert
     void insert(Practice practice);
@@ -24,4 +24,7 @@ public interface PracticeDao {
 
     @Delete
     void delete(Practice practice);
+
+    @Query("DELETE FROM Practices WHERE arrangementId = :arrangementId")
+    void deleteByArrangementId(String arrangementId);
 }

@@ -13,8 +13,8 @@ import pl.jansmi.scheduler.dbstructure.entities.Task;
 @Dao
 public interface TaskDao {
 
-    @Query("SELECT * FROM Tasks WHERE arrangementId = :arrangementId")
-    List<Task> getByArrangementId(String arrangementId);
+    @Query("SELECT * FROM Tasks WHERE arrangementId = :arrangementId AND weekday = :day")
+    List<Task> getByArrangementId(String arrangementId, int day);
 
     @Insert
     void insert(Task task);
@@ -24,4 +24,7 @@ public interface TaskDao {
 
     @Delete
     void delete(Task task);
+
+    @Query("DELETE FROM Tasks WHERE arrangementId = :arrangementId")
+    void deleteByArrangementId(String arrangementId);
 }

@@ -12,16 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
 
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.SubmitArrangementRecyclerViewAdapter;
+import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Tag;
 
 public class SubmitArrangementActivity extends AppCompatActivity {
 
+    private EditText title;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
@@ -33,8 +37,14 @@ public class SubmitArrangementActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.title = findViewById(R.id.submit_arrangement_content_title);
+
+        Arrangement arrangement = (Arrangement) getIntent().getSerializableExtra("arrangement");
+        if (arrangement.getName() != null)
+            this.title.setText(arrangement.getName());
+
         recycler = findViewById(R.id.submit_arrangement_content_recycler);
-        adapter = new SubmitArrangementRecyclerViewAdapter(this);
+        adapter = new SubmitArrangementRecyclerViewAdapter(this, arrangement);
         recycler.setAdapter(adapter);
 
         manager = new LinearLayoutManager(this);
@@ -44,8 +54,14 @@ public class SubmitArrangementActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (title.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter arrangement title", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 List<Tag> selectedTags = ((SubmitArrangementRecyclerViewAdapter) adapter).getSelectedTags();
                 Intent intent = new Intent();
+                intent.putExtra("title", title.getText().toString());
                 intent.putExtra("tags", (Serializable) selectedTags);
                 setResult(RESULT_OK, intent);
                 finish();

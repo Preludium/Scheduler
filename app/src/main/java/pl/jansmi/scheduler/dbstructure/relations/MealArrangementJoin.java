@@ -10,7 +10,7 @@ import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "Meal_arrangement_join",
-        primaryKeys = {"mealId", "arrangementId"},
+        primaryKeys = {"mealId", "arrangementId", "dayNumber"},
         foreignKeys = {@ForeignKey(entity = Meal.class,
                                    parentColumns = "id",
                                    childColumns = "mealId",

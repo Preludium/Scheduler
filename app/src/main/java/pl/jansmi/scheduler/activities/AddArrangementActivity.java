@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -22,9 +23,13 @@ import java.util.UUID;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
+import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
+import pl.jansmi.scheduler.dbstructure.entities.Tag;
 import pl.jansmi.scheduler.dbstructure.entities.Task;
+import pl.jansmi.scheduler.dbstructure.relations.MealArrangementJoin;
+import pl.jansmi.scheduler.dbstructure.relations.TagArrangementJoin;
 import pl.jansmi.scheduler.fragments.MealsFragment;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.fragments.StudyFragment;
@@ -75,7 +80,17 @@ public class AddArrangementActivity extends AppCompatActivity {
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
             this.arrangement = App.db.arrangements().getById(arrangementId);
-            // TODO: set activity title to 'update' and fill activity with initial data
+
+            for (int day=0; day<7; ++day) {
+                List<Meal> meals = App.db.meals().getByArrangementId(arrangement.getId(), day);
+                for (Meal m: meals)
+                    selectedMeals.get(day).add(m.getId());
+
+                selectedPractices.set(day, App.db.practices().getByArrangementId(arrangement.getId(), day));
+                selectedTasks.set(day, App.db.tasks().getByArrangementId(arrangement.getId(), day));
+                selectedStudies.set(day, App.db.studies().getByArrangementId(arrangement.getId(), day));
+            }
+
         } else {
             this.arrangement = new Arrangement(App.session.getUserId());
         }
@@ -264,10 +279,46 @@ public class AddArrangementActivity extends AppCompatActivity {
         }
 
         else if (requestCode == SUBMIT_ARRANGEMENT_RC && resultCode == RESULT_OK) {
-            // TODO: insert/update data to db
+            String title = data.getStringExtra("title");
+            List<Tag> selectedTags = (ArrayList<Tag>) data.getSerializableExtra("tags");
+
+            this.arrangement.setCreated(new Date());
+            this.arrangement.setName(title);
+
+            if (arrangementId == null) { // insert
+                App.db.arrangements().insert(arrangement);
+
+            } else { // update
+                App.db.arrangements().update(arrangement);
+
+                App.db.tagArrangementJoin().deleteByArrangementId(arrangement.getId());
+                App.db.mealArrangementJoin().deleteByArrangementId(arrangement.getId());
+                App.db.practices().deleteByArrangementId(arrangement.getId());
+                App.db.tasks().deleteByArrangementId(arrangement.getId());
+                App.db.studies().deleteByArrangementId(arrangement.getId());
+
+            }
+
+            for (Tag t: selectedTags)
+                App.db.tagArrangementJoin().insert(new TagArrangementJoin(t.getId(), arrangement.getId()));
+
+            for (int day=0; day<7; ++day) {
+                for (String s : selectedMeals.get(day))
+                    App.db.mealArrangementJoin().insert(new MealArrangementJoin(s, arrangement.getId(), day));
+
+                for (Practice p : selectedPractices.get(day))
+                    App.db.practices().insert(p);
+
+                for (Task t : selectedTasks.get(day))
+                    App.db.tasks().insert(t);
+
+                for (Study s : selectedStudies.get(day))
+                    App.db.studies().insert(s);
+            }
 
             finish();
         }
 
     }
+
 }

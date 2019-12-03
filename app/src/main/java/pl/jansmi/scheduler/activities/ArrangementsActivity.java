@@ -24,59 +24,15 @@ import java.util.List;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.adapters.ArrangementsRecyclerViewAdapter;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 
 public class ArrangementsActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
-    private RecyclerViewAdapter adapter;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager manager;
     private TextView infoBox;
-
-    private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
-        private List<Arrangement> arrangementList;
-
-        private class ViewHolder extends RecyclerView.ViewHolder {
-            TextView titleTextView, dateTextView;
-
-            ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                titleTextView = findViewById(R.id.main_listitem_title);
-                dateTextView = findViewById(R.id.main_listitem_desc);
-            }
-        }
-
-        public RecyclerViewAdapter() {
-            arrangementList = App.db.arrangements().getByUserId(App.session.getUserId());
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem_main, parent, false);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int index = recycler.getChildLayoutPosition(view);
-                    Intent intent = new Intent(getApplicationContext(), AddArrangementActivity.class);
-                    intent.putExtra("arrangementId", arrangementList.get(index).getId());
-                    startActivity(intent);
-                }
-            });
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            holder.titleTextView.setText(arrangementList.get(position).getName());
-            holder.dateTextView.setText("Created: " + arrangementList.get(position).getCreated().toString());
-        }
-
-        @Override
-        public int getItemCount() {
-            return arrangementList.size();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +42,11 @@ public class ArrangementsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recycler = findViewById(R.id.main_content_recycler);
-        adapter = new RecyclerViewAdapter();
+        adapter = new ArrangementsRecyclerViewAdapter(this);
         recycler.setAdapter(adapter);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
+
+        manager = new LinearLayoutManager(this);
+        recycler.setLayoutManager(manager);
 
         this.infoBox = findViewById(R.id.main_content_info_text);
 

@@ -17,6 +17,7 @@ import java.util.List;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.holders.SelectListItemViewHolder;
+import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Tag;
 
 public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<SelectListItemViewHolder> {
@@ -25,10 +26,18 @@ public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<S
     private List<Tag> tagList;
     private List<Boolean> selectedTags;
 
-    public SubmitArrangementRecyclerViewAdapter(Context context) {
+    public SubmitArrangementRecyclerViewAdapter(Context context, Arrangement arrangement) {
         this.context = context;
         this.tagList = App.db.tags().getAll();
         this.selectedTags = new ArrayList<>(Collections.nCopies(tagList.size(), false));
+
+        List<Tag> arrangementTags = App.db.tags().getByArrangementId(arrangement.getId());
+        for (Tag t: arrangementTags) {
+            for (int i=0; i<tagList.size(); ++i) {
+                if (t.getId().equals(tagList.get(i).getId()))
+                    selectedTags.set(i, true);
+            }
+        }
     }
 
     @NonNull
