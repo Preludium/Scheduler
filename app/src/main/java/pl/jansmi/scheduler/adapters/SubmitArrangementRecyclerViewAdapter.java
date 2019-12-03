@@ -1,14 +1,17 @@
 package pl.jansmi.scheduler.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
@@ -20,12 +23,12 @@ public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<S
 
     private Context context;
     private List<Tag> tagList;
-    private List<Integer> selectedTags;
+    private List<Boolean> selectedTags;
 
     public SubmitArrangementRecyclerViewAdapter(Context context) {
         this.context = context;
         this.tagList = App.db.tags().getAll();
-        this.selectedTags = new ArrayList<>();
+        this.selectedTags = new ArrayList<>(Collections.nCopies(tagList.size(), false));
     }
 
     @NonNull
@@ -42,13 +45,12 @@ public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<S
 
         holder.title.setText(tag.getName());
 
+        holder.checkBox.setChecked(selectedTags.get(position));
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.checkBox.isChecked())
-                    selectedTags.add(position);
-                else
-                    selectedTags.remove(new Integer(position));
+                selectedTags.set(position, !selectedTags.get(position));
+                notifyItemChanged(position);
             }
         });
     }
@@ -56,5 +58,16 @@ public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<S
     @Override
     public int getItemCount() {
         return tagList.size();
+    }
+
+    public List<Tag> getSelectedTags() {
+        List<Tag> result = new ArrayList<>();
+
+        for (int i=0; i<tagList.size(); ++i) {
+            if (selectedTags.get(i))
+                result.add(tagList.get(i));
+        }
+
+        return result;
     }
 }

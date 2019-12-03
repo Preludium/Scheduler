@@ -50,7 +50,8 @@ public class SelectMealsFragment extends Fragment {
     }
 
     public Meal getSelectedMeal() {
-        selectedMeal = ((SelectMealsRecyclerViewAdapter) adapter).getSelectedMeal();
+        if (adapter != null)
+            selectedMeal = ((SelectMealsRecyclerViewAdapter) adapter).getSelectedMeal();
         return selectedMeal;
     }
 

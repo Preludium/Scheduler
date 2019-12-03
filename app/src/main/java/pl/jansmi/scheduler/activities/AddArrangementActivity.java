@@ -11,19 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import pl.jansmi.scheduler.App;
-import pl.jansmi.scheduler.SubmitArrangementActivity;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Practice;
 import pl.jansmi.scheduler.dbstructure.entities.Study;
@@ -40,8 +37,10 @@ public class AddArrangementActivity extends AppCompatActivity {
     private static final int SELECT_TRAINING_RC = 2;
     private static final int SELECT_TASK_RC = 3;
     private static final int SELECT_STUDYING_RC = 4;
+    private static final int SUBMIT_ARRANGEMENT_RC = 5;
 
     private String arrangementId; // to (potentially) update
+    private Arrangement arrangement;
     private List<List<String>> selectedMeals; // [weekday: 0-7][category] = mealId
     private List<List<Study>> selectedStudies;
     private List<List<Practice>> selectedPractices;
@@ -75,9 +74,10 @@ public class AddArrangementActivity extends AppCompatActivity {
 
         this.arrangementId = getIntent().getExtras().getString("arrangementId");
         if (arrangementId != null) { // update
+            this.arrangement = App.db.arrangements().getById(arrangementId);
             // TODO: set activity title to 'update' and fill activity with initial data
         } else {
-            this.arrangementId = UUID.randomUUID().toString(); // generate UUID
+            this.arrangement = new Arrangement(App.session.getUserId());
         }
 
         // init starting fragment and navView
@@ -143,18 +143,13 @@ public class AddArrangementActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: implement listener (insert or update, depending on arrangementId!)
         FloatingActionButton saveFab = findViewById(R.id.add_arrangement_activity_saveFab);
         saveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SubmitArrangementActivity.class);
-                intent.putExtra("arrangementId", arrangementId);
-                intent.putExtra("meals", (Serializable) selectedMeals);
-                intent.putExtra("practices", (Serializable) selectedPractices);
-                intent.putExtra("tasks", (Serializable) selectedTasks);
-                intent.putExtra("studies", (Serializable) selectedStudies);
-                startActivity(intent);
+                intent.putExtra("arrangement", arrangement);
+                startActivityForResult(intent, SUBMIT_ARRANGEMENT_RC);
             }
         });
 
@@ -218,7 +213,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
             int day = trainingFragment.getCurrentDay();
             practice.setDayNumber(day);
-            practice.setArrangementId(arrangementId);
+            practice.setArrangementId(arrangement.getId());
 
             // if fetched study already exists in selectedStudies then update
             for (int i=0; i<selectedPractices.get(day).size(); ++i) {
@@ -236,7 +231,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
             int day = tasksFragment.getCurrentDay();
             task.setWeekday(day);
-            task.setArrangementId(arrangementId);
+            task.setArrangementId(arrangement.getId());
 
             // if fetched study already exists in selectedStudies then update
             for (int i=0; i<selectedTasks.get(day).size(); ++i) {
@@ -254,7 +249,7 @@ public class AddArrangementActivity extends AppCompatActivity {
 
             int day = studyFragment.getCurrentDay();
             study.setDayNumber(day);
-            study.setArrangementId(arrangementId);
+            study.setArrangementId(arrangement.getId());
 
             // if fetched study already exists in selectedStudies then update
             for (int i=0; i<selectedStudies.get(day).size(); ++i) {
@@ -266,6 +261,12 @@ public class AddArrangementActivity extends AppCompatActivity {
             
             // else insert new value
             selectedStudies.get(day).add(study);
+        }
+
+        else if (requestCode == SUBMIT_ARRANGEMENT_RC && resultCode == RESULT_OK) {
+            // TODO: insert/update data to db
+
+            finish();
         }
 
     }
