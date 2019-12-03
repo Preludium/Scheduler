@@ -12,7 +12,7 @@
         android:id="@+id/target_content_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/listitem_main" />
+        tools:listitem="@layout/listitem_target_switch" />
 
     <TextView
         android:id="@+id/target_content_info_text"
