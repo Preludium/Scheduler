@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import static androidx.room.ForeignKey.CASCADE;
                                    parentColumns = "id",
                                    childColumns = "userId",
                                    onDelete = CASCADE)})
-public class Target {
+public class Target implements Serializable {
 
     @PrimaryKey
     @NonNull

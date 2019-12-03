@@ -58,8 +58,6 @@ public class SelectUsersActivity extends AppCompatActivity {
         manager = new LinearLayoutManager(this);
         recycler.setLayoutManager(manager);
         List<User> lista = new ArrayList<>(App.db.users().getAll());    //nie zaznacza checkboxow userow, czaruje sobie jakis nowych z nowymi ID kurwa
-//        lista.add(App.db.users().getByName("mikus"));
-//        lista.add(App.db.users().getByName("szymonek"));
         adapter = new SelectUsersRecyclerViewAdapter(this, lista);
         recycler.setAdapter(adapter);
     }
