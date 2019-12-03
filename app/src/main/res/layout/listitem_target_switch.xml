@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/target_switch_listitem_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/target_switch_listitem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_toEndOf="@id/target_switch_listitem_image"/>
+
+    <TextView
+        android:id="@+id/target_switch_listitem_deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Deadline: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:layout_toEndOf="@id/target_switch_listitem_image"
+        android:layout_alignBottom="@id/target_switch_listitem_image" />
+
+    <TextView
+        android:id="@+id/target_switch_listitem_deadline_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="99.99.9999"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:layout_toEndOf="@id/target_switch_listitem_deadline"
+        android:layout_alignBottom="@id/target_switch_listitem_image" />
+
+    <Switch
+        android:id="@+id/target_switch_listitem_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Achieved      "
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

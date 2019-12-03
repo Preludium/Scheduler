@@ -16,6 +16,9 @@ public interface TargetDao {
     @Query("SELECT * FROM Targets WHERE userId = :userId")
     List<Target> getByUserId(String userId);
 
+    @Query("SELECT * FROM Targets")
+    List<Target> getAll();
+
     @Insert
     void insert(Target target);
 
@@ -24,4 +27,5 @@ public interface TargetDao {
 
     @Delete
     void delete(Target target);
+
 }
