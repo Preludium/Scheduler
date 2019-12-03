@@ -38,9 +38,10 @@ public class Target implements Serializable {
     }
 
     @Ignore
-    public Target(@NonNull String name, @NonNull String userId) {
+    public Target(@NonNull String name, Date deadline, @NonNull String userId) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
+        this.deadline = deadline;
         this.achieved = false;
         this.userId = userId;
     }

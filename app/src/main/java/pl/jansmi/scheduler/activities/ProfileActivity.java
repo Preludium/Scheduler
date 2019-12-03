@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(user.getBirthday() != null) {
             date = user.getBirthday();
             @SuppressLint("DefaultLocale")
-            String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth(), date.getYear());
+            String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth() + 1, date.getYear());
             birthday.setText(dateHandler);
         }
         weight.setText(String.valueOf(user.getWeight()));
@@ -122,9 +122,8 @@ public class ProfileActivity extends AppCompatActivity {
         birthdayDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
                 date = new Date(year, month, day);
-                birthday.setText(String.format("%s/%s/%s", day, month, year));
+                birthday.setText(String.format("%s/%s/%s", day, month + 1, year));
             }
         };
 
@@ -193,9 +192,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void targets() {
+        startActivity(new Intent(getApplicationContext(), TargetActivity.class));
     }
 
     private void measures() {
+        startActivity(new Intent(getApplicationContext(), MeasureActivity.class));
     }
 
     private void invitations() {
