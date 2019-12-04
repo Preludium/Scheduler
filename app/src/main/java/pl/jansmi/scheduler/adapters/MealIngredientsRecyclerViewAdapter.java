@@ -22,17 +22,13 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
 
     private Context context;
     private List<Ingredient> ingredients;
-    private List<Integer> counts;
+    private HashMap<String, Integer> counts;
+//    private List<Integer> counts;
 
     public MealIngredientsRecyclerViewAdapter(Context context, HashMap<String, Integer> selectedIngredients) {
         this.context = context;
         this.ingredients = App.db.ingredients().getAll();
-        // TODO: sort
-        this.counts = new ArrayList<>(Collections.nCopies(ingredients.size(), 0));
-
-        if (selectedIngredients != null)
-            for (int i = 0; i < ingredients.size(); ++i)
-                counts.set(i, selectedIngredients.getOrDefault(ingredients.get(i).getId(), 0));
+        this.counts = selectedIngredients;
     }
 
     @NonNull
@@ -45,23 +41,32 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
 
     @Override
     public void onBindViewHolder(@NonNull IngredientListItemViewHolder holder, int position) {
-        holder.count.setText(String.valueOf(counts.get(position)));
-        holder.title.setText(ingredients.get(position).getName());
-        holder.desc.setText(ingredients.get(position).getDesc());
+        Ingredient ingredient = ingredients.get(position);
+
+        Integer c = counts.get(ingredient.getId());
+        holder.count.setText(String.valueOf(c != null ? c : 0));
+        holder.title.setText(ingredient.getName());
+        holder.desc.setText(ingredient.getDesc());
 
         holder.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counts.set(position, counts.get(position) + 1);
-                holder.count.setText(String.valueOf(counts.get(position)));
+                if (counts.containsKey(ingredient.getId()))
+                    counts.replace(ingredient.getId(), counts.get(ingredient.getId()) + 1);
+                else
+                    counts.put(ingredient.getId(), 1);
+
+                holder.count.setText(String.valueOf(counts.get(ingredient.getId())));
             }
         });
 
         holder.delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counts.set(position, cutZero(counts.get(position) - 1));
-                holder.count.setText(String.valueOf(counts.get(position)));
+                if (counts.containsKey(ingredient.getId()))
+                    counts.replace(ingredient.getId(), cutZero(counts.get(ingredient.getId()) - 1));
+
+                holder.count.setText(String.valueOf(counts.get(ingredient.getId())));
             }
         });
 
@@ -77,13 +82,12 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
     }
 
     public HashMap<String, Integer> getSelectedIngredients() {
-        HashMap<String, Integer> resultMap = new HashMap<>();
-
-        for (int i = 0; i < ingredients.size(); ++i) {
-            if (counts.get(i) > 0)
-                resultMap.put(ingredients.get(i).getId(), counts.get(i));
-        }
-
-        return resultMap;
+        return counts;
     }
+
+    public void updateQuery(String newText) {
+        this.ingredients = App.db.ingredients().getAllLike(newText);
+        notifyDataSetChanged();
+    }
+
 }

@@ -147,7 +147,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddArrangementActivity"
-            android:label="@string/title_activity_add_arrangement" />
+            android:label="@string/title_activity_add_arrangement"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.ArrangementsActivity"
             android:label="@string/title_activity_arrangements_activity"

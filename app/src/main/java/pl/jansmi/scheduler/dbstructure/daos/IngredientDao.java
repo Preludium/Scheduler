@@ -16,6 +16,9 @@ public interface IngredientDao {
     @Query("SELECT * FROM Ingredients")
     List<Ingredient> getAll();
 
+    @Query("SELECT * FROM Ingredients WHERE name LIKE '%' || :phrase || '%'")
+    List<Ingredient> getAllLike(String phrase);
+
     @Query("SELECT * FROM Ingredients WHERE id = :ingredientId")
     Ingredient getById(String ingredientId);
 
