@@ -14,7 +14,7 @@
         <activity
             android:name=".activities.ReceivedInvitationDecisionActivity"
             android:label="@string/title_activity_received_invitation_decision"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.NewMeasureActivity"
             android:label="@string/title_activity_new_measure"
