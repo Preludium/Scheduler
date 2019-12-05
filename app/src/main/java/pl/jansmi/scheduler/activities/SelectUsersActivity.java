@@ -1,5 +1,6 @@
 package pl.jansmi.scheduler.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
@@ -22,7 +24,7 @@ import pl.jansmi.scheduler.dbstructure.entities.User;
 
 public class SelectUsersActivity extends AppCompatActivity {
 
-    private List<User> selectedUsers;
+    private User selectedUser;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
@@ -35,18 +37,18 @@ public class SelectUsersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         this.recycler = findViewById(R.id.select_users_content_recycler);
-        this.selectedUsers = (List<User>) getIntent().getSerializableExtra("users");
-
-        if(selectedUsers != null) {
-
-        }
+        this.selectedUser = (User) getIntent().getSerializableExtra("user");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                User user = ((SelectUsersRecyclerViewAdapter)
+                        Objects.requireNonNull(recycler.getAdapter())).getSelectedUser();
+                Intent intent = new Intent(getApplicationContext(), NewInvitationActivity.class);
+                intent.putExtra("user", user);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -57,8 +59,7 @@ public class SelectUsersActivity extends AppCompatActivity {
 
         manager = new LinearLayoutManager(this);
         recycler.setLayoutManager(manager);
-        List<User> lista = new ArrayList<>(App.db.users().getAll());    //nie zaznacza checkboxow userow, czaruje sobie jakis nowych z nowymi ID kurwa
-        adapter = new SelectUsersRecyclerViewAdapter(this, lista);
+        adapter = new SelectUsersRecyclerViewAdapter(this, selectedUser);
         recycler.setAdapter(adapter);
     }
 

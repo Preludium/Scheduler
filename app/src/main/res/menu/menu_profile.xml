@@ -9,19 +9,19 @@
         android:id="@+id/action_invitations"
         android:orderInCategory="1"
         android:title="Invitations"
-        android:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_measures"
         android:orderInCategory="2"
         android:title="Measures"
-        android:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_targets"
         android:orderInCategory="3"
         android:title="Targets"
-        android:showAsAction="never"/>
+        app:showAsAction="never" />
 
 
 </menu>

@@ -22,6 +22,9 @@ public interface UserDao {
     @Query("SELECT * FROM Users")
     List<User> getAll();
 
+    @Query("SELECT * FROM Users WHERE id != :id")
+    List<User> getAllExceptOne(String id);
+
     @Insert
     void insert(User user);
 

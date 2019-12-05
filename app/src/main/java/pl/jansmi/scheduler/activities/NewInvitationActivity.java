@@ -12,19 +12,23 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.util.List;
-
+import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Invitation;
+import pl.jansmi.scheduler.dbstructure.entities.Task;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 
 public class NewInvitationActivity extends AppCompatActivity {
 
     private final int SELECT_USERS_RC = 1;
     private final int SELECT_TASK_RC = 2;
-    private List<User> selectedUsers;
-    private EditText users;
-    private EditText tasks;
+    private User selectedUser;
+    private Task selectedTask;
+    private EditText user;
+    private EditText task;
+    private Invitation selectedInvitation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +37,55 @@ public class NewInvitationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        users = findViewById(R.id.new_invitation_content_select_user);
-        tasks = findViewById(R.id.new_invitation_content_select_task);
+        user = findViewById(R.id.new_invitation_content_select_user);
+        task = findViewById(R.id.new_invitation_content_select_task);
+
+        selectedUser = null;
+        selectedTask = null;
+
+        selectedInvitation = (Invitation) getIntent().getSerializableExtra("invite");
+
+        if (selectedInvitation != null) {
+            selectedUser = App.db.users().getById(selectedInvitation.getToId());
+            user.setText(selectedUser.getName());
+            selectedTask = App.db.tasks().getTaskById(selectedTask.getId());
+            task.setText(selectedTask.getName());
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                if (selectedUser == null)
+                    Toast.makeText(getApplicationContext(), "Choose User", Toast.LENGTH_LONG).show();
+                else if (selectedTask == null)
+                    Toast.makeText(getApplicationContext(), "Choose Task", Toast.LENGTH_LONG).show();
+                else {
+                    if (selectedInvitation != null) { // Update
+                        selectedInvitation.setToId(selectedUser.getId());
+                        selectedInvitation.setTaskId(selectedTask.getId());
+                        selectedInvitation.setState(Invitation.STATE_SENT);
+                        App.db.invitations().update(selectedInvitation);
+                    } else { // Insert
+                        selectedInvitation = new Invitation(App.session.getUserId(), selectedUser.getId(), selectedTask.getId());
+                        App.db.invitations().insert(selectedInvitation);
+                    }
+                    finish();
+                }
             }
         });
     }
 
     public void onSelectTask(View view) {
+        Intent intent = new Intent(getApplicationContext(), SelectTaskActivity.class);
+        intent.putExtra("task", selectedTask);
+        startActivityForResult(intent, SELECT_TASK_RC);
     }
 
     public void onSelectUsers(View view) {
         Intent intent = new Intent(getApplicationContext(), SelectUsersActivity.class);
-        intent.putExtra("users", (User) null);
+        intent.putExtra("user", selectedUser);
         startActivityForResult(intent, SELECT_USERS_RC);
     }
 
@@ -62,16 +96,16 @@ public class NewInvitationActivity extends AppCompatActivity {
         if(RESULT_OK == resultCode) {
             switch (requestCode) {
                 case SELECT_TASK_RC:
+                    selectedTask = (Task) data.getSerializableExtra("task");
+                    if(selectedTask != null) {
+                        task.setText(selectedTask.getName());
+                    }
                     break;
 
                 case SELECT_USERS_RC:
-                    selectedUsers = (List<User>) data.getSerializableExtra("users");
-                    if(selectedUsers != null) {
-                        String output = "";
-                        for (User user : selectedUsers) {
-                            output.concat(user.getName()).concat("\n");
-                        }
-                        users.setText(output);
+                    selectedUser = (User) data.getSerializableExtra("user");
+                    if(selectedUser != null) {
+                        user.setText(selectedUser.getName());
                     }
                     break;
             }

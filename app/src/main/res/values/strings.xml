@@ -89,4 +89,10 @@
     <string name="title_activity_measure">MeasureActivity</string>
     <string name="title_activity_submit_arrangement">SubmitArrangementActivity</string>
     <string name="title_activity_new_target">NewTargetActivity</string>
+    <string name="title_activity_new_measure">NewMeasureActivity</string>
+    <string name="no_measures_found_click_the_button_to_add_one">No measures found. Click the button to add one.</string>
+    <string name="received">Received</string>
+    <string name="sent">Sent</string>
+    <string name="title_activity_received_invitation_decision">ReceivedInvitationDecisionActivity
+    </string>
 </resources>

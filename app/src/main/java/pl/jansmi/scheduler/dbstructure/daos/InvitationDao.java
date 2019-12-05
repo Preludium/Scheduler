@@ -16,6 +16,12 @@ public interface InvitationDao {
     @Query("SELECT * FROM Invitations WHERE fromId = :id OR toId = :id")
     List<Invitation> getByUserId(String id);
 
+    @Query("SELECT * FROM Invitations WHERE toId = :id")
+    List<Invitation> getReceivedByUserId(String id);
+
+    @Query("SELECT * FROM Invitations WHERE fromId = :id")
+    List<Invitation> getSentByUserId(String id);
+
     @Insert
     void insert(Invitation invitation);
 

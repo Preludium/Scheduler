@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ import static androidx.room.ForeignKey.CASCADE;
                                    parentColumns = "id",
                                    childColumns = "toId",
                                    onDelete = CASCADE)})
-public class Invitation {
+public class Invitation implements Serializable {
 
     @Ignore
     public static final byte STATE_SENT = 0;
@@ -28,6 +29,7 @@ public class Invitation {
     public static final byte STATE_ACCEPTED = 1;
     @Ignore
     public static final byte STATE_REFUSED = 2;
+
 
     @NonNull
     @PrimaryKey
@@ -54,7 +56,7 @@ public class Invitation {
         this.fromId = fromId;
         this.toId = toId;
         this.taskId = taskId;
-        this.state = STATE_SENT;
+        this.state =STATE_SENT;
     }
 
     @NonNull
@@ -67,14 +69,26 @@ public class Invitation {
         return fromId;
     }
 
+    public void setFromId(@NonNull String fromId) {
+        this.fromId = fromId;
+    }
+
     @NonNull
     public String getToId() {
         return toId;
     }
 
+    public void setToId(@NonNull String toId) {
+        this.toId = toId;
+    }
+
     @NonNull
     public String getTaskId() {
         return taskId;
+    }
+
+    public void setTaskId(@NonNull String taskId) {
+        this.taskId = taskId;
     }
 
     public byte getState() {

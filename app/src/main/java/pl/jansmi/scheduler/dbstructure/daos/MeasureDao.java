@@ -16,6 +16,9 @@ public interface MeasureDao {
     @Query("SELECT * FROM Measures WHERE userId = :userId")
     List<Measure> getByUserId(String userId);
 
+    @Query("SELECT * FROM Measures")
+    List<Measure> getAll();
+
     @Insert
     void insert(Measure measure);
 
@@ -24,4 +27,5 @@ public interface MeasureDao {
 
     @Delete
     void delete(Measure measure);
+
 }
