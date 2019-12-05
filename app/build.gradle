@@ -55,5 +55,8 @@ dependencies {
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
+    // Search box
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
 
 }
