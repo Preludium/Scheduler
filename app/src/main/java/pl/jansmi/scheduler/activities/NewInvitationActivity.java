@@ -14,8 +14,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
+import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 import pl.jansmi.scheduler.dbstructure.entities.Invitation;
 import pl.jansmi.scheduler.dbstructure.entities.Task;
 import pl.jansmi.scheduler.dbstructure.entities.User;
@@ -48,7 +51,7 @@ public class NewInvitationActivity extends AppCompatActivity {
         if (selectedInvitation != null) {
             selectedUser = App.db.users().getById(selectedInvitation.getToId());
             user.setText(selectedUser.getName());
-            selectedTask = App.db.tasks().getTaskById(selectedTask.getId());
+            selectedTask = App.db.tasks().getTaskById(selectedInvitation.getTaskId());
             task.setText(selectedTask.getName());
         }
 
@@ -78,12 +81,28 @@ public class NewInvitationActivity extends AppCompatActivity {
     }
 
     public void onSelectTask(View view) {
+        int i = 0;
+        List<Arrangement> arrs = App.db.arrangements().getByUserId(App.session.getUserId());
+        for (Arrangement arr : arrs) {
+            if (App.db.tasks().getByArrangementId(arr.getId()) != null) {
+                i++;
+                break;
+            }
+        }
+        if (i == 0) {
+            Toast.makeText(getApplicationContext(), "You have no tasks. Add one to make invite.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent intent = new Intent(getApplicationContext(), SelectTaskActivity.class);
         intent.putExtra("task", selectedTask);
         startActivityForResult(intent, SELECT_TASK_RC);
     }
 
     public void onSelectUsers(View view) {
+        if (App.db.users().getAll().size() == 1) {
+            Toast.makeText(getApplicationContext(), "There are no other users to send invite.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent intent = new Intent(getApplicationContext(), SelectUsersActivity.class);
         intent.putExtra("user", selectedUser);
         startActivityForResult(intent, SELECT_USERS_RC);

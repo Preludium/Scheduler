@@ -9,6 +9,7 @@
     tools:context=".activities.InvitationsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -29,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/invitations_activity_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/appbar">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"

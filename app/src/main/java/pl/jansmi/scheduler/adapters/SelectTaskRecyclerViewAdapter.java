@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
@@ -25,16 +26,10 @@ public class SelectTaskRecyclerViewAdapter extends RecyclerView.Adapter<SelectLi
     public SelectTaskRecyclerViewAdapter(Context context, Task selectedTask) {
         this.context = context;
         this.selectedTask = selectedTask;
+        allTasks = new ArrayList<>();
         List<Arrangement> arrs = App.db.arrangements().getByUserId(App.session.getUserId());
-        for (Arrangement arr : arrs) {
-            List<Task> tasks = App.db.tasks().getByArrangementId(arr.getId());
-            if(tasks != null) {
-                for (Task task : tasks) {
-                    if (task != null)
-                        allTasks.add(task);
-                }
-            }
-        }
+        for (Arrangement arr : arrs)
+            allTasks.addAll(App.db.tasks().getByArrangementId(arr.getId()));
         if(this.selectedTask == null && allTasks != null)
             this.selectedTask = allTasks.get(0);
     }

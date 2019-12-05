@@ -1,6 +1,7 @@
 package pl.jansmi.scheduler.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import pl.jansmi.scheduler.activities.NewInvitationActivity;
 import pl.jansmi.scheduler.adapters.holders.MainWithoutBinListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Invitation;
 import pl.jansmi.scheduler.dbstructure.entities.Task;
+import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class SentInvitationsRecyclerViewAdapter extends RecyclerView.Adapter<MainWithoutBinListItemViewHolder> {
 
@@ -64,10 +66,31 @@ public class SentInvitationsRecyclerViewAdapter extends RecyclerView.Adapter<Mai
                 context.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteItem(position);
+                        App.db.invitations().delete(inv);
+                    }
+                });
+                return true;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return invitations.size();
+    }
+
+    private void deleteItem(int position) {
+        invitations.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, invitations.size());
+        notifyDataSetChanged();
     }
 }

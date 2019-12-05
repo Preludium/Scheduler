@@ -30,6 +30,9 @@ public class ReceivedInvitationDecisionActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        title = findViewById(R.id.received_invitation_content_title);
+        description = findViewById(R.id.received_invitation_content_description);
+
         selectedInvitation = (Invitation) getIntent().getSerializableExtra("invite");
 
         task = App.db.tasks().getTaskById(selectedInvitation.getTaskId());
