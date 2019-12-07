@@ -90,7 +90,7 @@ public class AddArrangementActivity extends AppCompatActivity {
                     selectedMeals.get(day).add(m.getId());
 
                 selectedPractices.set(day, App.db.practices().getByArrangementId(arrangement.getId(), day));
-                selectedTasks.set(day, App.db.tasks().getByArrangementId(arrangement.getId(), day));
+                selectedTasks.set(day, App.db.tasks().getByArrangementIdAndDay(arrangement.getId(), day));
                 selectedStudies.set(day, App.db.studies().getByArrangementId(arrangement.getId(), day));
             }
 

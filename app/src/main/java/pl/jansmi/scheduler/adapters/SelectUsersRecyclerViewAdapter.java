@@ -20,13 +20,14 @@ public class SelectUsersRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
 
     private Context context;
     private List<User> allUsers;
-    private List<User> selectedUsers;
+    private User selectedUser;
 
-    public SelectUsersRecyclerViewAdapter(Context context, List<User> selectedUsers) {
+    public SelectUsersRecyclerViewAdapter(Context context, User selectedUser) {
         this.context = context;
-        this.selectedUsers = selectedUsers;        // przepisuje userow ale ...
-        this.allUsers = App.db.users().getAll();
-        this.allUsers.remove(App.db.users().getById(App.session.getUserId()));  //nie usuwa aktualnie zalogowanego usera
+        this.selectedUser = selectedUser;
+        this.allUsers = App.db.users().getAllExceptOne(App.session.getUserId());
+        if(this.selectedUser == null)
+            this.selectedUser = allUsers.get(0);
     }
 
     @NonNull
@@ -44,7 +45,7 @@ public class SelectUsersRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         holder.desc.setText("");
 
         holder.checkBox.setClickable(false);
-        if(selectedUsers != null && selectedUsers.contains(user))       // nie zaznacza userow ktorzy przyszli z activity
+        if(selectedUser != null && selectedUser == user)
             holder.checkBox.setChecked(true);
         else
             holder.checkBox.setChecked(false);
@@ -52,10 +53,8 @@ public class SelectUsersRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.checkBox.isChecked())     // wpierdala duplikaty userow z innymi ID
-                    selectedUsers.remove(user);
-                else
-                    selectedUsers.add(user);
+                if(!holder.checkBox.isChecked())
+                    selectedUser = user;
                 notifyDataSetChanged();
             }
         });
@@ -66,7 +65,7 @@ public class SelectUsersRecyclerViewAdapter extends RecyclerView.Adapter<SelectL
         return allUsers.size();
     }
 
-    public List<User> getSelectedUsers() {
-        return selectedUsers;
+    public User getSelectedUser() {
+        return selectedUser;
     }
 }

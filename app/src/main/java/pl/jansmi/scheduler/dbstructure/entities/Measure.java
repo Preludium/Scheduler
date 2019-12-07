@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import static androidx.room.ForeignKey.CASCADE;
                                    parentColumns = "id",
                                    childColumns = "userId",
                                    onDelete = CASCADE)})
-public class Measure {
+public class Measure implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -24,11 +25,11 @@ public class Measure {
     @NonNull
     private Date date;
     private float weight;
-    private float water; // number of glasses
+    private int water; // number of glasses
     @NonNull
     private String userId;
 
-    public Measure(@NonNull String id, @NonNull Date date, float weight, float water, @NonNull String userId) {
+    public Measure(@NonNull String id, @NonNull Date date, float weight, int water, @NonNull String userId) {
         this.id = id;
         this.date = date;
         this.weight = weight;
@@ -37,11 +38,11 @@ public class Measure {
     }
 
     @Ignore
-    public Measure(@NonNull Date date, @NonNull String userId) {
+    public Measure(@NonNull Date date, @NonNull String userId, int water, float weight) {
         this.id = UUID.randomUUID().toString();
         this.date = date;
-        this.weight = 0;
-        this.water = 0;
+        this.weight = weight;
+        this.water = water;
         this.userId = userId;
     }
 
@@ -67,11 +68,11 @@ public class Measure {
         this.weight = weight;
     }
 
-    public float getWater() {
+    public int getWater() {
         return water;
     }
 
-    public void setWater(float water) {
+    public void setWater(int water) {
         this.water = water;
     }
 

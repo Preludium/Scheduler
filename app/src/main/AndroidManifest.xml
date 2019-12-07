@@ -12,9 +12,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.ReceivedInvitationDecisionActivity"
+            android:label="@string/title_activity_received_invitation_decision"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.NewMeasureActivity"
+            android:label="@string/title_activity_new_measure"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.NewTargetActivity"
             android:label="@string/title_activity_new_target"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SubmitArrangementActivity"
             android:label="@string/title_activity_submit_arrangement"
@@ -28,7 +36,7 @@
             android:label="@string/title_activity_target"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SelectTasksActivity"
+            android:name=".activities.SelectTaskActivity"
             android:label="@string/title_activity_select_tasks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

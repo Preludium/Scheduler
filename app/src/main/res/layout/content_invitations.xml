@@ -8,24 +8,4 @@
     tools:context=".activities.InvitationsActivity"
     tools:showIn="@layout/activity_invitations">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/invitations_content_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/listitem_main" />
-
-    <TextView
-        android:id="@+id/invitations_content_info_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="100dp"
-        android:text="@string/no_invitations_found_click_the_button_to_add_one"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
