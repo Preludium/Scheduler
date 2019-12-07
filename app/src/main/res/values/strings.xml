@@ -8,34 +8,36 @@
     <string name="title_meals">Meals</string>
     <string name="title_training">Training</string>
     <string name="title_tasks">Tasks</string>
+    <string name="title_studying">Studying</string>
 
     <!-- Main menu options -->
     <string name="action_meals">Meals</string>
-    <string name="action_users">Change user</string>
+    <string name="action_disciplines">Disciplines</string>
+    <string name="action_subjects">Subjects</string>
+    <string name="action_profile">Profile</string>
+    <string name="action_tags">Tags</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Log Out</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Meals menu options -->
+    <string name="action_categories">Categories</string>
+    <string name="action_ingredients">Ingredients</string>
+
+    <!-- Profile menu options -->
+    <string name="action_invitations">Invitations</string>
+    <string name="action_measures">Measures</string>
+    <string name="action_targets">Targets</string>
+
+    <!-- Activity names -->
+    <string name="title_activity_invitations">InvitationsActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_disciplines">DisciplinesActivity</string>
+    <string name="title_activity_meals">MealsActivity</string>
     <string name="title_activity_select_meal">SelectMealActivity</string>
     <string name="title_activity_new_training">NewTrainingActivity</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_signup">SignupActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="action_disciplines">Disciplines</string>
-    <string name="action_invitations">Invitations</string>
-    <string name="action_logout">Log Out</string>
-    <string name="title_activity_invitations">InvitationsActivity</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_disciplines">DisciplinesActivity</string>
-    <string name="title_activity_meals">MealsActivity</string>
-    <string name="action_ingredients">Ingredients</string>
-    <string name="action_categories">Categories</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="remember_me">Remember me</string>
-    <string name="repeat_password">Repeat Password</string>
-    <string name="sign_up">Sign Up</string>
     <string name="title_activity_ingredients">IngredientsActivity</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="title_activity_arrangements_activity">Arrangements</string>
@@ -44,44 +46,17 @@
     <string name="title_activity_select_tags">SelectTagsActivity</string>
     <string name="title_activity_select_ingredient">SelectIngredientActivity</string>
     <string name="title_activity_add_tag">AddTagActivity</string>
-    <string name="studying">Studying</string>
     <string name="title_activity_new_studying">NewStudyingActivity</string>
-    <string name="action_profile">Profile</string>
-    <string name="action_tags">Tags</string>
-    <string name="action_subjects">Subjects</string>
     <string name="title_activity_add_category">AddCategoryActivity</string>
     <string name="title_activity_add_discipline">AddDisciplineActivity</string>
-    <string name="enter_discipline_name">Discipline name</string>
-    <string name="enter_discipline_kcal_per_minute">Kcal per minute</string>
-    <string name="kcal_per_minute">Kcal per Minute</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_add_ingredient">AddIngredientActivity</string>
-
-    <string name="no_invitations_found_click_the_button_to_add_one">No invitations found. Click the button to add one.</string>
-    <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button to add one.</string>
-    <string name="no_categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
-    <string name="no_disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
-    <string name="no_ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
-    <string name="no_subjects_found_click_to_add_one">No subjects found. Click the button to add one.</string>
-    <string name="no_meals_found_click_the_button_to_add_one">No meals found. Click the button to add one.</string>
-
-    <string name="ingredient_units_prompt">Unit</string>
-    <string-array name="ingredient_units_array">
-        <item>pcs.</item>
-        <item>g</item>
-        <item>ml</item>
-    </string-array>
-
     <string name="title_activity_subjects">SubjectsActivity</string>
     <string name="title_activity_add_subject">AddSubjectActivity</string>
     <string name="title_activity_tag">TagActivity</string>
-    <string name="no_tags_found_click_to_add_one">No tags found, click to add one</string>
     <string name="title_activity_select_meal_ingredients">SelectMealIngredientsActivity</string>
-    <string name="title_activity_new_studying_select_subject">NewStudyingSelectSubjectActivity
-    </string>
-    <string name="title_activity_new_training_select_discipline">
-        NewTrainingSelectDisciplineActivity
-    </string>
+    <string name="title_activity_new_studying_select_subject">NewStudyingSelectSubjectActivity</string>
+    <string name="title_activity_new_training_select_discipline">NewTrainingSelectDisciplineActivity</string>
     <string name="title_activity_new_invitation">NewInvitationActivity</string>
     <string name="title_activity_select_users">SelectUsersActivity</string>
     <string name="title_activity_select_tasks">SelectTasksActivity</string>
@@ -89,4 +64,35 @@
     <string name="title_activity_measure">MeasureActivity</string>
     <string name="title_activity_submit_arrangement">SubmitArrangementActivity</string>
     <string name="title_activity_new_target">NewTargetActivity</string>
+
+    <!-- No records found -->
+    <string name="no_invitations_found_click_the_button_to_add_one">No invitations found. Click the button to add one.</string>
+    <string name="no_schedules_found_click_the_button_to_add_one">No schedules found. Click the button to add one.</string>
+    <string name="no_categories_found_click_the_button_to_add_one">No categories found. Click the button to add one.</string>
+    <string name="no_disciplines_found_click_the_button_to_add_one">No disciplines found. Click the button to add one.</string>
+    <string name="no_ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
+    <string name="no_subjects_found_click_to_add_one">No subjects found. Click the button to add one.</string>
+    <string name="no_meals_found_click_the_button_to_add_one">No meals found. Click the button to add one.</string>
+    <string name="no_tags_found_click_to_add_one">No tags found, click to add one</string>
+
+    <!-- Ingredient units -->
+    <string name="ingredient_units_prompt">Unit</string>
+    <string-array name="ingredient_units_array">
+        <item>pcs.</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
+
+    <!-- LoginActivity -->
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- AddDisciplineActivity -->
+    <string name="enter_discipline_name">Discipline name</string>
+    <string name="enter_discipline_kcal_per_minute">Kcal per minute</string>
+    <string name="kcal_per_minute">Kcal per Minute</string>
+
 </resources>

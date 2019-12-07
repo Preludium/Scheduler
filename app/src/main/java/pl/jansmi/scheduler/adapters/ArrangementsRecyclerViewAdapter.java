@@ -1,5 +1,6 @@
 package pl.jansmi.scheduler.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Date;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
@@ -42,8 +44,12 @@ public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainLi
     public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
         Arrangement arrangement = arrangementList.get(position);
 
+        Date date = arrangement.getCreated();
+        @SuppressLint("DefaultLocale")
+        String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth() + 1, date.getYear()+1900);
+
         holder.title.setText(arrangement.getName());
-        holder.desc.setText("Created: " + arrangement.getCreated().toString());
+        holder.desc.setText("Created: " + dateHandler);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

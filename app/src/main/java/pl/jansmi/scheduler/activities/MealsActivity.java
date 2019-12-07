@@ -48,7 +48,6 @@ public class MealsActivity extends AppCompatActivity {
         this.pager = findViewById(R.id.meals_content_pager);
         this.tabs = findViewById(R.id.meals_content_tabs);
         this.tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        this.tabs.setupWithViewPager(pager);
         this.infoBox = findViewById(R.id.meals_content_info_text);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -76,6 +75,7 @@ public class MealsActivity extends AppCompatActivity {
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);
+        this.tabs.setupWithViewPager(pager);
 
         if (adapter.getCount() == 0)
             infoBox.setVisibility(View.VISIBLE);

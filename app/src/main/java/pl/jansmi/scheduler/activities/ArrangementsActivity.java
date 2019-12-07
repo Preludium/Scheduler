@@ -42,11 +42,6 @@ public class ArrangementsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recycler = findViewById(R.id.main_content_recycler);
-        adapter = new ArrangementsRecyclerViewAdapter(this);
-        recycler.setAdapter(adapter);
-
-        manager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(manager);
 
         this.infoBox = findViewById(R.id.main_content_info_text);
 
@@ -64,6 +59,12 @@ public class ArrangementsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        adapter = new ArrangementsRecyclerViewAdapter(this);
+        recycler.setAdapter(adapter);
+
+        manager = new LinearLayoutManager(this);
+        recycler.setLayoutManager(manager);
 
         if (adapter.getItemCount() == 0)
             infoBox.setVisibility(View.VISIBLE);

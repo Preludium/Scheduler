@@ -8,20 +8,19 @@
     <item
         android:id="@+id/action_invitations"
         android:orderInCategory="1"
-        android:title="Invitations"
-        android:showAsAction="never" />
+        android:title="@string/action_invitations"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_measures"
         android:orderInCategory="2"
-        android:title="Measures"
-        android:showAsAction="never"/>
+        android:title="@string/action_measures"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_targets"
         android:orderInCategory="3"
-        android:title="Targets"
-        android:showAsAction="never"/>
-
+        android:title="@string/action_targets"
+        app:showAsAction="never" />
 
 </menu>

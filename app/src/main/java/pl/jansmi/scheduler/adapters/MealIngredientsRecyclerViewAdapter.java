@@ -28,7 +28,11 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
     public MealIngredientsRecyclerViewAdapter(Context context, HashMap<String, Integer> selectedIngredients) {
         this.context = context;
         this.ingredients = App.db.ingredients().getAll();
-        this.counts = selectedIngredients;
+
+        if (selectedIngredients != null)
+            this.counts = selectedIngredients;
+        else
+            this.counts = new HashMap<>();
     }
 
     @NonNull

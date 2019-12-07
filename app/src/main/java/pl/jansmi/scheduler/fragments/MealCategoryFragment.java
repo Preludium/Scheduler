@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class MealCategoryFragment extends Fragment {
     private TextView infoBox;
 
     public MealCategoryFragment(Category category) {
+        // tutaj category = "breakfast"
         this.category = category;
     }
 
@@ -43,19 +45,16 @@ public class MealCategoryFragment extends Fragment {
 
         this.manager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(manager);
+        // tutaj category = "lunch"
         this.adapter = new MealsRecyclerViewAdapter(getContext(), category);
         recycler.setAdapter(adapter);
 
-        if (App.db.meals().getByCategoryId(category.getId()).size() == 0)
+        if (adapter.getItemCount() == 0)
             infoBox.setVisibility(View.VISIBLE);
         else
             infoBox.setVisibility(View.INVISIBLE);
 
         return root;
-    }
-
-    public int getItemCount() {
-        return adapter.getItemCount();
     }
 
 }
