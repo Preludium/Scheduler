@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">Scheduler</string>
 
-    <!-- Activity names -->
-    <string name="title_activity_add_arrangement">Add Arrangement</string>
-
     <!-- Bottom menu bar options -->
     <string name="title_meals">Meals</string>
     <string name="title_training">Training</string>
     <string name="title_tasks">Tasks</string>
     <string name="title_studying">Studying</string>
+
+    <!-- Bottom invitations menu bar options -->
+    <string name="received">Received</string>
+    <string name="sent">Sent</string>
 
     <!-- Main menu options -->
     <string name="action_meals">Meals</string>
@@ -29,6 +30,7 @@
     <string name="action_targets">Targets</string>
 
     <!-- Activity names -->
+    <string name="title_activity_add_arrangement">Add Arrangement</string>
     <string name="title_activity_invitations">InvitationsActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_disciplines">DisciplinesActivity</string>
@@ -64,6 +66,8 @@
     <string name="title_activity_measure">MeasureActivity</string>
     <string name="title_activity_submit_arrangement">SubmitArrangementActivity</string>
     <string name="title_activity_new_target">NewTargetActivity</string>
+    <string name="title_activity_received_invitation_decision">ReceivedInvitationDecisionActivity</string>
+    <string name="title_activity_new_measure">NewMeasureActivity</string>
 
     <!-- No records found -->
     <string name="no_invitations_found_click_the_button_to_add_one">No invitations found. Click the button to add one.</string>
@@ -73,7 +77,8 @@
     <string name="no_ingredients_found_click_the_button_to_add_one">No ingredients found. Click the button to add one.</string>
     <string name="no_subjects_found_click_to_add_one">No subjects found. Click the button to add one.</string>
     <string name="no_meals_found_click_the_button_to_add_one">No meals found. Click the button to add one.</string>
-    <string name="no_tags_found_click_to_add_one">No tags found, click to add one</string>
+    <string name="no_tags_found_click_to_add_one">No tags found. Click the button to add one.</string>
+    <string name="no_measures_found_click_the_button_to_add_one">No measures found. Click the button to add one.</string>
 
     <!-- Ingredient units -->
     <string name="ingredient_units_prompt">Unit</string>
