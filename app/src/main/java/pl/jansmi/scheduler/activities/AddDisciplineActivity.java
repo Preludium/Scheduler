@@ -48,7 +48,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (name.getText().toString().isEmpty())
-                    Toast.makeText(getApplicationContext(), "Name is missing!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Enter discipline name", Toast.LENGTH_LONG).show();
                 else {
                     if (disciplineId == null) {
                         discipline = new Discipline(name.getText().toString());

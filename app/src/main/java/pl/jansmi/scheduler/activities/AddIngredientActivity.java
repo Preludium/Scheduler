@@ -73,10 +73,8 @@ public class AddIngredientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (name.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(), "Enter ingredient name", Toast.LENGTH_LONG).show();
-                else if (quantity.getText().toString().isEmpty() || Integer.parseInt(quantity.getText().toString()) <= 0)
-                    Toast.makeText(getApplicationContext(), "Enter appropriate ingredient quantity", Toast.LENGTH_LONG).show();
-                else if (!kcal.getText().toString().isEmpty() && Integer.parseInt(kcal.getText().toString()) <= 0)
-                    Toast.makeText(getApplicationContext(), "Kcal must not be negative", Toast.LENGTH_LONG).show();
+                else if (quantity.getText().toString().isEmpty())
+                    Toast.makeText(getApplicationContext(), "Enter ingredient quantity", Toast.LENGTH_LONG).show();
                 else {
                     if (ingredientId == null) { // insert
                         ingredient = new Ingredient(name.getText().toString());
