@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.Session;
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "No user of a given name found!", Toast.LENGTH_LONG).show();
+                    Snackbar.make(v, "No user of a given name found!", Snackbar.LENGTH_LONG).show();
                 }
             }
         });

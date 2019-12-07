@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -26,9 +27,11 @@ import pl.jansmi.scheduler.dbstructure.entities.Tag;
 public class SubmitArrangementActivity extends AppCompatActivity {
 
     private EditText title;
+    private TextView infoBox;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
+    private Arrangement arrangement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +41,12 @@ public class SubmitArrangementActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         this.title = findViewById(R.id.submit_arrangement_content_title);
+        this.infoBox = findViewById(R.id.submit_arrangement_content_info_text);
 
-        Arrangement arrangement = (Arrangement) getIntent().getSerializableExtra("arrangement");
-        if (arrangement.getName() != null)
+        arrangement = (Arrangement) getIntent().getSerializableExtra("arrangement");
+
+        if (arrangement != null)
             this.title.setText(arrangement.getName());
-
-        recycler = findViewById(R.id.submit_arrangement_content_recycler);
-        adapter = new SubmitArrangementRecyclerViewAdapter(this, arrangement);
-        recycler.setAdapter(adapter);
-
-        manager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(manager);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,4 +67,20 @@ public class SubmitArrangementActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        recycler = findViewById(R.id.submit_arrangement_content_recycler);
+        adapter = new SubmitArrangementRecyclerViewAdapter(this, arrangement);
+        recycler.setAdapter(adapter);
+
+        manager = new LinearLayoutManager(this);
+        recycler.setLayoutManager(manager);
+
+        if (adapter.getItemCount() == 0)
+            infoBox.setVisibility(View.VISIBLE);
+        else
+            infoBox.setVisibility(View.INVISIBLE);
+    }
 }

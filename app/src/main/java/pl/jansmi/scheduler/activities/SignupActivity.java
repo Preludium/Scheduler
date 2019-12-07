@@ -11,12 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.Session;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 
 public class SignupActivity extends AppCompatActivity {
+
+    private EditText signup_login_box;
+    private Button signup_btn;
+//    private EditText signup_password1_box;
+//    private EditText signup_password2_box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +32,22 @@ public class SignupActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button signup_btn = findViewById(R.id.signup_btn);
-        EditText signup_login_box = findViewById(R.id.signup_login_box);
-        //EditText signup_password1_box = findViewById(R.id.signup_password1_box);
-        //EditText signup_password2_box = findViewById(R.id.signup_password2_box);
+        this.signup_btn = findViewById(R.id.signup_btn);
+        this.signup_login_box = findViewById(R.id.signup_login_box);
+        //signup_password1_box = findViewById(R.id.signup_password1_box);
+        //signup_password2_box = findViewById(R.id.signup_password2_box);
 
 
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // check if passwords are equal and add new user to database
                 if(signup_login_box.getText().toString().equals(""))
                     Toast.makeText(getApplicationContext(), "Enter user name", Toast.LENGTH_LONG).show();
+                else if(App.db.users().getAll().contains(App.db.users().getByName(signup_login_box.getText().toString())))
+                    Snackbar.make(v, "Given login is occupied.", Snackbar.LENGTH_LONG).show();
                 else {
                     String name = signup_login_box.getText().toString();
                     User usr = new User(name);
-
                     App.db.users().insert(usr);
 
                     finish();

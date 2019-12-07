@@ -23,7 +23,6 @@
         android:id="@+id/add_meal_content_name"
         android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:hint="Name"
         android:textAlignment="center"
         android:singleLine="true"
         android:maxLength="24"

@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:maxLength="24"
-        android:hint="Name"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/subject_content_name_title"
         app:layout_constraintBottom_toBottomOf="parent"

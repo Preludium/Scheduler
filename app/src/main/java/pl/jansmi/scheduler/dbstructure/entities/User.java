@@ -103,4 +103,16 @@ public class User implements Serializable {
     public void setKcalPerDayTarget(int kcalPerDayTarget) {
         this.kcalPerDayTarget = kcalPerDayTarget;
     }
+
+    @Override
+    public boolean equals(Object user) {
+        if (user == this)
+            return true;
+        else if (user == null || user.getClass() != this.getClass())
+            return false;
+        else {
+            User pom = (User) user;
+            return this.id.equals(pom.id);
+        }
+    }
 }

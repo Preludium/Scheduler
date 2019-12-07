@@ -52,6 +52,7 @@
         android:editable="false"
         android:width="200dp"
         android:textAlignment="center"
+        android:hint="Click to select"
         app:layout_constraintTop_toBottomOf="@id/new_target_content_deadline_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

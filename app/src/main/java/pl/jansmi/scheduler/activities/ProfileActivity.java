@@ -82,9 +82,17 @@ public class ProfileActivity extends AppCompatActivity {
             String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth() + 1, date.getYear());
             birthday.setText(dateHandler);
         }
-        weight.setText(String.valueOf(user.getWeight()));
-        height.setText(String.valueOf(user.getHeight()));
-        kcalPerDayTarget.setText(String.valueOf(user.getKcalPerDayTarget()));
+        else
+            birthday.setText("");
+
+        if(user.getWeight() != 0.0f)
+            weight.setText(String.valueOf(user.getWeight()));
+
+        if(user.getHeight() != 0)
+            height.setText(String.valueOf(user.getHeight()));
+
+        if(user.getKcalPerDayTarget() != 0)
+            kcalPerDayTarget.setText(String.valueOf(user.getKcalPerDayTarget()));
 
         gender = user.isSex();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sexList);
@@ -145,19 +153,34 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
 
-                if(birthday.getText() != null)
+                if(!birthday.getText().toString().equals(""))
                     user.setBirthday(date);
 
                 user.setSex(gender);
 
-                if(weight.getText() != null)
+                if(!weight.getText().toString().equals("")) {
+                    if (Float.valueOf(weight.getText().toString()) < 0) {
+                        Toast.makeText(getApplicationContext(), "Weight cannot be negative.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     user.setWeight(Float.valueOf(weight.getText().toString()));
+                }
 
-                if(height.getText() != null)
+                if(!height.getText().toString().equals("")) {
+                    if (Integer.valueOf(height.getText().toString()) < 0) {
+                        Toast.makeText(getApplicationContext(), "Height cannot be negative.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     user.setHeight(Integer.valueOf(height.getText().toString()));
+                }
 
-                if(kcalPerDayTarget.getText() != null)
+                if(!kcalPerDayTarget.getText().toString().equals("")) {
+                    if (Integer.valueOf(kcalPerDayTarget.getText().toString()) < 0) {
+                        Toast.makeText(getApplicationContext(), "kcalPerDayTarget cannot be negative.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     user.setKcalPerDayTarget(Integer.valueOf(kcalPerDayTarget.getText().toString()));
+                }
 
                 App.db.users().update(user);
                 finish();

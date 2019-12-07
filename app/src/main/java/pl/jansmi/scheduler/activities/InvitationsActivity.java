@@ -47,7 +47,7 @@ public class InvitationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_invitations);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         selectedFragment = RECV_RC;
         navView = findViewById(R.id.invitations_activity_nav_view);
         navView.setSelectedItemId(R.id.navigation_received);

@@ -9,7 +9,7 @@
         android:id="@+id/action_invitations"
         android:orderInCategory="1"
         android:title="@string/action_invitations"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_measures"

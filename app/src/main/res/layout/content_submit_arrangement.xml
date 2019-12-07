@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:hint="Title"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/submit_arrangement_content_title_label"
         app:layout_constraintBottom_toTopOf="@id/submit_arrangement_content_recycler_label"
@@ -57,5 +56,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/submit_arrangement_content_recycler_label"
         tools:listitem="@layout/listitem_select" />
+
+    <TextView
+        android:id="@+id/submit_arrangement_content_info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:text="No tag to choose. Add one."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/submit_arrangement_content_recycler_label"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

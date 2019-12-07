@@ -46,19 +46,21 @@ public class NewMeasureActivity extends AppCompatActivity {
         measureDate = findViewById(R.id.new_measure_content_date);
         water = findViewById(R.id.new_measure_content_water);
 
-        date = null;
         water.setMaxValue(99);
         water.setMinValue(0);
-        weight.setText("0.0");
 
         selectedMeasure = (Measure) getIntent().getSerializableExtra("measure");
 
         if(selectedMeasure != null) {
-            weight.setText(String.format("%.2f", selectedMeasure.getWeight()));
+            if(selectedMeasure.getWeight() != 0.0f)
+                weight.setText(String.format("%.2f", selectedMeasure.getWeight()));
             water.setValue(selectedMeasure.getWater());
             date = selectedMeasure.getDate();
             String dateHandler = String.format("%d/%d/%d", date.getDate(), date.getMonth() + 1, date.getYear());
             measureDate.setText(dateHandler);
+        }
+        else {
+            date = null;
         }
 
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -78,10 +80,11 @@ public class NewMeasureActivity extends AppCompatActivity {
                 }
                 else {
                     if (selectedMeasure == null) {    //insert
-                        selectedMeasure = new Measure(date, App.session.getUserId(), water.getValue(), Float.valueOf(weight.getText().toString()));
+                        selectedMeasure = new Measure(date, App.session.getUserId(), water.getValue(),
+                                (weight.getText().toString().equals("")) ? 0.0f : Float.valueOf(weight.getText().toString()) );
                         App.db.measures().insert(selectedMeasure);
                     } else {  //update
-                        selectedMeasure.setWeight(Float.valueOf(weight.getText().toString()));
+                        selectedMeasure.setWeight((!weight.getText().toString().equals("")) ? Float.valueOf(weight.getText().toString()) : 0.0f);
                         selectedMeasure.setDate(date);
                         selectedMeasure.setWater(water.getValue());
                         App.db.measures().update(selectedMeasure);
