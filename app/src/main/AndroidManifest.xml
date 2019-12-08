@@ -16,6 +16,10 @@
             android:label="@string/title_activity_received_invitation_decision"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".activities.MealsActivity"
+            android:label="@string/title_activity_meals"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".activities.NewMeasureActivity"
             android:label="@string/title_activity_new_measure"
             android:theme="@style/AppTheme.NoActionBar" />

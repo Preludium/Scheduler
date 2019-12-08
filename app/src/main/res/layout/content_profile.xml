@@ -26,9 +26,8 @@
 
     <EditText
         android:id="@+id/login_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         android:singleLine="true"
         android:maxLength="24"
         android:textAlignment="center"
@@ -53,9 +52,8 @@
 
     <EditText
         android:id="@+id/birthday_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         android:editable="false"
         android:onClick="onBirthdayClick"
         android:textAlignment="center"
@@ -82,9 +80,8 @@
 
     <Spinner
         android:id="@+id/sex_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         app:layout_constraintBottom_toTopOf="@id/weight_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sex_content_title"
@@ -106,9 +103,8 @@
 
     <EditText
         android:id="@+id/weight_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         android:singleLine="true"
         android:inputType="number"
         android:maxLength="24"
@@ -135,9 +131,8 @@
 
     <EditText
         android:id="@+id/height_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         android:singleLine="true"
         android:inputType="number"
         android:maxLength="24"
@@ -164,9 +159,8 @@
 
     <EditText
         android:id="@+id/kcalPerDayTarget_content"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_text_box_width"
         android:layout_height="wrap_content"
-        android:width="200dp"
         android:singleLine="true"
         android:maxLength="24"
         android:inputType="number"

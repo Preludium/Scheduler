@@ -5,27 +5,19 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import java.util.List;
-
-import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.adapters.ArrangementsRecyclerViewAdapter;
-import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
 
 public class ArrangementsActivity extends AppCompatActivity {
 

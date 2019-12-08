@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
                 else {
                     User usr = new User(signup_login_box.getText().toString(), signup_password1_box.getText().toString());
                     App.db.users().insert(usr);
-
+                    Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }

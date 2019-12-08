@@ -90,7 +90,7 @@ public class NewInvitationActivity extends AppCompatActivity {
             }
         }
         if (i == 0) {
-            Snackbar.make(view, "You have no tasks. Add one to make invite.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, "You have no tasks. Add one to make invitation.", Snackbar.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(getApplicationContext(), SelectTaskActivity.class);
@@ -100,7 +100,7 @@ public class NewInvitationActivity extends AppCompatActivity {
 
     public void onSelectUsers(View view) {
         if (App.db.users().getAll().size() == 1) {
-            Snackbar.make(view, "There are no other users to send invite.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, "There are no other users to send invitation to.", Snackbar.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(getApplicationContext(), SelectUsersActivity.class);
