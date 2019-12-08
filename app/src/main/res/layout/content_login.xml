@@ -57,32 +57,32 @@
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/remember_me_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+<!--    <LinearLayout-->
+<!--        android:id="@+id/remember_me_layout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
 
-        app:layout_constraintTop_toBottomOf="@id/login_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+<!--        app:layout_constraintTop_toBottomOf="@id/login_layout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        >-->
 
-        <CheckBox
-            android:id="@+id/remember_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+<!--        <CheckBox-->
+<!--            android:id="@+id/remember_checkbox"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
 
-        <TextView
-            android:id="@+id/remember_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/remember_me"
-            android:gravity="center"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/remember_text"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/remember_me"-->
+<!--            android:gravity="center"-->
+<!--            />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/signin_btn"

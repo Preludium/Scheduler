@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         password_box = findViewById(R.id.password_box);
         Button login_btn = findViewById(R.id.signin_btn);
         TextView signup_text = findViewById(R.id.signup_text);
-        final EditText login_box = findViewById(R.id.login_box);
-        // EditText password_box = findViewById(R.id.password_box);
 
 
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                 User fetched = App.db.users().getByName(name);
 
                 if (fetched != null) {
+                    if (!fetched.getPassword().equals(password_box.getText().toString())){
+                        Snackbar.make(v, "Login or password is incorrect.", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
                     App.session = new Session(fetched.getId());
                     startActivity(new Intent(getApplicationContext(), ArrangementsActivity.class));
                 }
@@ -80,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
         App.db.close();
-        // App.session.terminate();
     }
 
 }

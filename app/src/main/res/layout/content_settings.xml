@@ -13,9 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete account"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass1_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/settings_content_delete_account"/>
 
@@ -26,8 +26,93 @@
         android:text="Delete"
         android:onClick="onDeleteClick"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass1"
         app:layout_constraintStart_toEndOf="@id/settings_content_delete_account_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/settings_content_pass1_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current password"
+        style="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_delete_account_title"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass3_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/settings_content_pass1"/>
+
+    <EditText
+        android:id="@+id/settings_content_pass1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_delete_account"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass3"
+        app:layout_constraintStart_toEndOf="@id/settings_content_pass1_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/settings_content_pass2_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New password"
+        style="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_pass1_title"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass3_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/settings_content_pass2"/>
+
+    <EditText
+        android:id="@+id/settings_content_pass2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@id/settings_content_pass3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/settings_content_pass2_title"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_pass1" />
+
+    <TextView
+        android:id="@+id/settings_content_pass3_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm password"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_pass2_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/settings_content_pass3"/>
+
+    <EditText
+        android:id="@+id/settings_content_pass3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:width="200dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/settings_content_pass3_title"
+        app:layout_constraintTop_toBottomOf="@id/settings_content_pass2" />
+
+    <Button
+        android:id="@+id/settings_content_change_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:text="Change Password"
+        android:onClick="onChangePasswordClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

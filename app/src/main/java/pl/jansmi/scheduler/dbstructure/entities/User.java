@@ -23,16 +23,19 @@ public class User implements Serializable {
     private String id;
     @NonNull
     private String name;
+    @NonNull
+    private String password;
     private Date birthday;
     private boolean sex; // e.g. 0 - male, 1 - female
     private float weight;
     private int height;
     private int kcalPerDayTarget;
 
-    public User(@NonNull String id, @NonNull String name, Date birthday,
+    public User(@NonNull String id, @NonNull String name, Date birthday, @NonNull String password,
                 boolean sex, float weight, int height, int kcalPerDayTarget) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.birthday = birthday;
         this.sex = sex;
         this.weight = weight;
@@ -41,9 +44,10 @@ public class User implements Serializable {
     }
 
     @Ignore
-    public User(@NonNull String name) {
+    public User(@NonNull String name, @NonNull String password) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
+        this.password = password;
         this.sex = SEX_MALE;
         this.weight = 0.f;
         this.height = 0;
@@ -62,6 +66,15 @@ public class User implements Serializable {
 
     public void setName(@NonNull String name) {
         this.name = name;
+    }
+
+    @NonNull
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NonNull String password) {
+        this.password = password;
     }
 
     public Date getBirthday() {
