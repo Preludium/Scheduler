@@ -26,6 +26,9 @@ public interface IngredientDao {
             "ON i.id = j.ingredientId WHERE j.mealId = :mealId")
     List<Ingredient> getByMealId(String mealId);
 
+    @Query("UPDATE Ingredients SET favour = 0.9*favour")
+    void updateFavours();
+
     @Insert
     void insert(Ingredient ingredient);
 
