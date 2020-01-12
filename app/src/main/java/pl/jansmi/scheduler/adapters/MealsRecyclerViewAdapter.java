@@ -30,7 +30,9 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
     public MealsRecyclerViewAdapter(Context context, Category category) {
         this.context = context;
         this.meals = App.db.meals().getByCategoryId(category.getId());
-        // TODO: sort
+
+        // sort by favour descending
+        this.meals.sort((meal1, meal2) -> Float.compare(meal2.getFavour(), meal1.getFavour()));
     }
 
     @NonNull
