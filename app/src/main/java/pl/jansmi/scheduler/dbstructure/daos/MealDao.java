@@ -23,6 +23,9 @@ public interface MealDao {
     @Query("SELECT * FROM Meals WHERE id = :mealId")
     Meal getById(String mealId);
 
+    @Query("UPDATE Meals SET favour = 0.9*favour")
+    void updateFavours();
+
     @Insert
     void insert(Meal meal);
 
