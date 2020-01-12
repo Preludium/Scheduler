@@ -71,7 +71,7 @@ public class MealsActivity extends AppCompatActivity {
         super.onStart();
 
         this.categories = App.db.categories().getAll();
-        // TODO: sort categories by order
+        this.categories.sort((cat1, cat2) -> Integer.compare(cat1.getOrder(), cat2.getOrder()));
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);

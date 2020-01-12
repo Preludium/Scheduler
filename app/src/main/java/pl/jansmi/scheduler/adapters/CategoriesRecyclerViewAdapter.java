@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Comparator;
 import java.util.List;
 
 import pl.jansmi.scheduler.App;
@@ -27,7 +28,8 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<MainList
     public CategoriesRecyclerViewAdapter(Context context) {
         this.context = context;
         this.categories = App.db.categories().getAll();
-        // TODO: sort by category order
+
+        this.categories.sort((cat1, cat2) -> Integer.compare(cat1.getOrder(), cat2.getOrder()));
     }
 
     @NonNull

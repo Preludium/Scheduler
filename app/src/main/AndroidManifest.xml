@@ -12,13 +12,23 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.ReceivedInvitationDecisionActivity"
             android:label="@string/title_activity_received_invitation_decision"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MealsActivity"
             android:label="@string/title_activity_meals"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.NewMeasureActivity"
             android:label="@string/title_activity_new_measure"
@@ -116,10 +126,6 @@
             android:label="@string/title_activity_categories"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MealsActivity"
-            android:label="@string/title_activity_meals"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activities.DisciplinesActivity"
             android:label="@string/title_activity_disciplines"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -136,16 +142,6 @@
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".activities.NewTaskActivity"
             android:label="@string/title_activity_new_task"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -160,7 +156,7 @@
         <activity
             android:name=".activities.AddArrangementActivity"
             android:label="@string/title_activity_add_arrangement"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ArrangementsActivity"
             android:label="@string/title_activity_arrangements_activity"

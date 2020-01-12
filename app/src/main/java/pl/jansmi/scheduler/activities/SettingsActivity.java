@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +15,8 @@ import android.widget.Toast;
 
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
-import pl.jansmi.scheduler.Session;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 import pl.jansmi.scheduler.dialogs.DeleteAccountPromptDialog;
-import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
 public class SettingsActivity extends AppCompatActivity {
     private EditText cur_pass;
@@ -46,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 App.db.users().delete(App.db.users().getById(App.session.getUserId()));
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

@@ -86,7 +86,7 @@
         <item>ml</item>
     </string-array>
 
-    <!-- LoginActivity -->
+    <!-- MainActivity -->
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
@@ -97,5 +97,6 @@
     <string name="enter_discipline_name">Discipline name</string>
     <string name="enter_discipline_kcal_per_minute">Kcal per minute</string>
     <string name="kcal_per_minute">Kcal per Minute</string>
+    <string name="title_activity_main">Scheduler</string>
 
 </resources>
