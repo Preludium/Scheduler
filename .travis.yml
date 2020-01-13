@@ -1,5 +1,13 @@
 language: android
 dist: trusty
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-29.0.0
+    - android-29
+
 sudo: required
 before_install:
  - chmod +x gradlew
