@@ -32,7 +32,6 @@ public class MealCategoryFragment extends Fragment {
     private TextView infoBox;
 
     public MealCategoryFragment(Category category) {
-        // tutaj category = "breakfast"
         this.category = category;
     }
 
@@ -45,7 +44,6 @@ public class MealCategoryFragment extends Fragment {
 
         this.manager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(manager);
-        // tutaj category = "lunch"
         this.adapter = new MealsRecyclerViewAdapter(getContext(), category);
         recycler.setAdapter(adapter);
 

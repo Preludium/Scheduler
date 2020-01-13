@@ -41,9 +41,7 @@ public class TasksDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
         Task task = selectedTasks.get(position);
 
         holder.title.setText(task.getName());
-        holder.desc.setText("");
-        // TODO: holder.itemView listener implementation (startActivity NewStudyingActivity and pass
-        //  current study for update
+        holder.desc.setText(task.getDescription());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +51,6 @@ public class TasksDayRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
             }
         });
 
-        // TODO: holder.menuBtn listener implementation (delete record)
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

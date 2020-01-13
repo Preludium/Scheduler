@@ -67,7 +67,6 @@ public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainLi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'arrangements' is empty
                         App.db.arrangements().delete(arrangement);
                     }
                 });

@@ -64,8 +64,7 @@ public class AddDisciplineActivity extends AppCompatActivity {
                         if (!kcalPerMinute.getText().toString().isEmpty())
                             discipline.setKcalPerMinute(Integer.parseInt(kcalPerMinute.getText().toString()));
 
-                        // TODO: think of favour changing, while refreshing data
-                        // discipline.setFavour(1.f);
+                        discipline.setFavour(1);
                         App.db.disciplines().update(discipline);
                     }
                     finish();

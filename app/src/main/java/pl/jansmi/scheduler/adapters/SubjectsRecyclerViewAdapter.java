@@ -60,7 +60,6 @@ public class SubjectsRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'subject' is empty
                         App.db.subjects().delete(subject);
                     }
                 });

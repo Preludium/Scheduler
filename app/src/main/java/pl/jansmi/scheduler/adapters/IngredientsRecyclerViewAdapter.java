@@ -63,7 +63,6 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'ingredients' is empty
                         App.db.ingredients().delete(ingredient);
                     }
                 });

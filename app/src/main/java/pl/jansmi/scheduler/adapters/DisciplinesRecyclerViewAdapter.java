@@ -27,7 +27,7 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
     public DisciplinesRecyclerViewAdapter(Context context) {
         this.context = context;
         this.disciplines = App.db.disciplines().getAll();
-        // TODO: sort by discipline favour
+        this.disciplines.sort((dis1, dis2) -> Float.compare(dis1.getFavour(), dis2.getFavour()));
     }
 
     @NonNull
@@ -61,7 +61,6 @@ public class DisciplinesRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
                 DeletePromptDialog.show(context, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'disciplines' is empty
                         App.db.disciplines().delete(discipline);
                     }
                 });
