@@ -22,7 +22,7 @@ import pl.jansmi.scheduler.Session;
 import pl.jansmi.scheduler.dbstructure.Database;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 
-public class LoginActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private EditText login_box;
     private EditText password_box;
 
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         App.db = Database.build(getApplicationContext());
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

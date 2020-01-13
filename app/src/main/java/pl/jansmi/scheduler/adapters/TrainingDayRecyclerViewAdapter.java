@@ -49,8 +49,6 @@ public class TrainingDayRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
             holder.desc.setText("");
         }
 
-        // TODO: holder.itemView listener implementation (startActivity NewStudyingActivity and pass
-        //  current study for update
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +58,6 @@ public class TrainingDayRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
             }
         });
 
-        // TODO: holder.menuBtn listener implementation (delete record)
         holder.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

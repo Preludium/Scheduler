@@ -27,7 +27,9 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
     public IngredientsRecyclerViewAdapter(Context context) {
         this.context = context;
         this.ingredients = App.db.ingredients().getAll();
-        // TODO: sort by ingredient favour
+
+        // sort by favour descending
+        this.ingredients.sort((ing1, ing2) -> Float.compare(ing2.getFavour(), ing1.getFavour()));
     }
 
     @NonNull
@@ -61,7 +63,6 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<MainLis
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'ingredients' is empty
                         App.db.ingredients().delete(ingredient);
                     }
                 });

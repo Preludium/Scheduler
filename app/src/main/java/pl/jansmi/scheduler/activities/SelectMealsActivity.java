@@ -62,6 +62,14 @@ public class SelectMealsActivity extends AppCompatActivity {
                         selectedMealsId.add(fragment.getSelectedMeal().getId());
                 }
 
+                App.db.meals().updateFavours();
+
+                for (String key : selectedMealsId) {
+                    Meal meal = App.db.meals().getById(key);
+                    meal.setFavour(1);
+                    App.db.meals().update(meal);
+                }
+
                 Intent intent = new Intent();
                 intent.putExtra("meals", (Serializable) selectedMealsId);
                 setResult(RESULT_OK, intent);
@@ -76,7 +84,7 @@ public class SelectMealsActivity extends AppCompatActivity {
         super.onStart();
 
         this.categories = App.db.categories().getAll();
-        // TODO: sort categories by order
+        this.categories.sort((cat1, cat2) -> Integer.compare(cat1.getOrder(), cat2.getOrder()));
 
         this.selectedMealsId = getIntent().getExtras().getStringArrayList("meals");
 

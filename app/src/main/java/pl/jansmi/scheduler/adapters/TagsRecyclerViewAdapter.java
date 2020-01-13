@@ -60,7 +60,6 @@ public class TagsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemVi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'tags' is empty
                         App.db.tags().delete(tag);
                     }
                 });

@@ -27,6 +27,7 @@ public class SubjectsRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
     public SubjectsRecyclerViewAdapter(Context context) {
         this.context = context;
         this.subjects = App.db.subjects().getAll();
+        this.subjects.sort((sub1, sub2) -> Float.compare(sub2.getFavour(), sub1.getFavour()));
     }
 
     @NonNull
@@ -60,7 +61,6 @@ public class SubjectsRecyclerViewAdapter extends RecyclerView.Adapter<MainListIt
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'subject' is empty
                         App.db.subjects().delete(subject);
                     }
                 });

@@ -29,6 +29,8 @@ public class SubmitArrangementRecyclerViewAdapter extends RecyclerView.Adapter<S
     public SubmitArrangementRecyclerViewAdapter(Context context, Arrangement arrangement) {
         this.context = context;
         this.tagList = App.db.tags().getAll();
+        this.tagList.sort((tag1, tag2) -> Float.compare(tag1.getFavour(), tag2.getFavour()));
+
         this.selectedTags = new ArrayList<>(Collections.nCopies(tagList.size(), false));
 
         List<Tag> arrangementTags = App.db.tags().getByArrangementId(arrangement.getId());

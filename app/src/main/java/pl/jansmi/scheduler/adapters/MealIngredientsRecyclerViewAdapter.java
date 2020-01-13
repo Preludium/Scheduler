@@ -29,6 +29,9 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
         this.context = context;
         this.ingredients = App.db.ingredients().getAll();
 
+        // sort by favour descending
+        this.ingredients.sort((ing1, ing2) -> Float.compare(ing2.getFavour(), ing1.getFavour()));
+
         if (selectedIngredients != null)
             this.counts = selectedIngredients;
         else
@@ -86,6 +89,14 @@ public class MealIngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ing
     }
 
     public HashMap<String, Integer> getSelectedIngredients() {
+        // reduce all ingredients favour
+        App.db.ingredients().updateFavours();
+        // increase favour of selected ingredients
+        for (String key : counts.keySet()) {
+            Ingredient ing = App.db.ingredients().getById(key);
+            ing.setFavour(1);
+            App.db.ingredients().update(ing);
+        }
         return counts;
     }
 

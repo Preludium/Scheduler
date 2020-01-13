@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -71,7 +72,7 @@ public class MealsActivity extends AppCompatActivity {
         super.onStart();
 
         this.categories = App.db.categories().getAll();
-        // TODO: sort categories by order
+        this.categories.sort((cat1, cat2) -> Integer.compare(cat1.getOrder(), cat2.getOrder()));
 
         this.adapter = new MealCategoryFragmentPagerAdapter(getSupportFragmentManager());
         this.pager.setAdapter(adapter);
@@ -114,7 +115,7 @@ public class MealsActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
     }
 
-    private class MealCategoryFragmentPagerAdapter extends FragmentPagerAdapter {
+    private class MealCategoryFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<MealCategoryFragment> mealCategoryFragmentList;
 

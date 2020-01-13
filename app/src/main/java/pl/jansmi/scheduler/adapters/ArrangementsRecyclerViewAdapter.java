@@ -18,11 +18,13 @@ import java.util.List;
 import pl.jansmi.scheduler.App;
 import pl.jansmi.scheduler.R;
 import pl.jansmi.scheduler.activities.AddArrangementActivity;
+import pl.jansmi.scheduler.adapters.holders.ArrangementListItemViewHolder;
 import pl.jansmi.scheduler.adapters.holders.MainListItemViewHolder;
 import pl.jansmi.scheduler.dbstructure.entities.Arrangement;
+import pl.jansmi.scheduler.dbstructure.entities.Tag;
 import pl.jansmi.scheduler.dialogs.DeletePromptDialog;
 
-public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemViewHolder> {
+public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<ArrangementListItemViewHolder> {
 
     private Context context;
     private List<Arrangement> arrangementList;
@@ -34,14 +36,14 @@ public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainLi
 
     @NonNull
     @Override
-    public MainListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArrangementListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.listitem_main, null);
-        return new MainListItemViewHolder(view);
+        View view = inflater.inflate(R.layout.listitem_arrangement, null);
+        return new ArrangementListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArrangementListItemViewHolder holder, int position) {
         Arrangement arrangement = arrangementList.get(position);
 
         Date date = arrangement.getCreated();
@@ -51,6 +53,12 @@ public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainLi
         holder.title.setText(arrangement.getName());
         holder.desc.setText("Created: " + dateHandler);
 
+        StringBuilder tags = new StringBuilder();
+        List<Tag> tagList = App.db.tags().getByArrangementId(arrangementList.get(position).getId());
+        for (Tag t : tagList)
+            tags.append("#").append(t.getName()).append(" ");
+
+        holder.tags.setText(tags.toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +75,6 @@ public class ArrangementsRecyclerViewAdapter extends RecyclerView.Adapter<MainLi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'arrangements' is empty
                         App.db.arrangements().delete(arrangement);
                     }
                 });

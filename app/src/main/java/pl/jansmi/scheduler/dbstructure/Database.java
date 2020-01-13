@@ -49,7 +49,6 @@ import pl.jansmi.scheduler.dbstructure.relations.TagArrangementJoin;
 @TypeConverters({Converters.class})
 public abstract class Database extends RoomDatabase {
 
-    // TODO: think about changing Localization to Subject (of Study) - then declare localization as Task field
     public abstract ArrangementDao arrangements();
     public abstract CategoryDao categories();
     public abstract DisciplineDao disciplines();
