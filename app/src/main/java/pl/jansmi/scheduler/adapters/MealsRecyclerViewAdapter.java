@@ -75,7 +75,6 @@ public class MealsRecyclerViewAdapter extends RecyclerView.Adapter<MainListItemV
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'meals' is empty
 
                         List<IngredientMealJoin> joins =
                                 App.db.ingredientMealJoin().getIngredientsByMealId(meal.getId());

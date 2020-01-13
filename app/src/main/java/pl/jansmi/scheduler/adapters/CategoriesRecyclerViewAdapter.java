@@ -63,7 +63,6 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<MainList
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteItem(position);
-                        // TODO: show infoBox, if 'categories' is empty
                         App.db.categories().delete(category);
                     }
                 });
