@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import pl.jansmi.scheduler.dbstructure.entities.Category;
 import pl.jansmi.scheduler.dbstructure.entities.Discipline;
@@ -20,7 +19,9 @@ import pl.jansmi.scheduler.dbstructure.entities.Meal;
 import pl.jansmi.scheduler.dbstructure.entities.User;
 import pl.jansmi.scheduler.dbstructure.relations.IngredientMealJoin;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class DatabaseTest {
     private Database db;
@@ -33,7 +34,7 @@ public class DatabaseTest {
 
     @Test
     public void testExampleEntityInsert() throws RuntimeException {
-        User usr = new User("jansmi");
+        User usr = new User("user", "password");
         usr.setBirthday(new Date(1998, 8, 13));
         usr.setSex(User.SEX_MALE);
         usr.setWeight(80.0f);
@@ -45,6 +46,7 @@ public class DatabaseTest {
 
         assertEquals(fetched.getId(), usr.getId());
         assertEquals(fetched.getName(), usr.getName());
+        assertEquals(fetched.getHeight(), usr.getHeight());
     }
 
     @Test
