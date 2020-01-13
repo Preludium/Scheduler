@@ -114,10 +114,6 @@
             android:label="@string/title_activity_add_tag"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SelectTagsActivity"
-            android:label="@string/title_activity_select_tags"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activities.AddMealActivity"
             android:label="@string/title_activity_add_meal"
             android:theme="@style/AppTheme.NoActionBar" />
