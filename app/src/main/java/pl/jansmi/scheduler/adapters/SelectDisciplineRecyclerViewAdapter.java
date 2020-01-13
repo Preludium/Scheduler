@@ -25,6 +25,7 @@ public class SelectDisciplineRecyclerViewAdapter  extends RecyclerView.Adapter<S
     public SelectDisciplineRecyclerViewAdapter(Context context) {
         this.context = context;
         this.disciplines = App.db.disciplines().getAll();
+        this.disciplines.sort((dis1, dis2) -> Float.compare(dis2.getFavour(), dis1.getFavour()));
     }
 
     @NonNull

@@ -30,6 +30,7 @@ public class SelectSubjectRecyclerViewAdapter extends RecyclerView.Adapter<Selec
     public SelectSubjectRecyclerViewAdapter(Context context) {
         this.context = context;
         this.subjects = App.db.subjects().getAll();
+        this.subjects.sort((sub1, sub2) -> Float.compare(sub2.getFavour(), sub1.getFavour()));
     }
 
     @NonNull
