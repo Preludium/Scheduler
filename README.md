@@ -1,6 +1,10 @@
-# Scheduler v0.1
+# Scheduler v1.1
+Application for week arrangement
 
-## WORKING:
-- login (w/o password and remember me)
-- categories management (no erroneous data check)
-- ingredients management (no erroneous data check)
+### Features:
+* signing in with multiple accounts
+* meals and ingredients management
+* disciplines and training management
+* task management with user inviting feature
+* studying and subjects management
+* personal data storage
