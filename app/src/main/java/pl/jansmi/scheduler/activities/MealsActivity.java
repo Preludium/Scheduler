@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -114,7 +115,7 @@ public class MealsActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), IngredientsActivity.class));
     }
 
-    private class MealCategoryFragmentPagerAdapter extends FragmentPagerAdapter {
+    private class MealCategoryFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<MealCategoryFragment> mealCategoryFragmentList;
 
