@@ -14,7 +14,8 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,139 +25,173 @@
         <activity
             android:name=".activities.ReceivedInvitationDecisionActivity"
             android:label="@string/title_activity_received_invitation_decision"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MealsActivity"
             android:label="@string/title_activity_meals"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewMeasureActivity"
             android:label="@string/title_activity_new_measure"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewTargetActivity"
             android:label="@string/title_activity_new_target"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SubmitArrangementActivity"
             android:label="@string/title_activity_submit_arrangement"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MeasureActivity"
             android:label="@string/title_activity_measure"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.TargetActivity"
             android:label="@string/title_activity_target"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SelectTaskActivity"
             android:label="@string/title_activity_select_tasks"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SelectUsersActivity"
             android:label="@string/title_activity_select_users"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewInvitationActivity"
             android:label="@string/title_activity_new_invitation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewTrainingSelectDisciplineActivity"
             android:label="@string/title_activity_new_training_select_discipline"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewStudyingSelectSubjectActivity"
             android:label="@string/title_activity_new_studying_select_subject"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewStudyingActivity"
             android:label="@string/title_activity_new_studying"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SelectMealIngredientsActivity"
             android:label="@string/title_activity_select_meal_ingredients"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.TagsActivity"
             android:label="@string/title_activity_tag"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddSubjectActivity"
             android:label="@string/title_activity_add_subject"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SubjectsActivity"
             android:label="@string/title_activity_subjects"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddDisciplineActivity"
             android:label="@string/title_activity_add_discipline"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddIngredientActivity"
             android:label="@string/title_activity_add_ingredient"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.IngredientsActivity"
             android:label="@string/title_activity_ingredients"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddCategoryActivity"
             android:label="@string/title_activity_add_category"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddTagActivity"
             android:label="@string/title_activity_add_tag"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddMealActivity"
             android:label="@string/title_activity_add_meal"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.CategoriesActivity"
             android:label="@string/title_activity_categories"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.DisciplinesActivity"
             android:label="@string/title_activity_disciplines"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.InvitationsActivity"
             android:label="@string/title_activity_invitations"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SignupActivity"
             android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewTaskActivity"
             android:label="@string/title_activity_new_task"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.NewTrainingActivity"
             android:label="@string/title_activity_new_training"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SelectMealsActivity"
             android:label="@string/title_activity_select_meal"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.AddArrangementActivity"
             android:label="@string/title_activity_add_arrangement"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.ArrangementsActivity"
             android:label="@string/title_activity_arrangements_activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" 
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
